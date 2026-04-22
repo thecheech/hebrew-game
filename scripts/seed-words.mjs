@@ -1,0 +1,457 @@
+/**
+ * Generates data/words.json from compact pipe-delimited rows:
+ * hebrew|translit|english (comma-separated if multiple)|difficulty|level
+ * Run: node scripts/seed-words.mjs
+ */
+import { writeFileSync, mkdirSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const root = join(__dirname, "..");
+
+const rows = `
+אִמָּא|imma|mother|1|1
+אַבָּא|aba|father|1|1
+כֵּן|ken|yes|1|1
+לֹא|lo|no|1|1
+מַיִם|mayim|water|1|1
+בַּיִת|bayit|house|1|1
+כֶּלֶב|kelev|dog|1|2
+חָתוּל|chatul|cat|1|2
+יֶלֶד|yeled|boy,child|1|2
+יַלְדָּה|yaldah|girl|1|2
+סֵפֶר|sefer|book|1|3
+שֻׁלְחָן|shulchan|table|1|3
+כִּסֵּא|kise|chair|1|3
+דֶּלֶת|delet|door|1|3
+חַלּוֹן|chalon|window|1|4
+אֹכֶל|ochel|food|1|4
+לֶחֶם|lechem|bread|1|4
+חָלָב|chalav|milk|1|4
+בֵּיצָה|beitzah|egg|1|5
+תַּפּוּחַ|tapuach|apple|1|5
+עֵץ|etz|tree|1|5
+פְּרָח|perach|flower|1|5
+שֶׁמֶשׁ|shemesh|sun|1|6
+יָרֵחַ|yareach|moon|1|6
+כּוֹכָב|kokhav|star|1|6
+שָׁמַיִם|shamayim|sky,heaven|1|6
+אָרֶץ|eretz|earth,land|1|7
+יָם|yam|sea|1|7
+נָהָר|nahar|river|1|7
+הַר|har|mountain|1|7
+אֲנִי|ani|I|1|1
+אַתָּה|ata|you (m)|1|2
+אַתְּ|at|you (f)|1|2
+הוּא|hu|he|1|3
+הִיא|hi|she|1|3
+אֲנַחְנוּ|anachnu|we|1|4
+הֵם|hem|they (m)|1|5
+הֵן|hen|they (f)|1|5
+זֶה|zeh|this (m)|1|3
+זֹאת|zot|this (f)|1|3
+מָה|mah|what|1|4
+מִי|mi|who|1|4
+אֵיפֹה|eifo|where|1|5
+לָמָה|lama|why|1|5
+אֵיךְ|eich|how|1|6
+כַּמָּה|kama|how much|1|6
+הַיּוֹם|hayom|today|1|7
+מָחָר|machar|tomorrow|1|7
+אֶתְמוֹל|etmol|yesterday|1|7
+עַכְשָׁיו|achshav|now|1|6
+אָז|az|then|1|6
+כָּאן|kan|here|1|5
+שָׁם|sham|there|1|5
+טוֹב|tov|good|1|4
+רַע|ra|bad|1|5
+גָּדוֹל|gadol|big|1|5
+קָטָן|katan|small|1|5
+חָדָשׁ|chadash|new|1|6
+יָשָׁן|yashan|old|1|6
+חַם|cham|hot|1|6
+קַר|kar|cold|1|6
+מֶהֱרָה|meherah|quickly|1|7
+לְאַט|le'at|slowly|1|7
+שָׁלוֹם|shalom|peace,hello|2|8
+תּוֹדָה|toda|thanks|2|8
+בְּבַקָּשָׁה|bevakasha|please|2|8
+סְלִיחָה|slicha|sorry,excuse me|2|9
+בֹּקֶר טוֹב|boker tov|good morning|2|9
+לַיְלָה טוֹב|laylah tov|good night|2|9
+שָׁבוּעַ טוֹב|shavua tov|good week|2|10
+חַג שָׂמֵחַ|chag sameach|happy holiday|2|10
+מָזָל טוֹב|mazal tov|congratulations|2|10
+בְּרִיאוּת|briut|health (toast)|2|11
+מִסְפָּר|mispar|number|2|11
+שָׁעָה|sha'ah|hour|2|11
+דַּקָּה|dakah|minute|2|11
+שָׁנָה|shanah|year|2|12
+חֹדֶשׁ|chodesh|month|2|12
+שָׁבוּעַ|shavua|week|2|12
+יוֹם|yom|day|2|12
+לַיְלָה|laylah|night|2|13
+בֹּקֶר|boker|morning|2|13
+עֶרֶב|erev|evening|2|13
+מִשְׁפָּחָה|mishpacha|family|2|14
+חָבֵר|chaver|friend (m)|2|14
+חָבֵרָה|chaverah|friend (f)|2|14
+אָח|ach|brother|2|8
+אָחוֹת|achot|sister|2|9
+סָבָא|saba|grandfather|2|10
+סָבְתָא|savta|grandmother|2|10
+מוֹרֶה|moreh|teacher (m)|2|11
+מוֹרָה|morah|teacher (f)|2|11
+תַּלְמִיד|talmid|student (m)|2|12
+תַּלְמִידָה|talmidah|student (f)|2|12
+בֵּית סֵפֶר|beit sefer|school|2|13
+אוּנִיבֶרְסִיטָה|universita|university|2|14
+עִבְרִית|ivrit|Hebrew|2|9
+אַנְגְּלִית|anglit|English|2|9
+לָשׁוֹן|lashon|language|2|10
+מִלָּה|milah|word|2|10
+מַחְשֵׁב|machshev|computer|2|11
+טֵלֵפוֹן|telefon|telephone|2|11
+מְכוֹנִית|mechonit|car|2|12
+אוֹטוֹבּוּס|otobus|bus|2|12
+רַכֶּבֶת|rakevet|train|2|13
+מָטוֹס|matos|airplane|2|13
+עִיר|ir|city|2|14
+כְּפָר|kfar|village|2|14
+רְחוֹב|rechov|street|2|14
+חֲנוּת|chanut|shop|2|13
+כֶּסֶף|kesef|money,silver|2|12
+לִקְנוֹת|liknot|to buy|2|13
+לִמְכֹּר|limkor|to sell|2|14
+לֶאֱכֹל|le'echol|to eat|2|11
+לִשְׁתּוֹת|lishtot|to drink|2|11
+לִישׁוֹן|lishon|to sleep|2|12
+לָלֶכֶת|lalechet|to walk,to go|2|12
+לָרוּץ|larutz|to run|2|13
+לִרְאוֹת|lirot|to see|2|13
+לִשְׁמֹעַ|lishmoa|to hear|2|14
+לְדַבֵּר|ledaber|to speak|2|14
+לִכְתֹּב|lichtov|to write|2|14
+לִקְרֹא|likro|to read|2|13
+לִלְמֹד|lilmod|to learn|2|14
+לְהַבִּין|lehavin|to understand|2|15
+לִזְכּוֹר|lizkor|to remember|2|15
+לִשְׁכּוֹחַ|lishkoch|to forget|2|15
+לֶאֱהֹב|le'ehov|to love|2|14
+לִשְׂנֹא|lisno|to hate|2|15
+שִׂמְחָה|simcha|joy|3|15
+עֶצֶב|etzev|sadness|3|15
+פַּחַד|pachad|fear|3|16
+בִּטָּחוֹן|bitachon|confidence,security|3|16
+אַחְרָיוּת|achrayut|responsibility|3|17
+חֵרוּת|cherut|freedom|3|17
+צֶדֶק|tzedek|justice|3|17
+שָׁלוֹם בַּיִת|shalom bayit|domestic peace|3|16
+מַחְשָׁבוֹת|machshavot|thoughts|3|17
+הַמְצָאָה|hamtza'ah|invention|3|18
+מַדָּע|mada|science|3|18
+טֶבַע|teva|nature|3|18
+סְבִיבָה|sviva|environment|3|18
+מַעֲרֶכֶת|ma'arechet|system|3|19
+מַמְשָׁךְ|mamshach|continuum|3|19
+הִתְחַלְתִּי|hitchalti|I started|3|20
+אֶכְתֹּב|echtov|I will write|3|20
+נִלְמַד|nilmad|it is learned|3|19
+נִכְתַּב|nichtav|it was written|3|19
+הִתְקַדַּמְתִּי|hitkadamti|I advanced|3|20
+הִסְבַּרְתִּי|hisbarti|I explained|3|20
+הִתְמוֹדְדוּת|hitmodedut|coping|3|20
+הִתְחַבְּרוּת|hitchabrut|connection|3|19
+וִירְטוּאָלִי|virtuali|virtual|3|18
+מַצּוּב|matzuv|situated|3|18
+הִתְנַגְּדוּת|hitnagdut|opposition|3|19
+הִתְיַשְּׁבוּת|hityashvut|settlement|3|19
+מַחְלָקָה|machlaka|department|3|17
+מִשְׁפָּט|mishpat|trial,law|3|16
+חֹק|chok|law|3|16
+מֶמְשָׁלָה|memshala|government|3|17
+בְּחִירוֹת|bechirot|elections|3|18
+כּוֹכָב לֶכֶת|kokhav lechet|planet|3|17
+חַלָּל|chalal|space|3|17
+אֲנָשִׁים|anashim|people|2|10
+נָשִׁים|nashim|women|2|11
+יְלָדִים|yeladim|children|2|12
+זְקֵנִים|zekenim|elders|2|13
+רוֹפֵא|rofe|doctor (m)|2|11
+אַחַר|achar|after|2|9
+לִפְנֵי|lifnei|before|2|10
+עִם|im|with|2|8
+בְּלִי|bli|without|2|11
+בִּגְלַל|biglal|because of|2|12
+לְמַעַן|lema'an|for the sake of|2|13
+אֶל|el|to,toward|2|9
+מִן|min|from|2|10
+עַד|ad|until|2|10
+עַל|al|on,about|2|8
+תַּחַת|tachat|under|2|11
+מֵעַל|me'al|above|2|12
+בֵּין|bein|between|2|11
+שָׁלוֹשׁ|shalosh|three (f)|1|6
+אַרְבַּע|arba|four (f)|1|6
+חָמֵשׁ|chamesh|five (f)|1|6
+שִׁשָּׁה|shishah|six (m)|1|7
+שִׁבְעָה|shiv'ah|seven (m)|1|7
+שְׁמוֹנָה|shmonah|eight (f)|1|7
+תִּשְׁעָה|tish'ah|nine (m)|1|7
+עֲשָׂרָה|asarah|ten (m)|1|7
+רֹאשׁ|rosh|head|2|9
+יָד|yad|hand|2|9
+רֶגֶל|regel|foot,leg|2|10
+עַיִן|ayin|eye|2|10
+אֹזֶן|ozen|ear|2|10
+פֶּה|peh|mouth|2|10
+לֵב|lev|heart|2|11
+נֶפֶשׁ|nefesh|soul|3|16
+רוּחַ|ruach|wind,spirit|3|16
+גּוּף|guf|body|2|11
+דָּם|dam|blood|3|15
+עֶצֶם|etzem|bone|3|15
+שִׁנַּיִם|shinayim|teeth|2|12
+שֵׂעָר|se'ar|hair|2|12
+עוֹר|or|skin|3|15
+צִבְעוֹן|tzevon|color|3|16
+אָדוֹם|adom|red|1|5
+כָּחוֹל|kachol|blue|1|5
+יָרוֹק|yarok|green|1|5
+צָהוֹב|tzahov|yellow|1|5
+שָׁחוֹר|shachor|black|1|6
+לָבָן|lavan|white|1|6
+אֶפְשָׁר|efshar|possible|3|17
+בִּלְתִּי אֶפְשָׁר|bilti efshar|impossible|3|18
+חָשׁוּב|chashuv|important|3|16
+פָּשׁוּט|pashut|simple|3|16
+מֻרְכָּב|murkav|complex|3|17
+בְּרוּר|barur|clear|3|17
+מְבֻלְבָּל|mevulbal|confused|3|18
+מְעֻנְיָן|me'anyan|interested|3|18
+מְשׁוּעֲמָם|meshu'amam|bored|3|18
+מְאֻשָּׁר|me'ushar|happy (adj)|3|17
+עָצוּב|atzuv|sad (adj)|3|17
+עָיֵף|ayef|tired|2|13
+דֶּשֶׁא|deshe|grass|1|6
+עָנָן|anan|cloud|1|7
+גֶּשֶׁם|geshem|rain|2|10
+שֶׁלֶג|sheleg|snow|2|11
+אֵשׁ|esh|fire|2|9
+אֲוִיר|avir|air|2|11
+אֶבֶן|even|stone|2|10
+חוֹמָה|chomah|wall|2|12
+גֶּג|gag|roof|2|11
+מִטָּה|mitah|bed|2|10
+כִּסּוּא|kiso|toilet|2|12
+מִקְלַחַת|miklachat|shower|2|13
+מִטְבָּח|mitbach|kitchen|2|12
+סָלוֹן|salon|living room|2|13
+מַחְבֵּרֶת|machberet|notebook|2|11
+עֵט|et|pen|1|5
+עִיפָרוֹן|iparon|pencil|1|6
+תִּיק|tik|bag|2|9
+מַפְתֵּחַ|mafte'ach|key|2|10
+דֶּלְתוֹן|delton|window shutter|2|14
+מַזְגָּן|mazgan|air conditioner|2|14
+מַכְשִׁיר|machshir|appliance|3|16
+חַשְׁמַל|chashmal|electricity|3|17
+אוֹר|or|light|2|9
+חֹשֶׁךְ|choshech|darkness|3|16
+צָהֳרַיִם|tzohorayim|noon|2|12
+חֲצוֹת|chatzot|midnight|3|16
+פִּנָּה|pinah|corner|2|11
+קִיר|kir|wall (interior)|2|11
+רִצְפָּה|ritzpa|floor|2|12
+תִּקְרָה|tikrah|ceiling|2|13
+מַעֲלָה|ma'alah|stairs|3|16
+מַעֲלִית|ma'alit|elevator|3|17
+מִזְרָח|mizrach|east|3|15
+מַעֲרָב|ma'arav|west|3|15
+צָפוֹן|tzafon|north|3|15
+דָּרוֹם|darom|south|3|15
+אִי|ee|island|2|11
+חוֹף|chof|beach|2|11
+מִדְבָּר|midbar|desert|3|16
+יַעַר|ya'ar|forest|2|12
+שָׂדֶה|sadeh|field|2|11
+גָּנָן|ganan|gardener|3|17
+זֶרַע|zera|seed|3|15
+פְּרִי|pri|fruit|2|10
+יָרָק|yarak|vegetable|2|11
+בָּשָׂר|basar|meat|2|11
+דָּג|dag|fish|2|9
+עוֹף|of|chicken,bird|2|10
+גְּבִינָה|gvinah|cheese|2|11
+חֶמְאָה|chem'ah|butter|2|12
+מֶלַח|melach|salt|2|10
+סֻכָּר|sukar|sugar|2|11
+קָפֶה|kafeh|coffee|2|10
+תֵּה|teh|tea|1|5
+מִיץ|mitz|juice|2|10
+יַיִן|yayin|wine|2|11
+בִּירָה|birah|beer|2|11
+מַשְׁקֶה|mashkeh|beverage|3|16
+אֲרוּחָה|arucha|meal|2|12
+רָעֵב|ra'ev|hungry|2|13
+שׂבֵעַ|savea|full,satisfied|2|14
+צָמֵא|tzame|thirsty|2|14
+חוֹלֶה|choleh|sick|2|14
+בָּרִיא|bari|healthy|2|14
+חַם לְבָב|cham levav|warm-hearted|3|19
+קַר רוּחַ|kar ruach|cold-hearted|3|19
+בּוֹא|bo|come (m)|1|1
+לֵךְ|lech|go (m)|1|1
+שֵׁב|shev|sit (m)|1|1
+קוּם|kum|get up (m)|1|1
+שֵׁם|shem|name|1|1
+חַי|chai|alive,life|1|1
+מֵת|met|dead|1|1
+אַף|af|nose|1|1
+עַכְבָּר|achbar|mouse|1|2
+פָּרָה|para|cow|1|2
+סוּס|sus|horse|1|2
+חֲמוֹר|chamor|donkey|1|2
+כֶּבֶשׂ|keves|sheep|1|2
+עֵז|ez|goat|1|2
+אֲרִי|ari|lion|1|2
+פִּיל|pil|elephant|1|2
+אַתֶּם|atem|you (pl m)|1|2
+אַתֶּן|aten|you (pl f)|1|3
+שֶׁלִּי|sheli|mine|1|3
+שֶׁלְּךָ|shelcha|yours (m)|1|3
+שֶׁלָּךְ|shelach|yours (f)|1|3
+שֶׁלּוֹ|shelo|his|1|3
+שֶׁלָּהּ|shela|hers|1|3
+אֵיזֶה|eizeh|which (m)|1|4
+אֵיזוֹ|eizo|which (f)|1|4
+כָּל|kol|every,all|1|4
+שׁוּב|shuv|again|1|4
+כְּבָר|kvar|already|1|4
+עוֹד|od|more,still|1|4
+רַק|rak|only|1|4
+בְּסֵדֶר|beseder|okay|2|8
+כּוֹס|kos|cup,glass|2|8
+צַלַּחַת|tzalachat|plate|2|8
+מַזְלֵג|mazleg|fork|2|8
+סַכִּין|sakin|knife|2|8
+כַּף|kaf|spoon|2|8
+שָׁעוֹן|sha'on|clock,watch|2|8
+מַרְאָה|marah|mirror|2|9
+כַּדּוּר|kadur|ball|2|9
+בֻּבָּה|buba|doll|2|9
+אוֹרֶז|orez|rice|2|10
+פַּסְטָה|pasta|pasta|2|10
+סָלָט|salat|salad|2|10
+מָרָק|marak|soup|2|10
+עוּגָה|uga|cake|2|10
+שׁוֹקוֹלָד|shokolad|chocolate|2|10
+גַּן|gan|garden,kindergarten|2|12
+פַּארְק|park|park|2|12
+שׁוּק|shuk|market|2|12
+מִסְעָדָה|mis'ada|restaurant|2|13
+בֵּית חוֹלִים|beit cholim|hospital|2|13
+צַוָּאר|tzavar|neck|2|14
+כָּתֵף|katef|shoulder|2|14
+בֶּטֶן|beten|stomach|2|14
+גַּב|gav|back|2|14
+אֶצְבַּע|etzba|finger|2|14
+בֶּרֶךְ|berech|knee|2|14
+דּוֹד|dod|uncle|2|15
+דּוֹדָה|doda|aunt|2|15
+בֵּן|ben|son|2|15
+בַּת|bat|daughter|2|15
+בַּעַל|ba'al|husband|2|15
+אִשָּׁה|isha|woman,wife|2|15
+כֹּחַ|koach|strength|3|16
+חֻלְשָׁה|chulshah|weakness|3|16
+מַטָּרָה|matarah|goal|3|16
+הַצְלָחָה|hatzlachah|success|3|17
+כִּשָּׁלוֹן|kishalon|failure|3|17
+וָרוֹד|varod|pink|2|18
+כָּתוֹם|katom|orange|2|18
+חוּם|chum|brown|2|18
+סָגוֹל|sagol|purple|2|18
+אָפוֹר|afor|gray|2|18
+יָפֶה|yafeh|beautiful|3|19
+גָּבוֹהַּ|gavoah|tall|3|19
+נָמוּךְ|namuch|low,short|3|19
+כָּבֵד|kaved|heavy|3|19
+מָהִיר|mahir|fast|3|19
+אִטִּי|iti|slow|3|19
+לַעֲבֹד|la'avod|to work|3|20
+לָבוֹא|lavo|to come|3|20
+לָתֵת|latet|to give|3|20
+לָקַחַת|lakachat|to take|3|20
+לִשְׁאֹל|lishol|to ask|3|20
+לַעֲנוֹת|la'anot|to answer|3|20
+לְבַקֵּשׁ|levakesh|to request|3|20
+לְחַכּוֹת|lechakot|to wait|3|20
+לְהַחְלִיט|lehachlit|to decide|3|20
+לְהַתְחִיל|lehatchil|to start|3|20
+אָדֹן|adon|lord,master|2|16
+אֶלֶף|elef|thousand|2|16
+בָּנִים|banim|sons,children|2|16
+בֶּגֶד|beged|garment,clothing|2|16
+שַׁבָּת|shabbat|Sabbath|2|16
+לְךָ|lecha|to you (m sg)|2|16
+חֵן|chen|grace,favor|2|16
+חֹרֶף|choref|winter|2|16
+טָהוֹר|tahor|pure,clean|2|16
+מֶלֶךְ|melech|king|2|16
+נָשָׂא|nasa|lifted,bore,carried|2|17
+סָרוּ|saru|they turned aside|3|17
+פַּעַם|pa'am|once,occasion|2|17
+בָּרוּךְ|baruch|blessed|2|17
+טוֹבִים|tovim|good (m pl)|2|17
+רַחֵם|rachem|have mercy|2|17
+קַו|kav|line,cord|2|17
+רָחַץ|rachatz|washed|2|17
+קֶדֶם|kedem|east,antiquity|2|17
+כָּנָף|kanaf|wing,corner|2|18
+לֵוִי|levi|Levi|2|18
+מָגֵן|magen|shield|2|18
+רַד|rad|went down|2|18
+שָׂרָה|sarah|Sarah|2|18
+אָהַב|ahav|loved|2|18
+נָתַן|natan|gave|2|18
+אָבֵל|avel|mourning,mourner|2|18
+סוּר|sur|turn aside|2|19
+אָמַר|amar|said|2|19
+עָבַר|avar|passed,crossed|2|19
+אָסַף|asaf|gathered|2|19
+שָׁאַל|sha'al|asked|2|19
+שָׂנָא|sana|hated|2|19
+זוּלָתוֹ|zulato|except him,besides him|3|19
+נֵר|ner|lamp,candle|2|19
+וָלֶד|valed|child,offspring|2|20
+לֵבָב|levav|heart|2|20
+צָרָה|tzarah|trouble,distress|2|20
+מַתָּנָה|matana|gift|2|20
+שֶׁבֶץ|shevetz|ornament,setting|3|20
+עֵגֶל|egel|calf|2|20
+אָקוּם|akum|I will arise|3|20
+טַבַּעַת|taba'at|ring|2|20
+חָמֵץ|chametz|leaven|2|20
+לָרֶדֶת|laredet|to descend|2|20
+שָׁוֶה|shaveh|equal,worth|2|20
+בָּם|bam|in them (m)|3|20
+`.trim().split("\n").filter(Boolean);
+
+function parseRow(line) {
+  const [hebrew, translit, englishPart, difficulty, level] = line.split("|");
+  return {
+    hebrew: hebrew.trim(),
+    translit: translit.trim(),
+    english: englishPart.split(",").map((s) => s.trim()),
+    difficulty: Number(difficulty),
+    level: Number(level),
+  };
+}
+
+const words = rows.map(parseRow);
+const outPath = join(root, "data", "words.json");
+mkdirSync(dirname(outPath), { recursive: true });
+writeFileSync(outPath, JSON.stringify(words, null, 2), "utf8");
+console.log(`Wrote ${words.length} words to ${outPath}`);

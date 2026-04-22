@@ -1,0 +1,3878 @@
+[
+  {
+    "hebrew": "אִמָּא",
+    "translit": "imma",
+    "english": [
+      "mother"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "אַבָּא",
+    "translit": "aba",
+    "english": [
+      "father"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "כֵּן",
+    "translit": "ken",
+    "english": [
+      "yes"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "לֹא",
+    "translit": "lo",
+    "english": [
+      "no"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "מַיִם",
+    "translit": "mayim",
+    "english": [
+      "water"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "בַּיִת",
+    "translit": "bayit",
+    "english": [
+      "house"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "כֶּלֶב",
+    "translit": "kelev",
+    "english": [
+      "dog"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "חָתוּל",
+    "translit": "chatul",
+    "english": [
+      "cat"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "יֶלֶד",
+    "translit": "yeled",
+    "english": [
+      "boy",
+      "child"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "יַלְדָּה",
+    "translit": "yaldah",
+    "english": [
+      "girl"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "סֵפֶר",
+    "translit": "sefer",
+    "english": [
+      "book"
+    ],
+    "difficulty": 1,
+    "level": 3
+  },
+  {
+    "hebrew": "שֻׁלְחָן",
+    "translit": "shulchan",
+    "english": [
+      "table"
+    ],
+    "difficulty": 1,
+    "level": 3
+  },
+  {
+    "hebrew": "כִּסֵּא",
+    "translit": "kise",
+    "english": [
+      "chair"
+    ],
+    "difficulty": 1,
+    "level": 3
+  },
+  {
+    "hebrew": "דֶּלֶת",
+    "translit": "delet",
+    "english": [
+      "door"
+    ],
+    "difficulty": 1,
+    "level": 3
+  },
+  {
+    "hebrew": "חַלּוֹן",
+    "translit": "chalon",
+    "english": [
+      "window"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "אֹכֶל",
+    "translit": "ochel",
+    "english": [
+      "food"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "לֶחֶם",
+    "translit": "lechem",
+    "english": [
+      "bread"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "חָלָב",
+    "translit": "chalav",
+    "english": [
+      "milk"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "בֵּיצָה",
+    "translit": "beitzah",
+    "english": [
+      "egg"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "תַּפּוּחַ",
+    "translit": "tapuach",
+    "english": [
+      "apple"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "עֵץ",
+    "translit": "etz",
+    "english": [
+      "tree"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "פְּרָח",
+    "translit": "perach",
+    "english": [
+      "flower"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "שֶׁמֶשׁ",
+    "translit": "shemesh",
+    "english": [
+      "sun"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "יָרֵחַ",
+    "translit": "yareach",
+    "english": [
+      "moon"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "כּוֹכָב",
+    "translit": "kokhav",
+    "english": [
+      "star"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "שָׁמַיִם",
+    "translit": "shamayim",
+    "english": [
+      "sky",
+      "heaven"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "אָרֶץ",
+    "translit": "eretz",
+    "english": [
+      "earth",
+      "land"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "יָם",
+    "translit": "yam",
+    "english": [
+      "sea"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "נָהָר",
+    "translit": "nahar",
+    "english": [
+      "river"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "הַר",
+    "translit": "har",
+    "english": [
+      "mountain"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "אֲנִי",
+    "translit": "ani",
+    "english": [
+      "I"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "אַתָּה",
+    "translit": "ata",
+    "english": [
+      "you (m)"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "אַתְּ",
+    "translit": "at",
+    "english": [
+      "you (f)"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "הוּא",
+    "translit": "hu",
+    "english": [
+      "he"
+    ],
+    "difficulty": 1,
+    "level": 3
+  },
+  {
+    "hebrew": "הִיא",
+    "translit": "hi",
+    "english": [
+      "she"
+    ],
+    "difficulty": 1,
+    "level": 3
+  },
+  {
+    "hebrew": "אֲנַחְנוּ",
+    "translit": "anachnu",
+    "english": [
+      "we"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "הֵם",
+    "translit": "hem",
+    "english": [
+      "they (m)"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "הֵן",
+    "translit": "hen",
+    "english": [
+      "they (f)"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "זֶה",
+    "translit": "zeh",
+    "english": [
+      "this (m)"
+    ],
+    "difficulty": 1,
+    "level": 3
+  },
+  {
+    "hebrew": "זֹאת",
+    "translit": "zot",
+    "english": [
+      "this (f)"
+    ],
+    "difficulty": 1,
+    "level": 3
+  },
+  {
+    "hebrew": "מָה",
+    "translit": "mah",
+    "english": [
+      "what"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "מִי",
+    "translit": "mi",
+    "english": [
+      "who"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "אֵיפֹה",
+    "translit": "eifo",
+    "english": [
+      "where"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "לָמָה",
+    "translit": "lama",
+    "english": [
+      "why"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "אֵיךְ",
+    "translit": "eich",
+    "english": [
+      "how"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "כַּמָּה",
+    "translit": "kama",
+    "english": [
+      "how much"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "הַיּוֹם",
+    "translit": "hayom",
+    "english": [
+      "today"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "מָחָר",
+    "translit": "machar",
+    "english": [
+      "tomorrow"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "אֶתְמוֹל",
+    "translit": "etmol",
+    "english": [
+      "yesterday"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "עַכְשָׁיו",
+    "translit": "achshav",
+    "english": [
+      "now"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "אָז",
+    "translit": "az",
+    "english": [
+      "then"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "כָּאן",
+    "translit": "kan",
+    "english": [
+      "here"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "שָׁם",
+    "translit": "sham",
+    "english": [
+      "there"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "טוֹב",
+    "translit": "tov",
+    "english": [
+      "good"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "רַע",
+    "translit": "ra",
+    "english": [
+      "bad"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "גָּדוֹל",
+    "translit": "gadol",
+    "english": [
+      "big"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "קָטָן",
+    "translit": "katan",
+    "english": [
+      "small"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "חָדָשׁ",
+    "translit": "chadash",
+    "english": [
+      "new"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "יָשָׁן",
+    "translit": "yashan",
+    "english": [
+      "old"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "חַם",
+    "translit": "cham",
+    "english": [
+      "hot"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "קַר",
+    "translit": "kar",
+    "english": [
+      "cold"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "מֶהֱרָה",
+    "translit": "meherah",
+    "english": [
+      "quickly"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "לְאַט",
+    "translit": "le'at",
+    "english": [
+      "slowly"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "שָׁלוֹם",
+    "translit": "shalom",
+    "english": [
+      "peace",
+      "hello"
+    ],
+    "difficulty": 2,
+    "level": 8
+  },
+  {
+    "hebrew": "תּוֹדָה",
+    "translit": "toda",
+    "english": [
+      "thanks"
+    ],
+    "difficulty": 2,
+    "level": 8
+  },
+  {
+    "hebrew": "בְּבַקָּשָׁה",
+    "translit": "bevakasha",
+    "english": [
+      "please"
+    ],
+    "difficulty": 2,
+    "level": 8
+  },
+  {
+    "hebrew": "סְלִיחָה",
+    "translit": "slicha",
+    "english": [
+      "sorry",
+      "excuse me"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "בֹּקֶר טוֹב",
+    "translit": "boker tov",
+    "english": [
+      "good morning"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "לַיְלָה טוֹב",
+    "translit": "laylah tov",
+    "english": [
+      "good night"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "שָׁבוּעַ טוֹב",
+    "translit": "shavua tov",
+    "english": [
+      "good week"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "חַג שָׂמֵחַ",
+    "translit": "chag sameach",
+    "english": [
+      "happy holiday"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "מָזָל טוֹב",
+    "translit": "mazal tov",
+    "english": [
+      "congratulations"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "בְּרִיאוּת",
+    "translit": "briut",
+    "english": [
+      "health (toast)"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "מִסְפָּר",
+    "translit": "mispar",
+    "english": [
+      "number"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "שָׁעָה",
+    "translit": "sha'ah",
+    "english": [
+      "hour"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "דַּקָּה",
+    "translit": "dakah",
+    "english": [
+      "minute"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "שָׁנָה",
+    "translit": "shanah",
+    "english": [
+      "year"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "חֹדֶשׁ",
+    "translit": "chodesh",
+    "english": [
+      "month"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "שָׁבוּעַ",
+    "translit": "shavua",
+    "english": [
+      "week"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "יוֹם",
+    "translit": "yom",
+    "english": [
+      "day"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "לַיְלָה",
+    "translit": "laylah",
+    "english": [
+      "night"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "בֹּקֶר",
+    "translit": "boker",
+    "english": [
+      "morning"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "עֶרֶב",
+    "translit": "erev",
+    "english": [
+      "evening"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "מִשְׁפָּחָה",
+    "translit": "mishpacha",
+    "english": [
+      "family"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "חָבֵר",
+    "translit": "chaver",
+    "english": [
+      "friend (m)"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "חָבֵרָה",
+    "translit": "chaverah",
+    "english": [
+      "friend (f)"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "אָח",
+    "translit": "ach",
+    "english": [
+      "brother"
+    ],
+    "difficulty": 2,
+    "level": 8
+  },
+  {
+    "hebrew": "אָחוֹת",
+    "translit": "achot",
+    "english": [
+      "sister"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "סָבָא",
+    "translit": "saba",
+    "english": [
+      "grandfather"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "סָבְתָא",
+    "translit": "savta",
+    "english": [
+      "grandmother"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "מוֹרֶה",
+    "translit": "moreh",
+    "english": [
+      "teacher (m)"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "מוֹרָה",
+    "translit": "morah",
+    "english": [
+      "teacher (f)"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "תַּלְמִיד",
+    "translit": "talmid",
+    "english": [
+      "student (m)"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "תַּלְמִידָה",
+    "translit": "talmidah",
+    "english": [
+      "student (f)"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "בֵּית סֵפֶר",
+    "translit": "beit sefer",
+    "english": [
+      "school"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "אוּנִיבֶרְסִיטָה",
+    "translit": "universita",
+    "english": [
+      "university"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "עִבְרִית",
+    "translit": "ivrit",
+    "english": [
+      "Hebrew"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "אַנְגְּלִית",
+    "translit": "anglit",
+    "english": [
+      "English"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "לָשׁוֹן",
+    "translit": "lashon",
+    "english": [
+      "language"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "מִלָּה",
+    "translit": "milah",
+    "english": [
+      "word"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "מַחְשֵׁב",
+    "translit": "machshev",
+    "english": [
+      "computer"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "טֵלֵפוֹן",
+    "translit": "telefon",
+    "english": [
+      "telephone"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "מְכוֹנִית",
+    "translit": "mechonit",
+    "english": [
+      "car"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "אוֹטוֹבּוּס",
+    "translit": "otobus",
+    "english": [
+      "bus"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "רַכֶּבֶת",
+    "translit": "rakevet",
+    "english": [
+      "train"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "מָטוֹס",
+    "translit": "matos",
+    "english": [
+      "airplane"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "עִיר",
+    "translit": "ir",
+    "english": [
+      "city"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "כְּפָר",
+    "translit": "kfar",
+    "english": [
+      "village"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "רְחוֹב",
+    "translit": "rechov",
+    "english": [
+      "street"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "חֲנוּת",
+    "translit": "chanut",
+    "english": [
+      "shop"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "כֶּסֶף",
+    "translit": "kesef",
+    "english": [
+      "money",
+      "silver"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "לִקְנוֹת",
+    "translit": "liknot",
+    "english": [
+      "to buy"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "לִמְכֹּר",
+    "translit": "limkor",
+    "english": [
+      "to sell"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "לֶאֱכֹל",
+    "translit": "le'echol",
+    "english": [
+      "to eat"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "לִשְׁתּוֹת",
+    "translit": "lishtot",
+    "english": [
+      "to drink"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "לִישׁוֹן",
+    "translit": "lishon",
+    "english": [
+      "to sleep"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "לָלֶכֶת",
+    "translit": "lalechet",
+    "english": [
+      "to walk",
+      "to go"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "לָרוּץ",
+    "translit": "larutz",
+    "english": [
+      "to run"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "לִרְאוֹת",
+    "translit": "lirot",
+    "english": [
+      "to see"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "לִשְׁמֹעַ",
+    "translit": "lishmoa",
+    "english": [
+      "to hear"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "לְדַבֵּר",
+    "translit": "ledaber",
+    "english": [
+      "to speak"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "לִכְתֹּב",
+    "translit": "lichtov",
+    "english": [
+      "to write"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "לִקְרֹא",
+    "translit": "likro",
+    "english": [
+      "to read"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "לִלְמֹד",
+    "translit": "lilmod",
+    "english": [
+      "to learn"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "לְהַבִּין",
+    "translit": "lehavin",
+    "english": [
+      "to understand"
+    ],
+    "difficulty": 2,
+    "level": 15
+  },
+  {
+    "hebrew": "לִזְכּוֹר",
+    "translit": "lizkor",
+    "english": [
+      "to remember"
+    ],
+    "difficulty": 2,
+    "level": 15
+  },
+  {
+    "hebrew": "לִשְׁכּוֹחַ",
+    "translit": "lishkoch",
+    "english": [
+      "to forget"
+    ],
+    "difficulty": 2,
+    "level": 15
+  },
+  {
+    "hebrew": "לֶאֱהֹב",
+    "translit": "le'ehov",
+    "english": [
+      "to love"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "לִשְׂנֹא",
+    "translit": "lisno",
+    "english": [
+      "to hate"
+    ],
+    "difficulty": 2,
+    "level": 15
+  },
+  {
+    "hebrew": "שִׂמְחָה",
+    "translit": "simcha",
+    "english": [
+      "joy"
+    ],
+    "difficulty": 3,
+    "level": 15
+  },
+  {
+    "hebrew": "עֶצֶב",
+    "translit": "etzev",
+    "english": [
+      "sadness"
+    ],
+    "difficulty": 3,
+    "level": 15
+  },
+  {
+    "hebrew": "פַּחַד",
+    "translit": "pachad",
+    "english": [
+      "fear"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "בִּטָּחוֹן",
+    "translit": "bitachon",
+    "english": [
+      "confidence",
+      "security"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "אַחְרָיוּת",
+    "translit": "achrayut",
+    "english": [
+      "responsibility"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "חֵרוּת",
+    "translit": "cherut",
+    "english": [
+      "freedom"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "צֶדֶק",
+    "translit": "tzedek",
+    "english": [
+      "justice"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "שָׁלוֹם בַּיִת",
+    "translit": "shalom bayit",
+    "english": [
+      "domestic peace"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "מַחְשָׁבוֹת",
+    "translit": "machshavot",
+    "english": [
+      "thoughts"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "הַמְצָאָה",
+    "translit": "hamtza'ah",
+    "english": [
+      "invention"
+    ],
+    "difficulty": 3,
+    "level": 18
+  },
+  {
+    "hebrew": "מַדָּע",
+    "translit": "mada",
+    "english": [
+      "science"
+    ],
+    "difficulty": 3,
+    "level": 18
+  },
+  {
+    "hebrew": "טֶבַע",
+    "translit": "teva",
+    "english": [
+      "nature"
+    ],
+    "difficulty": 3,
+    "level": 18
+  },
+  {
+    "hebrew": "סְבִיבָה",
+    "translit": "sviva",
+    "english": [
+      "environment"
+    ],
+    "difficulty": 3,
+    "level": 18
+  },
+  {
+    "hebrew": "מַעֲרֶכֶת",
+    "translit": "ma'arechet",
+    "english": [
+      "system"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "מַמְשָׁךְ",
+    "translit": "mamshach",
+    "english": [
+      "continuum"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "הִתְחַלְתִּי",
+    "translit": "hitchalti",
+    "english": [
+      "I started"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "אֶכְתֹּב",
+    "translit": "echtov",
+    "english": [
+      "I will write"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "נִלְמַד",
+    "translit": "nilmad",
+    "english": [
+      "it is learned"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "נִכְתַּב",
+    "translit": "nichtav",
+    "english": [
+      "it was written"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "הִתְקַדַּמְתִּי",
+    "translit": "hitkadamti",
+    "english": [
+      "I advanced"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "הִסְבַּרְתִּי",
+    "translit": "hisbarti",
+    "english": [
+      "I explained"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "הִתְמוֹדְדוּת",
+    "translit": "hitmodedut",
+    "english": [
+      "coping"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "הִתְחַבְּרוּת",
+    "translit": "hitchabrut",
+    "english": [
+      "connection"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "וִירְטוּאָלִי",
+    "translit": "virtuali",
+    "english": [
+      "virtual"
+    ],
+    "difficulty": 3,
+    "level": 18
+  },
+  {
+    "hebrew": "מַצּוּב",
+    "translit": "matzuv",
+    "english": [
+      "situated"
+    ],
+    "difficulty": 3,
+    "level": 18
+  },
+  {
+    "hebrew": "הִתְנַגְּדוּת",
+    "translit": "hitnagdut",
+    "english": [
+      "opposition"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "הִתְיַשְּׁבוּת",
+    "translit": "hityashvut",
+    "english": [
+      "settlement"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "מַחְלָקָה",
+    "translit": "machlaka",
+    "english": [
+      "department"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "מִשְׁפָּט",
+    "translit": "mishpat",
+    "english": [
+      "trial",
+      "law"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "חֹק",
+    "translit": "chok",
+    "english": [
+      "law"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "מֶמְשָׁלָה",
+    "translit": "memshala",
+    "english": [
+      "government"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "בְּחִירוֹת",
+    "translit": "bechirot",
+    "english": [
+      "elections"
+    ],
+    "difficulty": 3,
+    "level": 18
+  },
+  {
+    "hebrew": "כּוֹכָב לֶכֶת",
+    "translit": "kokhav lechet",
+    "english": [
+      "planet"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "חַלָּל",
+    "translit": "chalal",
+    "english": [
+      "space"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "אֲנָשִׁים",
+    "translit": "anashim",
+    "english": [
+      "people"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "נָשִׁים",
+    "translit": "nashim",
+    "english": [
+      "women"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "יְלָדִים",
+    "translit": "yeladim",
+    "english": [
+      "children"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "זְקֵנִים",
+    "translit": "zekenim",
+    "english": [
+      "elders"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "רוֹפֵא",
+    "translit": "rofe",
+    "english": [
+      "doctor (m)"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "אַחַר",
+    "translit": "achar",
+    "english": [
+      "after"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "לִפְנֵי",
+    "translit": "lifnei",
+    "english": [
+      "before"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "עִם",
+    "translit": "im",
+    "english": [
+      "with"
+    ],
+    "difficulty": 2,
+    "level": 8
+  },
+  {
+    "hebrew": "בְּלִי",
+    "translit": "bli",
+    "english": [
+      "without"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "בִּגְלַל",
+    "translit": "biglal",
+    "english": [
+      "because of"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "לְמַעַן",
+    "translit": "lema'an",
+    "english": [
+      "for the sake of"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "אֶל",
+    "translit": "el",
+    "english": [
+      "to",
+      "toward"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "מִן",
+    "translit": "min",
+    "english": [
+      "from"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "עַד",
+    "translit": "ad",
+    "english": [
+      "until"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "עַל",
+    "translit": "al",
+    "english": [
+      "on",
+      "about"
+    ],
+    "difficulty": 2,
+    "level": 8
+  },
+  {
+    "hebrew": "תַּחַת",
+    "translit": "tachat",
+    "english": [
+      "under"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "מֵעַל",
+    "translit": "me'al",
+    "english": [
+      "above"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "בֵּין",
+    "translit": "bein",
+    "english": [
+      "between"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "שָׁלוֹשׁ",
+    "translit": "shalosh",
+    "english": [
+      "three (f)"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "אַרְבַּע",
+    "translit": "arba",
+    "english": [
+      "four (f)"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "חָמֵשׁ",
+    "translit": "chamesh",
+    "english": [
+      "five (f)"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "שִׁשָּׁה",
+    "translit": "shishah",
+    "english": [
+      "six (m)"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "שִׁבְעָה",
+    "translit": "shiv'ah",
+    "english": [
+      "seven (m)"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "שְׁמוֹנָה",
+    "translit": "shmonah",
+    "english": [
+      "eight (f)"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "תִּשְׁעָה",
+    "translit": "tish'ah",
+    "english": [
+      "nine (m)"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "עֲשָׂרָה",
+    "translit": "asarah",
+    "english": [
+      "ten (m)"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "רֹאשׁ",
+    "translit": "rosh",
+    "english": [
+      "head"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "יָד",
+    "translit": "yad",
+    "english": [
+      "hand"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "רֶגֶל",
+    "translit": "regel",
+    "english": [
+      "foot",
+      "leg"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "עַיִן",
+    "translit": "ayin",
+    "english": [
+      "eye"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "אֹזֶן",
+    "translit": "ozen",
+    "english": [
+      "ear"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "פֶּה",
+    "translit": "peh",
+    "english": [
+      "mouth"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "לֵב",
+    "translit": "lev",
+    "english": [
+      "heart"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "נֶפֶשׁ",
+    "translit": "nefesh",
+    "english": [
+      "soul"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "רוּחַ",
+    "translit": "ruach",
+    "english": [
+      "wind",
+      "spirit"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "גּוּף",
+    "translit": "guf",
+    "english": [
+      "body"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "דָּם",
+    "translit": "dam",
+    "english": [
+      "blood"
+    ],
+    "difficulty": 3,
+    "level": 15
+  },
+  {
+    "hebrew": "עֶצֶם",
+    "translit": "etzem",
+    "english": [
+      "bone"
+    ],
+    "difficulty": 3,
+    "level": 15
+  },
+  {
+    "hebrew": "שִׁנַּיִם",
+    "translit": "shinayim",
+    "english": [
+      "teeth"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "שֵׂעָר",
+    "translit": "se'ar",
+    "english": [
+      "hair"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "עוֹר",
+    "translit": "or",
+    "english": [
+      "skin"
+    ],
+    "difficulty": 3,
+    "level": 15
+  },
+  {
+    "hebrew": "צִבְעוֹן",
+    "translit": "tzevon",
+    "english": [
+      "color"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "אָדוֹם",
+    "translit": "adom",
+    "english": [
+      "red"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "כָּחוֹל",
+    "translit": "kachol",
+    "english": [
+      "blue"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "יָרוֹק",
+    "translit": "yarok",
+    "english": [
+      "green"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "צָהוֹב",
+    "translit": "tzahov",
+    "english": [
+      "yellow"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "שָׁחוֹר",
+    "translit": "shachor",
+    "english": [
+      "black"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "לָבָן",
+    "translit": "lavan",
+    "english": [
+      "white"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "אֶפְשָׁר",
+    "translit": "efshar",
+    "english": [
+      "possible"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "בִּלְתִּי אֶפְשָׁר",
+    "translit": "bilti efshar",
+    "english": [
+      "impossible"
+    ],
+    "difficulty": 3,
+    "level": 18
+  },
+  {
+    "hebrew": "חָשׁוּב",
+    "translit": "chashuv",
+    "english": [
+      "important"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "פָּשׁוּט",
+    "translit": "pashut",
+    "english": [
+      "simple"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "מֻרְכָּב",
+    "translit": "murkav",
+    "english": [
+      "complex"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "בְּרוּר",
+    "translit": "barur",
+    "english": [
+      "clear"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "מְבֻלְבָּל",
+    "translit": "mevulbal",
+    "english": [
+      "confused"
+    ],
+    "difficulty": 3,
+    "level": 18
+  },
+  {
+    "hebrew": "מְעֻנְיָן",
+    "translit": "me'anyan",
+    "english": [
+      "interested"
+    ],
+    "difficulty": 3,
+    "level": 18
+  },
+  {
+    "hebrew": "מְשׁוּעֲמָם",
+    "translit": "meshu'amam",
+    "english": [
+      "bored"
+    ],
+    "difficulty": 3,
+    "level": 18
+  },
+  {
+    "hebrew": "מְאֻשָּׁר",
+    "translit": "me'ushar",
+    "english": [
+      "happy (adj)"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "עָצוּב",
+    "translit": "atzuv",
+    "english": [
+      "sad (adj)"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "עָיֵף",
+    "translit": "ayef",
+    "english": [
+      "tired"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "דֶּשֶׁא",
+    "translit": "deshe",
+    "english": [
+      "grass"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "עָנָן",
+    "translit": "anan",
+    "english": [
+      "cloud"
+    ],
+    "difficulty": 1,
+    "level": 7
+  },
+  {
+    "hebrew": "גֶּשֶׁם",
+    "translit": "geshem",
+    "english": [
+      "rain"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "שֶׁלֶג",
+    "translit": "sheleg",
+    "english": [
+      "snow"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "אֵשׁ",
+    "translit": "esh",
+    "english": [
+      "fire"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "אֲוִיר",
+    "translit": "avir",
+    "english": [
+      "air"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "אֶבֶן",
+    "translit": "even",
+    "english": [
+      "stone"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "חוֹמָה",
+    "translit": "chomah",
+    "english": [
+      "wall"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "גֶּג",
+    "translit": "gag",
+    "english": [
+      "roof"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "מִטָּה",
+    "translit": "mitah",
+    "english": [
+      "bed"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "כִּסּוּא",
+    "translit": "kiso",
+    "english": [
+      "toilet"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "מִקְלַחַת",
+    "translit": "miklachat",
+    "english": [
+      "shower"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "מִטְבָּח",
+    "translit": "mitbach",
+    "english": [
+      "kitchen"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "סָלוֹן",
+    "translit": "salon",
+    "english": [
+      "living room"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "מַחְבֵּרֶת",
+    "translit": "machberet",
+    "english": [
+      "notebook"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "עֵט",
+    "translit": "et",
+    "english": [
+      "pen"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "עִיפָרוֹן",
+    "translit": "iparon",
+    "english": [
+      "pencil"
+    ],
+    "difficulty": 1,
+    "level": 6
+  },
+  {
+    "hebrew": "תִּיק",
+    "translit": "tik",
+    "english": [
+      "bag"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "מַפְתֵּחַ",
+    "translit": "mafte'ach",
+    "english": [
+      "key"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "דֶּלְתוֹן",
+    "translit": "delton",
+    "english": [
+      "window shutter"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "מַזְגָּן",
+    "translit": "mazgan",
+    "english": [
+      "air conditioner"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "מַכְשִׁיר",
+    "translit": "machshir",
+    "english": [
+      "appliance"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "חַשְׁמַל",
+    "translit": "chashmal",
+    "english": [
+      "electricity"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "אוֹר",
+    "translit": "or",
+    "english": [
+      "light"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "חֹשֶׁךְ",
+    "translit": "choshech",
+    "english": [
+      "darkness"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "צָהֳרַיִם",
+    "translit": "tzohorayim",
+    "english": [
+      "noon"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "חֲצוֹת",
+    "translit": "chatzot",
+    "english": [
+      "midnight"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "פִּנָּה",
+    "translit": "pinah",
+    "english": [
+      "corner"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "קִיר",
+    "translit": "kir",
+    "english": [
+      "wall (interior)"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "רִצְפָּה",
+    "translit": "ritzpa",
+    "english": [
+      "floor"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "תִּקְרָה",
+    "translit": "tikrah",
+    "english": [
+      "ceiling"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "מַעֲלָה",
+    "translit": "ma'alah",
+    "english": [
+      "stairs"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "מַעֲלִית",
+    "translit": "ma'alit",
+    "english": [
+      "elevator"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "מִזְרָח",
+    "translit": "mizrach",
+    "english": [
+      "east"
+    ],
+    "difficulty": 3,
+    "level": 15
+  },
+  {
+    "hebrew": "מַעֲרָב",
+    "translit": "ma'arav",
+    "english": [
+      "west"
+    ],
+    "difficulty": 3,
+    "level": 15
+  },
+  {
+    "hebrew": "צָפוֹן",
+    "translit": "tzafon",
+    "english": [
+      "north"
+    ],
+    "difficulty": 3,
+    "level": 15
+  },
+  {
+    "hebrew": "דָּרוֹם",
+    "translit": "darom",
+    "english": [
+      "south"
+    ],
+    "difficulty": 3,
+    "level": 15
+  },
+  {
+    "hebrew": "אִי",
+    "translit": "ee",
+    "english": [
+      "island"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "חוֹף",
+    "translit": "chof",
+    "english": [
+      "beach"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "מִדְבָּר",
+    "translit": "midbar",
+    "english": [
+      "desert"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "יַעַר",
+    "translit": "ya'ar",
+    "english": [
+      "forest"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "שָׂדֶה",
+    "translit": "sadeh",
+    "english": [
+      "field"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "גָּנָן",
+    "translit": "ganan",
+    "english": [
+      "gardener"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "זֶרַע",
+    "translit": "zera",
+    "english": [
+      "seed"
+    ],
+    "difficulty": 3,
+    "level": 15
+  },
+  {
+    "hebrew": "פְּרִי",
+    "translit": "pri",
+    "english": [
+      "fruit"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "יָרָק",
+    "translit": "yarak",
+    "english": [
+      "vegetable"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "בָּשָׂר",
+    "translit": "basar",
+    "english": [
+      "meat"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "דָּג",
+    "translit": "dag",
+    "english": [
+      "fish"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "עוֹף",
+    "translit": "of",
+    "english": [
+      "chicken",
+      "bird"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "גְּבִינָה",
+    "translit": "gvinah",
+    "english": [
+      "cheese"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "חֶמְאָה",
+    "translit": "chem'ah",
+    "english": [
+      "butter"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "מֶלַח",
+    "translit": "melach",
+    "english": [
+      "salt"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "סֻכָּר",
+    "translit": "sukar",
+    "english": [
+      "sugar"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "קָפֶה",
+    "translit": "kafeh",
+    "english": [
+      "coffee"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "תֵּה",
+    "translit": "teh",
+    "english": [
+      "tea"
+    ],
+    "difficulty": 1,
+    "level": 5
+  },
+  {
+    "hebrew": "מִיץ",
+    "translit": "mitz",
+    "english": [
+      "juice"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "יַיִן",
+    "translit": "yayin",
+    "english": [
+      "wine"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "בִּירָה",
+    "translit": "birah",
+    "english": [
+      "beer"
+    ],
+    "difficulty": 2,
+    "level": 11
+  },
+  {
+    "hebrew": "מַשְׁקֶה",
+    "translit": "mashkeh",
+    "english": [
+      "beverage"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "אֲרוּחָה",
+    "translit": "arucha",
+    "english": [
+      "meal"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "רָעֵב",
+    "translit": "ra'ev",
+    "english": [
+      "hungry"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "שׂבֵעַ",
+    "translit": "savea",
+    "english": [
+      "full",
+      "satisfied"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "צָמֵא",
+    "translit": "tzame",
+    "english": [
+      "thirsty"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "חוֹלֶה",
+    "translit": "choleh",
+    "english": [
+      "sick"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "בָּרִיא",
+    "translit": "bari",
+    "english": [
+      "healthy"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "חַם לְבָב",
+    "translit": "cham levav",
+    "english": [
+      "warm-hearted"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "קַר רוּחַ",
+    "translit": "kar ruach",
+    "english": [
+      "cold-hearted"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "בּוֹא",
+    "translit": "bo",
+    "english": [
+      "come (m)"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "לֵךְ",
+    "translit": "lech",
+    "english": [
+      "go (m)"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "שֵׁב",
+    "translit": "shev",
+    "english": [
+      "sit (m)"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "קוּם",
+    "translit": "kum",
+    "english": [
+      "get up (m)"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "שֵׁם",
+    "translit": "shem",
+    "english": [
+      "name"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "חַי",
+    "translit": "chai",
+    "english": [
+      "alive",
+      "life"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "מֵת",
+    "translit": "met",
+    "english": [
+      "dead"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "אַף",
+    "translit": "af",
+    "english": [
+      "nose"
+    ],
+    "difficulty": 1,
+    "level": 1
+  },
+  {
+    "hebrew": "עַכְבָּר",
+    "translit": "achbar",
+    "english": [
+      "mouse"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "פָּרָה",
+    "translit": "para",
+    "english": [
+      "cow"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "סוּס",
+    "translit": "sus",
+    "english": [
+      "horse"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "חֲמוֹר",
+    "translit": "chamor",
+    "english": [
+      "donkey"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "כֶּבֶשׂ",
+    "translit": "keves",
+    "english": [
+      "sheep"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "עֵז",
+    "translit": "ez",
+    "english": [
+      "goat"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "אֲרִי",
+    "translit": "ari",
+    "english": [
+      "lion"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "פִּיל",
+    "translit": "pil",
+    "english": [
+      "elephant"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "אַתֶּם",
+    "translit": "atem",
+    "english": [
+      "you (pl m)"
+    ],
+    "difficulty": 1,
+    "level": 2
+  },
+  {
+    "hebrew": "אַתֶּן",
+    "translit": "aten",
+    "english": [
+      "you (pl f)"
+    ],
+    "difficulty": 1,
+    "level": 3
+  },
+  {
+    "hebrew": "שֶׁלִּי",
+    "translit": "sheli",
+    "english": [
+      "mine"
+    ],
+    "difficulty": 1,
+    "level": 3
+  },
+  {
+    "hebrew": "שֶׁלְּךָ",
+    "translit": "shelcha",
+    "english": [
+      "yours (m)"
+    ],
+    "difficulty": 1,
+    "level": 3
+  },
+  {
+    "hebrew": "שֶׁלָּךְ",
+    "translit": "shelach",
+    "english": [
+      "yours (f)"
+    ],
+    "difficulty": 1,
+    "level": 3
+  },
+  {
+    "hebrew": "שֶׁלּוֹ",
+    "translit": "shelo",
+    "english": [
+      "his"
+    ],
+    "difficulty": 1,
+    "level": 3
+  },
+  {
+    "hebrew": "שֶׁלָּהּ",
+    "translit": "shela",
+    "english": [
+      "hers"
+    ],
+    "difficulty": 1,
+    "level": 3
+  },
+  {
+    "hebrew": "אֵיזֶה",
+    "translit": "eizeh",
+    "english": [
+      "which (m)"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "אֵיזוֹ",
+    "translit": "eizo",
+    "english": [
+      "which (f)"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "כָּל",
+    "translit": "kol",
+    "english": [
+      "every",
+      "all"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "שׁוּב",
+    "translit": "shuv",
+    "english": [
+      "again"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "כְּבָר",
+    "translit": "kvar",
+    "english": [
+      "already"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "עוֹד",
+    "translit": "od",
+    "english": [
+      "more",
+      "still"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "רַק",
+    "translit": "rak",
+    "english": [
+      "only"
+    ],
+    "difficulty": 1,
+    "level": 4
+  },
+  {
+    "hebrew": "בְּסֵדֶר",
+    "translit": "beseder",
+    "english": [
+      "okay"
+    ],
+    "difficulty": 2,
+    "level": 8
+  },
+  {
+    "hebrew": "כּוֹס",
+    "translit": "kos",
+    "english": [
+      "cup",
+      "glass"
+    ],
+    "difficulty": 2,
+    "level": 8
+  },
+  {
+    "hebrew": "צַלַּחַת",
+    "translit": "tzalachat",
+    "english": [
+      "plate"
+    ],
+    "difficulty": 2,
+    "level": 8
+  },
+  {
+    "hebrew": "מַזְלֵג",
+    "translit": "mazleg",
+    "english": [
+      "fork"
+    ],
+    "difficulty": 2,
+    "level": 8
+  },
+  {
+    "hebrew": "סַכִּין",
+    "translit": "sakin",
+    "english": [
+      "knife"
+    ],
+    "difficulty": 2,
+    "level": 8
+  },
+  {
+    "hebrew": "כַּף",
+    "translit": "kaf",
+    "english": [
+      "spoon"
+    ],
+    "difficulty": 2,
+    "level": 8
+  },
+  {
+    "hebrew": "שָׁעוֹן",
+    "translit": "sha'on",
+    "english": [
+      "clock",
+      "watch"
+    ],
+    "difficulty": 2,
+    "level": 8
+  },
+  {
+    "hebrew": "מַרְאָה",
+    "translit": "marah",
+    "english": [
+      "mirror"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "כַּדּוּר",
+    "translit": "kadur",
+    "english": [
+      "ball"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "בֻּבָּה",
+    "translit": "buba",
+    "english": [
+      "doll"
+    ],
+    "difficulty": 2,
+    "level": 9
+  },
+  {
+    "hebrew": "אוֹרֶז",
+    "translit": "orez",
+    "english": [
+      "rice"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "פַּסְטָה",
+    "translit": "pasta",
+    "english": [
+      "pasta"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "סָלָט",
+    "translit": "salat",
+    "english": [
+      "salad"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "מָרָק",
+    "translit": "marak",
+    "english": [
+      "soup"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "עוּגָה",
+    "translit": "uga",
+    "english": [
+      "cake"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "שׁוֹקוֹלָד",
+    "translit": "shokolad",
+    "english": [
+      "chocolate"
+    ],
+    "difficulty": 2,
+    "level": 10
+  },
+  {
+    "hebrew": "גַּן",
+    "translit": "gan",
+    "english": [
+      "garden",
+      "kindergarten"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "פַּארְק",
+    "translit": "park",
+    "english": [
+      "park"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "שׁוּק",
+    "translit": "shuk",
+    "english": [
+      "market"
+    ],
+    "difficulty": 2,
+    "level": 12
+  },
+  {
+    "hebrew": "מִסְעָדָה",
+    "translit": "mis'ada",
+    "english": [
+      "restaurant"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "בֵּית חוֹלִים",
+    "translit": "beit cholim",
+    "english": [
+      "hospital"
+    ],
+    "difficulty": 2,
+    "level": 13
+  },
+  {
+    "hebrew": "צַוָּאר",
+    "translit": "tzavar",
+    "english": [
+      "neck"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "כָּתֵף",
+    "translit": "katef",
+    "english": [
+      "shoulder"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "בֶּטֶן",
+    "translit": "beten",
+    "english": [
+      "stomach"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "גַּב",
+    "translit": "gav",
+    "english": [
+      "back"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "אֶצְבַּע",
+    "translit": "etzba",
+    "english": [
+      "finger"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "בֶּרֶךְ",
+    "translit": "berech",
+    "english": [
+      "knee"
+    ],
+    "difficulty": 2,
+    "level": 14
+  },
+  {
+    "hebrew": "דּוֹד",
+    "translit": "dod",
+    "english": [
+      "uncle"
+    ],
+    "difficulty": 2,
+    "level": 15
+  },
+  {
+    "hebrew": "דּוֹדָה",
+    "translit": "doda",
+    "english": [
+      "aunt"
+    ],
+    "difficulty": 2,
+    "level": 15
+  },
+  {
+    "hebrew": "בֵּן",
+    "translit": "ben",
+    "english": [
+      "son"
+    ],
+    "difficulty": 2,
+    "level": 15
+  },
+  {
+    "hebrew": "בַּת",
+    "translit": "bat",
+    "english": [
+      "daughter"
+    ],
+    "difficulty": 2,
+    "level": 15
+  },
+  {
+    "hebrew": "בַּעַל",
+    "translit": "ba'al",
+    "english": [
+      "husband"
+    ],
+    "difficulty": 2,
+    "level": 15
+  },
+  {
+    "hebrew": "אִשָּׁה",
+    "translit": "isha",
+    "english": [
+      "woman",
+      "wife"
+    ],
+    "difficulty": 2,
+    "level": 15
+  },
+  {
+    "hebrew": "כֹּחַ",
+    "translit": "koach",
+    "english": [
+      "strength"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "חֻלְשָׁה",
+    "translit": "chulshah",
+    "english": [
+      "weakness"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "מַטָּרָה",
+    "translit": "matarah",
+    "english": [
+      "goal"
+    ],
+    "difficulty": 3,
+    "level": 16
+  },
+  {
+    "hebrew": "הַצְלָחָה",
+    "translit": "hatzlachah",
+    "english": [
+      "success"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "כִּשָּׁלוֹן",
+    "translit": "kishalon",
+    "english": [
+      "failure"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "וָרוֹד",
+    "translit": "varod",
+    "english": [
+      "pink"
+    ],
+    "difficulty": 2,
+    "level": 18
+  },
+  {
+    "hebrew": "כָּתוֹם",
+    "translit": "katom",
+    "english": [
+      "orange"
+    ],
+    "difficulty": 2,
+    "level": 18
+  },
+  {
+    "hebrew": "חוּם",
+    "translit": "chum",
+    "english": [
+      "brown"
+    ],
+    "difficulty": 2,
+    "level": 18
+  },
+  {
+    "hebrew": "סָגוֹל",
+    "translit": "sagol",
+    "english": [
+      "purple"
+    ],
+    "difficulty": 2,
+    "level": 18
+  },
+  {
+    "hebrew": "אָפוֹר",
+    "translit": "afor",
+    "english": [
+      "gray"
+    ],
+    "difficulty": 2,
+    "level": 18
+  },
+  {
+    "hebrew": "יָפֶה",
+    "translit": "yafeh",
+    "english": [
+      "beautiful"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "גָּבוֹהַּ",
+    "translit": "gavoah",
+    "english": [
+      "tall"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "נָמוּךְ",
+    "translit": "namuch",
+    "english": [
+      "low",
+      "short"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "כָּבֵד",
+    "translit": "kaved",
+    "english": [
+      "heavy"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "מָהִיר",
+    "translit": "mahir",
+    "english": [
+      "fast"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "אִטִּי",
+    "translit": "iti",
+    "english": [
+      "slow"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "לַעֲבֹד",
+    "translit": "la'avod",
+    "english": [
+      "to work"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "לָבוֹא",
+    "translit": "lavo",
+    "english": [
+      "to come"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "לָתֵת",
+    "translit": "latet",
+    "english": [
+      "to give"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "לָקַחַת",
+    "translit": "lakachat",
+    "english": [
+      "to take"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "לִשְׁאֹל",
+    "translit": "lishol",
+    "english": [
+      "to ask"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "לַעֲנוֹת",
+    "translit": "la'anot",
+    "english": [
+      "to answer"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "לְבַקֵּשׁ",
+    "translit": "levakesh",
+    "english": [
+      "to request"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "לְחַכּוֹת",
+    "translit": "lechakot",
+    "english": [
+      "to wait"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "לְהַחְלִיט",
+    "translit": "lehachlit",
+    "english": [
+      "to decide"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "לְהַתְחִיל",
+    "translit": "lehatchil",
+    "english": [
+      "to start"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "אָדֹן",
+    "translit": "adon",
+    "english": [
+      "lord",
+      "master"
+    ],
+    "difficulty": 2,
+    "level": 16
+  },
+  {
+    "hebrew": "אֶלֶף",
+    "translit": "elef",
+    "english": [
+      "thousand"
+    ],
+    "difficulty": 2,
+    "level": 16
+  },
+  {
+    "hebrew": "בָּנִים",
+    "translit": "banim",
+    "english": [
+      "sons",
+      "children"
+    ],
+    "difficulty": 2,
+    "level": 16
+  },
+  {
+    "hebrew": "בֶּגֶד",
+    "translit": "beged",
+    "english": [
+      "garment",
+      "clothing"
+    ],
+    "difficulty": 2,
+    "level": 16
+  },
+  {
+    "hebrew": "שַׁבָּת",
+    "translit": "shabbat",
+    "english": [
+      "Sabbath"
+    ],
+    "difficulty": 2,
+    "level": 16
+  },
+  {
+    "hebrew": "לְךָ",
+    "translit": "lecha",
+    "english": [
+      "to you (m sg)"
+    ],
+    "difficulty": 2,
+    "level": 16
+  },
+  {
+    "hebrew": "חֵן",
+    "translit": "chen",
+    "english": [
+      "grace",
+      "favor"
+    ],
+    "difficulty": 2,
+    "level": 16
+  },
+  {
+    "hebrew": "חֹרֶף",
+    "translit": "choref",
+    "english": [
+      "winter"
+    ],
+    "difficulty": 2,
+    "level": 16
+  },
+  {
+    "hebrew": "טָהוֹר",
+    "translit": "tahor",
+    "english": [
+      "pure",
+      "clean"
+    ],
+    "difficulty": 2,
+    "level": 16
+  },
+  {
+    "hebrew": "מֶלֶךְ",
+    "translit": "melech",
+    "english": [
+      "king"
+    ],
+    "difficulty": 2,
+    "level": 16
+  },
+  {
+    "hebrew": "נָשָׂא",
+    "translit": "nasa",
+    "english": [
+      "lifted",
+      "bore",
+      "carried"
+    ],
+    "difficulty": 2,
+    "level": 17
+  },
+  {
+    "hebrew": "סָרוּ",
+    "translit": "saru",
+    "english": [
+      "they turned aside"
+    ],
+    "difficulty": 3,
+    "level": 17
+  },
+  {
+    "hebrew": "פַּעַם",
+    "translit": "pa'am",
+    "english": [
+      "once",
+      "occasion"
+    ],
+    "difficulty": 2,
+    "level": 17
+  },
+  {
+    "hebrew": "בָּרוּךְ",
+    "translit": "baruch",
+    "english": [
+      "blessed"
+    ],
+    "difficulty": 2,
+    "level": 17
+  },
+  {
+    "hebrew": "טוֹבִים",
+    "translit": "tovim",
+    "english": [
+      "good (m pl)"
+    ],
+    "difficulty": 2,
+    "level": 17
+  },
+  {
+    "hebrew": "רַחֵם",
+    "translit": "rachem",
+    "english": [
+      "have mercy"
+    ],
+    "difficulty": 2,
+    "level": 17
+  },
+  {
+    "hebrew": "קַו",
+    "translit": "kav",
+    "english": [
+      "line",
+      "cord"
+    ],
+    "difficulty": 2,
+    "level": 17
+  },
+  {
+    "hebrew": "רָחַץ",
+    "translit": "rachatz",
+    "english": [
+      "washed"
+    ],
+    "difficulty": 2,
+    "level": 17
+  },
+  {
+    "hebrew": "קֶדֶם",
+    "translit": "kedem",
+    "english": [
+      "east",
+      "antiquity"
+    ],
+    "difficulty": 2,
+    "level": 17
+  },
+  {
+    "hebrew": "כָּנָף",
+    "translit": "kanaf",
+    "english": [
+      "wing",
+      "corner"
+    ],
+    "difficulty": 2,
+    "level": 18
+  },
+  {
+    "hebrew": "לֵוִי",
+    "translit": "levi",
+    "english": [
+      "Levi"
+    ],
+    "difficulty": 2,
+    "level": 18
+  },
+  {
+    "hebrew": "מָגֵן",
+    "translit": "magen",
+    "english": [
+      "shield"
+    ],
+    "difficulty": 2,
+    "level": 18
+  },
+  {
+    "hebrew": "רַד",
+    "translit": "rad",
+    "english": [
+      "went down"
+    ],
+    "difficulty": 2,
+    "level": 18
+  },
+  {
+    "hebrew": "שָׂרָה",
+    "translit": "sarah",
+    "english": [
+      "Sarah"
+    ],
+    "difficulty": 2,
+    "level": 18
+  },
+  {
+    "hebrew": "אָהַב",
+    "translit": "ahav",
+    "english": [
+      "loved"
+    ],
+    "difficulty": 2,
+    "level": 18
+  },
+  {
+    "hebrew": "נָתַן",
+    "translit": "natan",
+    "english": [
+      "gave"
+    ],
+    "difficulty": 2,
+    "level": 18
+  },
+  {
+    "hebrew": "אָבֵל",
+    "translit": "avel",
+    "english": [
+      "mourning",
+      "mourner"
+    ],
+    "difficulty": 2,
+    "level": 18
+  },
+  {
+    "hebrew": "סוּר",
+    "translit": "sur",
+    "english": [
+      "turn aside"
+    ],
+    "difficulty": 2,
+    "level": 19
+  },
+  {
+    "hebrew": "אָמַר",
+    "translit": "amar",
+    "english": [
+      "said"
+    ],
+    "difficulty": 2,
+    "level": 19
+  },
+  {
+    "hebrew": "עָבַר",
+    "translit": "avar",
+    "english": [
+      "passed",
+      "crossed"
+    ],
+    "difficulty": 2,
+    "level": 19
+  },
+  {
+    "hebrew": "אָסַף",
+    "translit": "asaf",
+    "english": [
+      "gathered"
+    ],
+    "difficulty": 2,
+    "level": 19
+  },
+  {
+    "hebrew": "שָׁאַל",
+    "translit": "sha'al",
+    "english": [
+      "asked"
+    ],
+    "difficulty": 2,
+    "level": 19
+  },
+  {
+    "hebrew": "שָׂנָא",
+    "translit": "sana",
+    "english": [
+      "hated"
+    ],
+    "difficulty": 2,
+    "level": 19
+  },
+  {
+    "hebrew": "זוּלָתוֹ",
+    "translit": "zulato",
+    "english": [
+      "except him",
+      "besides him"
+    ],
+    "difficulty": 3,
+    "level": 19
+  },
+  {
+    "hebrew": "נֵר",
+    "translit": "ner",
+    "english": [
+      "lamp",
+      "candle"
+    ],
+    "difficulty": 2,
+    "level": 19
+  },
+  {
+    "hebrew": "וָלֶד",
+    "translit": "valed",
+    "english": [
+      "child",
+      "offspring"
+    ],
+    "difficulty": 2,
+    "level": 20
+  },
+  {
+    "hebrew": "לֵבָב",
+    "translit": "levav",
+    "english": [
+      "heart"
+    ],
+    "difficulty": 2,
+    "level": 20
+  },
+  {
+    "hebrew": "צָרָה",
+    "translit": "tzarah",
+    "english": [
+      "trouble",
+      "distress"
+    ],
+    "difficulty": 2,
+    "level": 20
+  },
+  {
+    "hebrew": "מַתָּנָה",
+    "translit": "matana",
+    "english": [
+      "gift"
+    ],
+    "difficulty": 2,
+    "level": 20
+  },
+  {
+    "hebrew": "שֶׁבֶץ",
+    "translit": "shevetz",
+    "english": [
+      "ornament",
+      "setting"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "עֵגֶל",
+    "translit": "egel",
+    "english": [
+      "calf"
+    ],
+    "difficulty": 2,
+    "level": 20
+  },
+  {
+    "hebrew": "אָקוּם",
+    "translit": "akum",
+    "english": [
+      "I will arise"
+    ],
+    "difficulty": 3,
+    "level": 20
+  },
+  {
+    "hebrew": "טַבַּעַת",
+    "translit": "taba'at",
+    "english": [
+      "ring"
+    ],
+    "difficulty": 2,
+    "level": 20
+  },
+  {
+    "hebrew": "חָמֵץ",
+    "translit": "chametz",
+    "english": [
+      "leaven"
+    ],
+    "difficulty": 2,
+    "level": 20
+  },
+  {
+    "hebrew": "לָרֶדֶת",
+    "translit": "laredet",
+    "english": [
+      "to descend"
+    ],
+    "difficulty": 2,
+    "level": 20
+  },
+  {
+    "hebrew": "שָׁוֶה",
+    "translit": "shaveh",
+    "english": [
+      "equal",
+      "worth"
+    ],
+    "difficulty": 2,
+    "level": 20
+  },
+  {
+    "hebrew": "בָּם",
+    "translit": "bam",
+    "english": [
+      "in them (m)"
+    ],
+    "difficulty": 3,
+    "level": 20
+  }
+]
