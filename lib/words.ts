@@ -77,34 +77,157 @@ export interface AnswerOption {
   id: string;
   label: string;
   isCorrect: boolean;
-  entry: WordEntry;
+  /** Only present for the correct option (real word). Distractors are made-up. */
+  entry?: WordEntry;
 }
 
 /**
- * Builds 4 shuffled choices: one correct word + 3 distractors from the same level.
+ * Tokenize a transliteration so multi-letter Hebrew sounds (sh, ch, tz, kh, ts)
+ * stay together. Splits the rest into single chars (vowels, consonants,
+ * apostrophes, spaces, etc.).
+ */
+const TRANSLIT_TOKEN_RE = /sh|ch|tz|kh|ts|[a-zA-Z']|[^a-zA-Z']/g;
+const VOWELS = new Set(["a", "e", "i", "o", "u"]);
+
+const VOWEL_SWAPS: Record<string, string[]> = {
+  a: ["e", "o", "i"],
+  e: ["a", "i"],
+  i: ["e", "a"],
+  o: ["u", "a"],
+  u: ["o", "i"],
+};
+
+const CONSONANT_SWAPS: Record<string, string[]> = {
+  b: ["v", "p"],
+  v: ["b", "f"],
+  p: ["f", "b"],
+  f: ["p", "v"],
+  t: ["d"],
+  d: ["t"],
+  k: ["g", "ch"],
+  g: ["k"],
+  ch: ["k", "h"],
+  sh: ["s", "z"],
+  s: ["sh", "z"],
+  z: ["s", "tz"],
+  tz: ["z", "s"],
+  ts: ["z", "s"],
+  m: ["n"],
+  n: ["m"],
+  r: ["l"],
+  l: ["r"],
+  y: ["i"],
+  h: [""],
+};
+
+function tokenize(translit: string): string[] {
+  return translit.match(TRANSLIT_TOKEN_RE) ?? [];
+}
+
+function pickRandom<T>(arr: T[]): T | undefined {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+/**
+ * Returns a single-edit phonetic mutation of the input (or null if no token
+ * can be mutated). Mutates exactly one token: a vowel or a consonant atom
+ * (single chars or 'sh' / 'ch' / 'tz' / 'ts' / 'kh' digraphs).
+ */
+function mutateTranslit(translit: string): string | null {
+  const tokens = tokenize(translit);
+  if (tokens.length === 0) return null;
+  const indices = tokens.map((_, i) => i);
+  for (let attempt = 0; attempt < indices.length * 2; attempt++) {
+    const idx = pickRandom(indices);
+    if (idx == null) break;
+    const tok = tokens[idx]!.toLowerCase();
+    const candidates = VOWELS.has(tok)
+      ? VOWEL_SWAPS[tok]
+      : CONSONANT_SWAPS[tok];
+    if (!candidates || candidates.length === 0) continue;
+    const replacement = pickRandom(candidates);
+    if (replacement == null) continue;
+    const next = [...tokens];
+    next[idx] = replacement;
+    const out = next.join("");
+    if (out && out !== translit) return out;
+  }
+  return null;
+}
+
+/**
+ * Build N unique fake transliterations that look phonetically similar to the
+ * original. Each distractor is made by mutating 1–2 sound atoms.
+ */
+function generateSimilarDistractors(
+  correctTranslit: string,
+  count: number,
+  exclude: Set<string>,
+): string[] {
+  const out: string[] = [];
+  const seen = new Set(exclude);
+  seen.add(correctTranslit.toLowerCase());
+
+  const maxAttempts = count * 25;
+  for (let attempt = 0; attempt < maxAttempts && out.length < count; attempt++) {
+    let candidate = mutateTranslit(correctTranslit);
+    if (!candidate) break;
+    // For longer words, sometimes apply a second mutation for more variety.
+    if (correctTranslit.replace(/[^a-zA-Z]/g, "").length > 4 && Math.random() < 0.5) {
+      candidate = mutateTranslit(candidate) ?? candidate;
+    }
+    const key = candidate.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(candidate);
+  }
+  return out;
+}
+
+/**
+ * Builds 4 shuffled choices: one correct transliteration + 3 phonetically
+ * similar (but made-up) distractors. Falls back to other-pool words only if
+ * mutation cannot produce enough unique distractors.
  */
 export function buildRoundOptions(
   correct: WordEntry,
   pool: WordEntry[],
 ): AnswerOption[] {
-  // Distractors must have a *different* transliteration so the round is
-  // unambiguous (some entries share translits e.g. רוּחַ / both spellings).
-  const others = pool.filter(
-    (w) => w.hebrew !== correct.hebrew && w.translit !== correct.translit,
-  );
-  const picks = shuffle(others).slice(0, 3);
-  while (picks.length < 3 && others.length > picks.length) {
-    const extra = others.find((o) => !picks.includes(o));
-    if (!extra) break;
-    picks.push(extra);
+  const exclude = new Set<string>();
+  for (const w of pool) exclude.add(w.translit.toLowerCase());
+
+  const distractors = generateSimilarDistractors(correct.translit, 3, exclude);
+
+  if (distractors.length < 3) {
+    // Last-ditch fallback: pull other real translits from the level pool.
+    const others = pool.filter(
+      (w) =>
+        w.hebrew !== correct.hebrew &&
+        w.translit.toLowerCase() !== correct.translit.toLowerCase(),
+    );
+    for (const o of shuffle(others)) {
+      if (distractors.length >= 3) break;
+      const key = o.translit.toLowerCase();
+      if (distractors.some((d) => d.toLowerCase() === key)) continue;
+      distractors.push(o.translit);
+    }
   }
-  const options: AnswerOption[] = [correct, ...picks].map((entry) => ({
-    id: wordKey(entry),
-    label: getAnswerLabel(entry),
-    isCorrect: entry.hebrew === correct.hebrew,
-    entry,
-  }));
-  return shuffle(options);
+
+  const correctOption: AnswerOption = {
+    id: `correct:${wordKey(correct)}`,
+    label: getAnswerLabel(correct),
+    isCorrect: true,
+    entry: correct,
+  };
+  const distractorOptions: AnswerOption[] = distractors
+    .slice(0, 3)
+    .map((label, i) => ({
+      id: `fake:${i}:${label}`,
+      label,
+      isCorrect: false,
+    }));
+
+  return shuffle([correctOption, ...distractorOptions]);
 }
 
 export function pickRandomWord(
