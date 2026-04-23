@@ -20,7 +20,12 @@ import {
   getLevelTitle,
   type LevelId,
 } from "@/lib/levels";
-import { loadSettings, saveSettings } from "@/lib/settings";
+import {
+  loadSettings,
+  saveSettings,
+  TIMER_OVERRIDE_MAX,
+  TIMER_OVERRIDE_MIN,
+} from "@/lib/settings";
 import { cn } from "@/lib/utils";
 
 interface SettingsDialogProps {
@@ -42,16 +47,24 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
     setOpen(true);
     const s = loadSettings();
     const def = getDefaultTimerSeconds(level);
+    const o = s.timerSecondsOverride;
     if (
-      s.timerSecondsOverride != null &&
-      s.timerSecondsOverride >= 3 &&
-      s.timerSecondsOverride <= 60
+      o != null &&
+      Number.isFinite(o) &&
+      o >= TIMER_OVERRIDE_MIN &&
+      o <= TIMER_OVERRIDE_MAX
     ) {
       setUseOverride(true);
-      setSeconds(s.timerSecondsOverride);
+      setSeconds(o);
+    } else if (o != null && Number.isFinite(o) && o >= 3 && o < TIMER_OVERRIDE_MIN) {
+      // Legacy saves (3–14s): show minimum valid range in the UI.
+      setUseOverride(true);
+      setSeconds(TIMER_OVERRIDE_MIN);
     } else {
       setUseOverride(false);
-      setSeconds(def);
+      setSeconds(
+        Math.min(TIMER_OVERRIDE_MAX, Math.max(TIMER_OVERRIDE_MIN, def)),
+      );
     }
     setAutoAdvance(s.autoAdvance);
   }
@@ -81,9 +94,8 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
         <DialogHeader>
           <DialogTitle>Settings</DialogTitle>
           <DialogDescription>
-            Adjust round timer (seconds). Applies to all levels when override is
-            on; otherwise each level uses its own default ({getLevelTitle(level)}{" "}
-            default: {def}s).
+            Set seconds per word (15–60) when custom timer is on; otherwise each
+            level uses its own default ({getLevelTitle(level)} default: {def}s).
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-2">
@@ -101,12 +113,12 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
           </div>
           <div className={!useOverride ? "pointer-events-none opacity-50" : ""}>
             <div className="mb-2 flex justify-between text-sm">
-              <Label>Seconds per round</Label>
+              <Label>Seconds per word</Label>
               <span className="text-muted-foreground tabular-nums">{seconds}s</span>
             </div>
             <Slider
-              min={3}
-              max={30}
+              min={TIMER_OVERRIDE_MIN}
+              max={TIMER_OVERRIDE_MAX}
               step={1}
               value={[seconds]}
               onValueChange={(v) => {
@@ -143,7 +155,9 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
             onClick={() => {
               saveSettings({ timerSecondsOverride: null, autoAdvance: true });
               setUseOverride(false);
-              setSeconds(def);
+              setSeconds(
+                Math.min(TIMER_OVERRIDE_MAX, Math.max(TIMER_OVERRIDE_MIN, def)),
+              );
               setAutoAdvance(true);
             }}
           >

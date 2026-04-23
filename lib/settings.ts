@@ -2,6 +2,10 @@ import { getDefaultTimerSeconds, type LevelId } from "@/lib/levels";
 
 const SETTINGS_KEY = "hebrew-game-settings";
 
+/** Allowed range when the student enables a custom timer (seconds per word). */
+export const TIMER_OVERRIDE_MIN = 15;
+export const TIMER_OVERRIDE_MAX = 60;
+
 export interface GameSettings {
   /** If set, overrides per-level default timer (seconds). */
   timerSecondsOverride: number | null;
@@ -18,13 +22,14 @@ const defaultSettings: GameSettings = {
   autoAdvance: true,
 };
 
-/** Timer shown in UI and used when starting rounds (3–60 clamp). */
+/** Timer shown in UI and used when starting rounds. */
 export function getEffectiveTimerSeconds(level: LevelId): number {
   const s = loadSettings();
   if (
     s.timerSecondsOverride != null &&
-    s.timerSecondsOverride >= 3 &&
-    s.timerSecondsOverride <= 60
+    Number.isFinite(s.timerSecondsOverride) &&
+    s.timerSecondsOverride >= TIMER_OVERRIDE_MIN &&
+    s.timerSecondsOverride <= TIMER_OVERRIDE_MAX
   ) {
     return s.timerSecondsOverride;
   }
