@@ -39,6 +39,12 @@ export const EXTRA_LEVELS: ExtraLevel[] = [
     category: "Torah portion",
     timerSeconds: 12,
   },
+  {
+    id: "miketz-2",
+    label: "Miketz-2",
+    category: "Torah portion",
+    timerSeconds: 12,
+  },
 ];
 
 const EXTRA_LEVEL_MAP: Record<string, ExtraLevel> = Object.fromEntries(
@@ -47,7 +53,7 @@ const EXTRA_LEVEL_MAP: Record<string, ExtraLevel> = Object.fromEntries(
 
 export function getExtraLevel(id: string): ExtraLevel | undefined {
   if (EXTRA_LEVEL_MAP[id]) return EXTRA_LEVEL_MAP[id];
-  // Match longest registered prefix (e.g. "miketz-1b-a" matches "miketz-1").
+  // Match longest registered prefix (e.g. "miketz-1-a" matches "miketz-1").
   let bestKey: string | null = null;
   for (const key of Object.keys(EXTRA_LEVEL_MAP)) {
     if (id.startsWith(`${key}-`) || id.startsWith(key)) {

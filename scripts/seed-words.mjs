@@ -437,123 +437,123 @@ const rows = `
 לָרֶדֶת|laredet|to descend|2|20
 שָׁוֶה|shaveh|equal,worth|2|20
 בָּם|bam|in them (m)|3|20
-וַיְהִי|vayhi|and it was,and it came to pass|2|miketz-1b
-מִקֵּץ|miketz|at the end of|2|miketz-1b
-שְׁנָתַיִם|shnatayim|two years|2|miketz-1b
-יָמִים|yamim|days|1|miketz-1a
-וּפַרְעֹה|ufaroh|and Pharaoh|2|miketz-1b
-חֹלֵם|cholem|dreaming|2|miketz-1b
-וְהִנֵּה|vehineh|and behold|2|miketz-1b
-עֹמֵד|omed|standing|2|miketz-1b
-עַל|al|on,upon|1|miketz-1a
-הַיְאֹר|hayeor|the Nile,the river|2|miketz-1b
-מִן|min|from|1|miketz-1a
-עֹלוֹת|olot|coming up (f pl)|2|miketz-1b
-שֶׁבַע|sheva|seven|1|miketz-1a
-פָּרוֹת|parot|cows|2|miketz-1b
-יְפוֹת|yefot|beautiful (f pl)|2|miketz-1b
-מַרְאֶה|mareh|appearance|2|miketz-1b
-וּבְרִיאֹת|uveriot|and fat (f pl)|3|miketz-1c
-בָּשָׂר|basar|flesh|2|miketz-1b
-וַתִּרְעֶינָה|vatirenah|and they grazed|3|miketz-1c
-בָּאָחוּ|baachu|in the marsh|3|miketz-1c
-אֲחֵרוֹת|acherot|other (f pl)|2|miketz-1b
-אַחֲרֵיהֶן|achareihen|after them (f pl)|3|miketz-1c
-רָעוֹת|raot|bad (f pl)|2|miketz-1b
-וְדַקּוֹת|vedakot|and thin (f pl)|2|miketz-1b
-וַתַּעֲמֹדְנָה|vataamodnah|and they stood|3|miketz-1c
-אֵצֶל|etzel|beside,near|2|miketz-1b
-הַפָּרוֹת|haparot|the cows|2|miketz-1b
-שְׂפַת|sefat|edge of,bank of|2|miketz-1b
-וַתֹּאכַלְנָה|vatochalnah|and they ate|3|miketz-1c
-הַמַּרְאֶה|hamareh|the appearance|2|miketz-1b
-הַבָּשָׂר|habasar|the flesh|2|miketz-1b
-אֵת|et|(direct object marker)|1|miketz-1a
-וְהַבְּרִיאֹת|vehaberiot|and the fat (f pl)|3|miketz-1c
-וַיִּיקַץ|vayikatz|and he awoke|3|miketz-1c
-פַּרְעֹה|paroh|Pharaoh|2|miketz-1b
-וַיִּישָׁן|vayishan|and he slept|3|miketz-1c
-וַיַּחֲלֹם|vayachalom|and he dreamed|3|miketz-1c
-שֵׁנִית|shenit|a second time|2|miketz-1b
-שִׁבֳּלִים|shibolim|ears of grain|3|miketz-1c
-בְּקָנֶה|bekaneh|on a stalk|2|miketz-1b
-אֶחָד|echad|one|1|miketz-1a
-בְּרִיאוֹת|beriot|fat (f pl)|2|miketz-1b
-וְטֹבוֹת|vetovot|and good (f pl)|2|miketz-1b
-דַּקּוֹת|dakot|thin (f pl)|2|miketz-1b
-וּשְׁדוּפֹת|ushdufot|and scorched (f pl)|3|miketz-1c
-קָדִים|kadim|east wind|2|miketz-1b
-צֹמְחוֹת|tzomchot|growing,sprouting (f pl)|3|miketz-1c
-וַתִּבְלַעְנָה|vativlanah|and they swallowed|3|miketz-1c
-הַשִּׁבֳּלִים|hashibolim|the ears of grain|3|miketz-1c
-הַדַּקּוֹת|hadakot|the thin (f pl)|2|miketz-1b
-הַבְּרִיאוֹת|haberiot|the fat (f pl)|3|miketz-1c
-וְהַמְּלֵאוֹת|vehameleot|and the full (f pl)|3|miketz-1c
-חֲלוֹם|chalom|dream|2|miketz-1b
-בַבֹּקֶר|baboker|in the morning|2|miketz-1b
-וַתִּפָּעֶם|vatipaem|and was troubled|3|miketz-1c
-רוּחוֹ|rucho|his spirit|2|miketz-1b
-וַיִּשְׁלַח|vayishlach|and he sent|2|miketz-1b
-וַיִּקְרָא|vayikra|and he called|2|miketz-1b
-כָּל|kol|all,every|1|miketz-1a
-חַרְטֻמֵּי|chartumei|magicians of|3|miketz-1c
-מִצְרַיִם|mitzrayim|Egypt|2|miketz-1b
-וְאֵת|veet|and (direct object marker)|2|miketz-1b
-חֲכָמֶיהָ|chachameha|her wise men|3|miketz-1c
-וַיְסַפֵּר|vayesaper|and he told,recounted|2|miketz-1b
-לָהֶם|lahem|to them|2|miketz-1b
-חֲלֹמוֹ|chalomo|his dream|2|miketz-1b
-וְאֵין|veein|and there is no|2|miketz-1b
-פּוֹתֵר|poter|interpreter|2|miketz-1b
-אוֹתָם|otam|them (m)|2|miketz-1b
-לְפַרְעֹה|lefaroh|to Pharaoh|2|miketz-1b
-וַיְדַבֵּר|vayedaber|and he spoke|2|miketz-1b
-שַׂר|sar|chief,officer|2|miketz-1b
-הַמַּשְׁקִים|hamashkim|the cupbearers|2|miketz-1b
-לֵאמֹר|lemor|saying|2|miketz-1b
-חֲטָאַי|chataai|my sins,my faults|3|miketz-1c
-מַזְכִּיר|mazkir|recall,mention|2|miketz-1b
-קָצַף|katzaf|was angry|2|miketz-1b
-עֲבָדָיו|avadav|his servants|2|miketz-1b
-וַיִּתֵּן|vayiten|and he placed,gave|2|miketz-1b
-אֹתִי|oti|me|2|miketz-1b
-בְּמִשְׁמַר|bemishmar|in custody,in confinement|3|miketz-1c
-בֵּית|beit|house of|2|miketz-1b
-הַטַּבָּחִים|hatabachim|the guards,the executioners|3|miketz-1c
-הָאֹפִים|haofim|the bakers|2|miketz-1b
-וַנַּחַלְמָה|vanachalmah|and we dreamed|3|miketz-1c
-בְּלַיְלָה|belaylah|in a night|2|miketz-1b
-וָהוּא|vahu|and he|2|miketz-1b
-אִישׁ|ish|man,each|1|miketz-1a
-כְּפִתְרוֹן|kefitron|according to interpretation of|3|miketz-1c
-חָלָמְנוּ|chalamnu|we dreamed|2|miketz-1b
-וְשָׁם|vesham|and there|2|miketz-1b
-אִתָּנוּ|itanu|with us|2|miketz-1b
-נַעַר|naar|youth,lad|2|miketz-1b
-עִבְרִי|ivri|Hebrew|2|miketz-1b
-עֶבֶד|eved|servant,slave|2|miketz-1b
-לְשַׂר|lesar|to the chief of|2|miketz-1b
-וַנְּסַפֶּר|vanesaper|and we told|3|miketz-1c
-לוֹ|lo|to him|1|miketz-1a
-וַיִּפְתָּר|vayiftar|and he interpreted|3|miketz-1c
-לָנוּ|lanu|to us|2|miketz-1b
-חֲלֹמֹתֵינוּ|chalomoteinu|our dreams|3|miketz-1c
-כַּחֲלֹמוֹ|kachalomo|according to his dream|3|miketz-1c
-פָּתַר|patar|interpreted|2|miketz-1b
-כַּאֲשֶׁר|kaasher|just as,when|2|miketz-1b
-הָיָה|hayah|it was,happened|2|miketz-1b
-הֵשִׁיב|heshiv|restored,returned|2|miketz-1b
-כַּנִּי|kani|my post,my position|3|miketz-1c
-וְאֹתוֹ|veoto|and him|2|miketz-1b
-תָלָה|talah|hanged|2|miketz-1b
-יוֹסֵף|yosef|Joseph|2|miketz-1b
-וַיְרִיצֻהוּ|vayritzuhu|and they rushed him|3|miketz-1c
-הַבּוֹר|habor|the pit,the dungeon|2|miketz-1b
-וַיְגַלַּח|vayegalach|and he shaved|3|miketz-1c
-וַיְחַלֵּף|vayechalef|and he changed|3|miketz-1c
-שִׂמְלֹתָיו|simlotav|his clothes,his garments|3|miketz-1c
-וַיָּבֹא|vayavo|and he came|2|miketz-1b
-אֶל|el|to,toward|1|miketz-1a
+וַיְהִי|vayhi|and it was,and it came to pass|2|miketz-raw
+מִקֵּץ|miketz|at the end of|2|miketz-raw
+שְׁנָתַיִם|shnatayim|two years|2|miketz-raw
+יָמִים|yamim|days|1|miketz-raw
+וּפַרְעֹה|ufaroh|and Pharaoh|2|miketz-raw
+חֹלֵם|cholem|dreaming|2|miketz-raw
+וְהִנֵּה|vehineh|and behold|2|miketz-raw
+עֹמֵד|omed|standing|2|miketz-raw
+עַל|al|on,upon|1|miketz-raw
+הַיְאֹר|hayeor|the Nile,the river|2|miketz-raw
+מִן|min|from|1|miketz-raw
+עֹלוֹת|olot|coming up (f pl)|2|miketz-raw
+שֶׁבַע|sheva|seven|1|miketz-raw
+פָּרוֹת|parot|cows|2|miketz-raw
+יְפוֹת|yefot|beautiful (f pl)|2|miketz-raw
+מַרְאֶה|mareh|appearance|2|miketz-raw
+וּבְרִיאֹת|uveriot|and fat (f pl)|3|miketz-raw
+בָּשָׂר|basar|flesh|2|miketz-raw
+וַתִּרְעֶינָה|vatirenah|and they grazed|3|miketz-raw
+בָּאָחוּ|baachu|in the marsh|3|miketz-raw
+אֲחֵרוֹת|acherot|other (f pl)|2|miketz-raw
+אַחֲרֵיהֶן|achareihen|after them (f pl)|3|miketz-raw
+רָעוֹת|raot|bad (f pl)|2|miketz-raw
+וְדַקּוֹת|vedakot|and thin (f pl)|2|miketz-raw
+וַתַּעֲמֹדְנָה|vataamodnah|and they stood|3|miketz-raw
+אֵצֶל|etzel|beside,near|2|miketz-raw
+הַפָּרוֹת|haparot|the cows|2|miketz-raw
+שְׂפַת|sefat|edge of,bank of|2|miketz-raw
+וַתֹּאכַלְנָה|vatochalnah|and they ate|3|miketz-raw
+הַמַּרְאֶה|hamareh|the appearance|2|miketz-raw
+הַבָּשָׂר|habasar|the flesh|2|miketz-raw
+אֵת|et|(direct object marker)|1|miketz-raw
+וְהַבְּרִיאֹת|vehaberiot|and the fat (f pl)|3|miketz-raw
+וַיִּיקַץ|vayikatz|and he awoke|3|miketz-raw
+פַּרְעֹה|paroh|Pharaoh|2|miketz-raw
+וַיִּישָׁן|vayishan|and he slept|3|miketz-raw
+וַיַּחֲלֹם|vayachalom|and he dreamed|3|miketz-raw
+שֵׁנִית|shenit|a second time|2|miketz-raw
+שִׁבֳּלִים|shibolim|ears of grain|3|miketz-raw
+בְּקָנֶה|bekaneh|on a stalk|2|miketz-raw
+אֶחָד|echad|one|1|miketz-raw
+בְּרִיאוֹת|beriot|fat (f pl)|2|miketz-raw
+וְטֹבוֹת|vetovot|and good (f pl)|2|miketz-raw
+דַּקּוֹת|dakot|thin (f pl)|2|miketz-raw
+וּשְׁדוּפֹת|ushdufot|and scorched (f pl)|3|miketz-raw
+קָדִים|kadim|east wind|2|miketz-raw
+צֹמְחוֹת|tzomchot|growing,sprouting (f pl)|3|miketz-raw
+וַתִּבְלַעְנָה|vativlanah|and they swallowed|3|miketz-raw
+הַשִּׁבֳּלִים|hashibolim|the ears of grain|3|miketz-raw
+הַדַּקּוֹת|hadakot|the thin (f pl)|2|miketz-raw
+הַבְּרִיאוֹת|haberiot|the fat (f pl)|3|miketz-raw
+וְהַמְּלֵאוֹת|vehameleot|and the full (f pl)|3|miketz-raw
+חֲלוֹם|chalom|dream|2|miketz-raw
+בַבֹּקֶר|baboker|in the morning|2|miketz-raw
+וַתִּפָּעֶם|vatipaem|and was troubled|3|miketz-raw
+רוּחוֹ|rucho|his spirit|2|miketz-raw
+וַיִּשְׁלַח|vayishlach|and he sent|2|miketz-raw
+וַיִּקְרָא|vayikra|and he called|2|miketz-raw
+כָּל|kol|all,every|1|miketz-raw
+חַרְטֻמֵּי|chartumei|magicians of|3|miketz-raw
+מִצְרַיִם|mitzrayim|Egypt|2|miketz-raw
+וְאֵת|veet|and (direct object marker)|2|miketz-raw
+חֲכָמֶיהָ|chachameha|her wise men|3|miketz-raw
+וַיְסַפֵּר|vayesaper|and he told,recounted|2|miketz-raw
+לָהֶם|lahem|to them|2|miketz-raw
+חֲלֹמוֹ|chalomo|his dream|2|miketz-raw
+וְאֵין|veein|and there is no|2|miketz-raw
+פּוֹתֵר|poter|interpreter|2|miketz-raw
+אוֹתָם|otam|them (m)|2|miketz-raw
+לְפַרְעֹה|lefaroh|to Pharaoh|2|miketz-raw
+וַיְדַבֵּר|vayedaber|and he spoke|2|miketz-raw
+שַׂר|sar|chief,officer|2|miketz-raw
+הַמַּשְׁקִים|hamashkim|the cupbearers|2|miketz-raw
+לֵאמֹר|lemor|saying|2|miketz-raw
+חֲטָאַי|chataai|my sins,my faults|3|miketz-raw
+מַזְכִּיר|mazkir|recall,mention|2|miketz-raw
+קָצַף|katzaf|was angry|2|miketz-raw
+עֲבָדָיו|avadav|his servants|2|miketz-raw
+וַיִּתֵּן|vayiten|and he placed,gave|2|miketz-raw
+אֹתִי|oti|me|2|miketz-raw
+בְּמִשְׁמַר|bemishmar|in custody,in confinement|3|miketz-raw
+בֵּית|beit|house of|2|miketz-raw
+הַטַּבָּחִים|hatabachim|the guards,the executioners|3|miketz-raw
+הָאֹפִים|haofim|the bakers|2|miketz-raw
+וַנַּחַלְמָה|vanachalmah|and we dreamed|3|miketz-raw
+בְּלַיְלָה|belaylah|in a night|2|miketz-raw
+וָהוּא|vahu|and he|2|miketz-raw
+אִישׁ|ish|man,each|1|miketz-raw
+כְּפִתְרוֹן|kefitron|according to interpretation of|3|miketz-raw
+חָלָמְנוּ|chalamnu|we dreamed|2|miketz-raw
+וְשָׁם|vesham|and there|2|miketz-raw
+אִתָּנוּ|itanu|with us|2|miketz-raw
+נַעַר|naar|youth,lad|2|miketz-raw
+עִבְרִי|ivri|Hebrew|2|miketz-raw
+עֶבֶד|eved|servant,slave|2|miketz-raw
+לְשַׂר|lesar|to the chief of|2|miketz-raw
+וַנְּסַפֶּר|vanesaper|and we told|3|miketz-raw
+לוֹ|lo|to him|1|miketz-raw
+וַיִּפְתָּר|vayiftar|and he interpreted|3|miketz-raw
+לָנוּ|lanu|to us|2|miketz-raw
+חֲלֹמֹתֵינוּ|chalomoteinu|our dreams|3|miketz-raw
+כַּחֲלֹמוֹ|kachalomo|according to his dream|3|miketz-raw
+פָּתַר|patar|interpreted|2|miketz-raw
+כַּאֲשֶׁר|kaasher|just as,when|2|miketz-raw
+הָיָה|hayah|it was,happened|2|miketz-raw
+הֵשִׁיב|heshiv|restored,returned|2|miketz-raw
+כַּנִּי|kani|my post,my position|3|miketz-raw
+וְאֹתוֹ|veoto|and him|2|miketz-raw
+תָלָה|talah|hanged|2|miketz-raw
+יוֹסֵף|yosef|Joseph|2|miketz-raw
+וַיְרִיצֻהוּ|vayritzuhu|and they rushed him|3|miketz-raw
+הַבּוֹר|habor|the pit,the dungeon|2|miketz-raw
+וַיְגַלַּח|vayegalach|and he shaved|3|miketz-raw
+וַיְחַלֵּף|vayechalef|and he changed|3|miketz-raw
+שִׂמְלֹתָיו|simlotav|his clothes,his garments|3|miketz-raw
+וַיָּבֹא|vayavo|and he came|2|miketz-raw
+אֶל|el|to,toward|1|miketz-raw
 `.trim().split("\n").filter(Boolean);
 
 function parseRow(line) {
@@ -580,7 +580,7 @@ const MAX_PER_LEVEL = 25;
  * - A level with N > MAX is divided into ceil(N / MAX) chunks of nearly-equal
  *   size, and each chunk gets a stable letter suffix (`a`, `b`, `c`, ...).
  *   `10` (30 words) → `10a` (15) + `10b` (15)
- *   `miketz-1b` (73 words) → `miketz-1b-a`, `miketz-1b-b`, `miketz-1b-c`
+ *   `miketz-1` (59 words) → `miketz-1-a`, `miketz-1-b`, `miketz-1-c`
  *
  * Word order within a level is preserved so suffix mapping is deterministic.
  */
@@ -619,8 +619,22 @@ function splitOversizedLevels(entries) {
   return out;
 }
 
+function repartitionMiketz(entries) {
+  const miketz = entries.filter((w) => String(w.level) === "miketz-raw");
+  if (miketz.length === 0) return entries;
+  const firstSize = Math.ceil(miketz.length / 2);
+  let idx = 0;
+  return entries.map((w) => {
+    if (String(w.level) !== "miketz-raw") return w;
+    const level = idx < firstSize ? "miketz-1" : "miketz-2";
+    idx += 1;
+    return { ...w, level };
+  });
+}
+
 const rawWords = rows.map(parseRow);
-const words = splitOversizedLevels(rawWords);
+const miketzPartitioned = repartitionMiketz(rawWords);
+const words = splitOversizedLevels(miketzPartitioned);
 
 const counts = words.reduce((acc, w) => {
   const k = String(w.level);
