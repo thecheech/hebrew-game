@@ -10,7 +10,7 @@ const allRawWords = wordsJson as RawWord[];
 /**
  * A level identifier — either a numeric core level (1, 2, ...) or a string id
  * for a named extra level (e.g. a sub-bucket like `10a` or a Torah-portion
- * vocabulary set like `miketz-1a`).
+ * vocabulary set like `miketz-1`).
  */
 export type LevelId = number | string;
 
@@ -40,8 +40,8 @@ export const EXTRA_LEVELS: ExtraLevel[] = [
     timerSeconds: 12,
   },
   {
-    id: "miketz-2",
-    label: "Miketz-2",
+    id: "miketz-7",
+    label: "Miketz-7",
     category: "Torah portion",
     timerSeconds: 12,
   },

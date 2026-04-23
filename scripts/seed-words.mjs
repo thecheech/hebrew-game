@@ -619,22 +619,113 @@ function splitOversizedLevels(entries) {
   return out;
 }
 
-function repartitionMiketz(entries) {
-  const miketz = entries.filter((w) => String(w.level) === "miketz-raw");
-  if (miketz.length === 0) return entries;
-  const firstSize = Math.ceil(miketz.length / 2);
-  let idx = 0;
-  return entries.map((w) => {
-    if (String(w.level) !== "miketz-raw") return w;
-    const level = idx < firstSize ? "miketz-1" : "miketz-2";
-    idx += 1;
-    return { ...w, level };
-  });
+const MIKETZ_1_TEXT = `
+טזוַיַּ֨רְא יוֹסֵ֣ף אִתָּם֘ אֶת־בִּנְיָמִין֒ וַיֹּ֨אמֶר֙ לַֽאֲשֶׁ֣ר עַל־בֵּית֔וֹ הָבֵ֥א אֶת־הָֽאֲנָשִׁ֖ים הַבָּ֑יְתָה וּטְבֹ֤חַ טֶ֨בַח֙ וְהָכֵ֔ן כִּ֥י אִתִּ֛י יֹֽאכְל֥וּ הָֽאֲנָשִׁ֖ים בַּצָּֽהֳרָֽיִם:
+יזוַיַּ֣עַשׂ הָאִ֔ישׁ כַּֽאֲשֶׁ֖ר אָמַ֣ר יוֹסֵ֑ף וַיָּבֵ֥א הָאִ֛ישׁ אֶת־הָֽאֲנָשִׁ֖ים בֵּ֥יתָה יוֹסֵֽף:
+יחוַיִּֽירְא֣וּ הָֽאֲנָשִׁ֗ים כִּ֣י הֽוּבְאוּ֘ בֵּ֣ית יוֹסֵף֒ וַיֹּֽאמְר֗וּ עַל־דְּבַ֤ר הַכֶּ֨סֶף֙ הַשָּׁ֤ב בְּאַמְתְּחֹתֵ֨ינוּ֙ בַּתְּחִלָּ֔ה אֲנַ֖חְנוּ מֽוּבָאִ֑ים לְהִתְגֹּלֵ֤ל עָלֵ֨ינוּ֙ וּלְהִתְנַפֵּ֣ל עָלֵ֔ינוּ וְלָקַ֧חַת אֹתָ֛נוּ לַֽעֲבָדִ֖ים וְאֶת־חֲמֹרֵֽינוּ:
+`;
+
+const MIKETZ_7_TEXT = `
+וַיְמַֽהֲר֗וּ וַיּוֹרִ֛דוּ אִ֥ישׁ אֶת־אַמְתַּחְתּ֖וֹ אָ֑רְצָה וַיִּפְתְּח֖וּ אִ֥ישׁ אַמְתַּחְתּֽוֹ:
+יבוַיְחַפֵּ֕שׂ בַּגָּד֣וֹל הֵחֵ֔ל וּבַקָּטֹ֖ן כִּלָּ֑ה וַיִּמָּצֵא֙ הַגָּבִ֔יעַ בְּאַמְתַּ֖חַת בִּנְיָמִֽן:
+יגוַיִּקְרְע֖וּ שִׂמְלֹתָ֑ם וַיַּֽעֲמֹס֙ אִ֣ישׁ עַל־חֲמֹר֔וֹ וַיָּשֻׁ֖בוּ הָעִֽירָה:
+ידוַיָּבֹ֨א יְהוּדָ֤ה וְאֶחָיו֙ בֵּ֣יתָה יוֹסֵ֔ף וְה֖וּא עוֹדֶ֣נּוּ שָׁ֑ם וַיִּפְּל֥וּ לְפָנָ֖יו אָֽרְצָה:
+טווַיֹּ֤אמֶר לָהֶם֙ יוֹסֵ֔ף מָֽה־הַמַּֽעֲשֶׂ֥ה הַזֶּ֖ה אֲשֶׁ֣ר עֲשִׂיתֶ֑ם הֲל֣וֹא יְדַעְתֶּ֔ם כִּֽי־נַחֵ֧שׁ יְנַחֵ֛שׁ אִ֖ישׁ אֲשֶׁ֥ר כָּמֹֽנִי:
+טזוַיֹּ֣אמֶר יְהוּדָ֗ה מַה־נֹּאמַר֙ לַֽאדֹנִ֔י מַה־נְּדַבֵּ֖ר וּמַה־נִּצְטַדָּ֑ק הָֽאֱלֹהִ֗ים מָצָא֙ אֶת־עֲוֹ֣ן עֲבָדֶ֔יךָ הִנֶּנּ֤וּ עֲבָדִים֙ לַֽאדֹנִ֔י גַּם־אֲנַ֕חְנוּ גַּ֛ם אֲשֶׁר־נִמְצָ֥א הַגָּבִ֖יעַ בְּיָדֽוֹ:
+יזוַיֹּ֕אמֶר חָלִ֣ילָה לִּ֔י מֵֽעֲשׂ֖וֹת זֹ֑את הָאִ֡ישׁ אֲשֶׁר֩ נִמְצָ֨א הַגָּבִ֜יעַ בְּיָד֗וֹ ה֚וּא יִֽהְיֶה־לִּ֣י עָ֔בֶד וְאַתֶּ֕ם עֲל֥וּ לְשָׁל֖וֹם אֶל־אֲבִיכֶֽם:
+`;
+
+function removeVersePrefix(line) {
+  return line.replace(/^[א-ת]{1,2}(?=ו)/, "");
+}
+
+function cleanHebrewToken(token) {
+  return token.replace(/[^\u0590-\u05FF]/g, "");
+}
+
+function transliterateHebrew(hebrew) {
+  const plain = hebrew.normalize("NFD").replace(/[\u0591-\u05C7]/g, "");
+  const map = {
+    א: "a",
+    ב: "b",
+    ג: "g",
+    ד: "d",
+    ה: "h",
+    ו: "v",
+    ז: "z",
+    ח: "ch",
+    ט: "t",
+    י: "y",
+    כ: "k",
+    ך: "k",
+    ל: "l",
+    מ: "m",
+    ם: "m",
+    נ: "n",
+    ן: "n",
+    ס: "s",
+    ע: "a",
+    פ: "p",
+    ף: "f",
+    צ: "tz",
+    ץ: "tz",
+    ק: "k",
+    ר: "r",
+    ש: "sh",
+    ת: "t",
+  };
+  let out = "";
+  for (const ch of plain) out += map[ch] ?? "";
+  return out || "he";
+}
+
+function inferDifficulty(hebrew) {
+  const letters = hebrew.replace(/[\u0591-\u05C7]/g, "").length;
+  if (letters <= 3) return 1;
+  if (letters <= 5) return 2;
+  return 3;
+}
+
+function extractUniqueWords(text) {
+  const seen = new Set();
+  const out = [];
+  const lines = text
+    .split("\n")
+    .map((l) => removeVersePrefix(l.trim()))
+    .filter(Boolean);
+  for (const line of lines) {
+    const normalized = line.replace(/[:׃]/g, " ").replace(/־/g, " ");
+    for (const raw of normalized.split(/\s+/)) {
+      const token = cleanHebrewToken(raw);
+      if (!token || seen.has(token)) continue;
+      seen.add(token);
+      out.push(token);
+    }
+  }
+  return out;
+}
+
+function buildMiketzRows() {
+  const group1 = extractUniqueWords(MIKETZ_1_TEXT).map((hebrew) => ({
+    hebrew,
+    translit: transliterateHebrew(hebrew),
+    english: ["Miketz 1"],
+    difficulty: inferDifficulty(hebrew),
+    level: "miketz-1",
+  }));
+  const group7 = extractUniqueWords(MIKETZ_7_TEXT).map((hebrew) => ({
+    hebrew,
+    translit: transliterateHebrew(hebrew),
+    english: ["Miketz 7"],
+    difficulty: inferDifficulty(hebrew),
+    level: "miketz-7",
+  }));
+  return [...group1, ...group7];
 }
 
 const rawWords = rows.map(parseRow);
-const miketzPartitioned = repartitionMiketz(rawWords);
-const words = splitOversizedLevels(miketzPartitioned);
+const baseWords = rawWords.filter((w) => String(w.level) !== "miketz-raw");
+const words = splitOversizedLevels([...baseWords, ...buildMiketzRows()]);
 
 const counts = words.reduce((acc, w) => {
   const k = String(w.level);
