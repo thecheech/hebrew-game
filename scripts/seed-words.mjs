@@ -777,14 +777,14 @@ function buildMiketzRows() {
   const group1 = extractUniqueWords(MIKETZ_1_TEXT).map((hebrew) => ({
     hebrew,
     translit: transliterateHebrew(hebrew),
-    english: ["Miketz 1"],
+    english: [],
     difficulty: inferDifficulty(hebrew),
     level: "miketz-1",
   }));
   const group7 = extractUniqueWords(MIKETZ_7_TEXT).map((hebrew) => ({
     hebrew,
     translit: transliterateHebrew(hebrew),
-    english: ["Miketz 7"],
+    english: [],
     difficulty: inferDifficulty(hebrew),
     level: "miketz-7",
   }));
