@@ -1,3 +1,4 @@
+import type { LevelId } from "@/lib/levels";
 import type { WordEntry, WordDifficulty } from "@/lib/words";
 
 const OVERRIDES_KEY = "hebrew-game-word-overrides";
@@ -57,7 +58,7 @@ function isValidCustomWord(value: unknown): value is CustomWord {
     typeof v.translit === "string" &&
     Array.isArray(v.english) &&
     typeof v.difficulty === "number" &&
-    typeof v.level === "number"
+    (typeof v.level === "number" || typeof v.level === "string")
   );
 }
 
@@ -88,7 +89,7 @@ export interface WordDraft {
   translit: string;
   english: string[];
   difficulty: WordDifficulty;
-  level: number;
+  level: LevelId;
 }
 
 function normalizeDraft(draft: WordDraft): WordDraft {

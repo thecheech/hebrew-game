@@ -1,4 +1,5 @@
 import wordsJson from "@/data/words.json";
+import { levelKey, type LevelId } from "@/lib/levels";
 
 export type WordDifficulty = 1 | 2 | 3;
 
@@ -7,7 +8,7 @@ export interface WordEntry {
   translit: string;
   english: string[];
   difficulty: WordDifficulty;
-  level: number;
+  level: LevelId;
   pos?:
     | "noun"
     | "verb"
@@ -23,6 +24,10 @@ import { loadOverrides } from "@/lib/word-overrides";
 export const bundledWords: WordEntry[] = wordsJson as WordEntry[];
 export const words = bundledWords;
 
+function sameLevel(a: LevelId, b: LevelId): boolean {
+  return levelKey(a) === levelKey(b);
+}
+
 function shuffle<T>(arr: T[]): T[] {
   const out = [...arr];
   for (let i = out.length - 1; i > 0; i--) {
@@ -32,8 +37,8 @@ function shuffle<T>(arr: T[]): T[] {
   return out;
 }
 
-export function getWordsForLevel(level: number): WordEntry[] {
-  return bundledWords.filter((w) => w.level === level);
+export function getWordsForLevel(level: LevelId): WordEntry[] {
+  return bundledWords.filter((w) => sameLevel(w.level, level));
 }
 
 /**
@@ -41,13 +46,13 @@ export function getWordsForLevel(level: number): WordEntry[] {
  * the user's localStorage overrides (hidden bundles + custom additions).
  * Safe to call on the server (returns bundled-only when `window` is missing).
  */
-export function getEffectiveWordsForLevel(level: number): WordEntry[] {
+export function getEffectiveWordsForLevel(level: LevelId): WordEntry[] {
   const overrides = loadOverrides();
   const hidden = new Set(overrides.hiddenBundleHebrew);
   const bundled = bundledWords.filter(
-    (w) => w.level === level && !hidden.has(w.hebrew),
+    (w) => sameLevel(w.level, level) && !hidden.has(w.hebrew),
   );
-  const custom = overrides.customWords.filter((w) => w.level === level);
+  const custom = overrides.customWords.filter((w) => sameLevel(w.level, level));
   return [...bundled, ...custom];
 }
 
@@ -70,7 +75,7 @@ export function getAnswerLabel(entry: WordEntry): string {
 
 /** Unique key for deduping rounds (hebrew string is unique enough). */
 export function wordKey(entry: WordEntry): string {
-  return `${entry.level}:${entry.hebrew}`;
+  return `${levelKey(entry.level)}:${entry.hebrew}`;
 }
 
 export interface AnswerOption {

@@ -9,7 +9,7 @@ import {
   type AnswerOption,
   type WordEntry,
 } from "@/lib/words";
-import { ROUNDS_PER_LEVEL } from "@/lib/levels";
+import { getRoundsForLevel, type LevelId } from "@/lib/levels";
 import { getEffectiveTimerSeconds } from "@/lib/settings";
 
 export type GamePhase = "idle" | "playing" | "feedback" | "summary";
@@ -21,7 +21,7 @@ export interface FeedbackState {
 }
 
 interface GameState {
-  level: number;
+  level: LevelId;
   roundIndex: number;
   score: number;
   correctCount: number;
@@ -32,14 +32,14 @@ interface GameState {
   timerMsRemaining: number;
   timerTotalMs: number;
   usedWordKeys: string[];
-  startSession: (level: number) => void;
+  startSession: (level: LevelId) => void;
   tick: (deltaMs: number) => void;
   submitAnswer: (optionIndex: number) => void;
   clearFeedbackAndAdvance: () => void;
   resetIdle: () => void;
 }
 
-function drawRound(level: number, used: Set<string>) {
+function drawRound(level: LevelId, used: Set<string>) {
   const pool = getEffectiveWordsForLevel(level);
   const word = pickRandomWord(pool, used);
   if (!word) {
@@ -141,7 +141,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     const used = new Set(usedWordKeys);
     const nextRound = roundIndex + 1;
 
-    if (nextRound >= ROUNDS_PER_LEVEL) {
+    if (nextRound >= getRoundsForLevel(level)) {
       saveBestScore(level, score);
       set({
         phase: "summary",

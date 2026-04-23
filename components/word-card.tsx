@@ -73,7 +73,7 @@ export function WordCard({ entry, reveal = false }: WordCardProps) {
                 <button
                   key={`${segment}-${idx}`}
                   type="button"
-                  className="hover:text-primary focus-visible:ring-ring inline rounded-sm px-0.5 transition-colors focus-visible:outline-none focus-visible:ring-2"
+                  className="hover:bg-primary/15 hover:text-primary focus-visible:bg-primary/15 focus-visible:text-primary focus-visible:ring-ring inline rounded-md px-1 transition-colors focus-visible:outline-none focus-visible:ring-2"
                   aria-label={`Learn letter ${segment}`}
                   onClick={() => setSelected({ kind: "letter", segment })}
                 >

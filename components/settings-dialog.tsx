@@ -15,19 +15,24 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import { getDefaultTimerSeconds } from "@/lib/levels";
+import {
+  getDefaultTimerSeconds,
+  getLevelTitle,
+  type LevelId,
+} from "@/lib/levels";
 import { loadSettings, saveSettings } from "@/lib/settings";
 import { cn } from "@/lib/utils";
 
 interface SettingsDialogProps {
   /** Current game level — used to show default timer hint. */
-  level: number;
+  level: LevelId;
 }
 
 export function SettingsDialog({ level }: SettingsDialogProps) {
   const [open, setOpen] = useState(false);
   const [useOverride, setUseOverride] = useState(false);
   const [seconds, setSeconds] = useState(15);
+  const [autoAdvance, setAutoAdvance] = useState(true);
 
   function syncFromStorage(nextOpen: boolean) {
     if (!nextOpen) {
@@ -48,11 +53,13 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
       setUseOverride(false);
       setSeconds(def);
     }
+    setAutoAdvance(s.autoAdvance);
   }
 
   function handleSave() {
     saveSettings({
       timerSecondsOverride: useOverride ? seconds : null,
+      autoAdvance,
     });
     setOpen(false);
   }
@@ -75,8 +82,8 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
           <DialogTitle>Settings</DialogTitle>
           <DialogDescription>
             Adjust round timer (seconds). Applies to all levels when override is
-            on; otherwise each level uses its own default (level {level} default:{" "}
-            {def}s).
+            on; otherwise each level uses its own default ({getLevelTitle(level)}{" "}
+            default: {def}s).
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-2">
@@ -110,15 +117,34 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
               }}
             />
           </div>
+          <div className="flex items-start justify-between gap-4 border-t pt-4">
+            <div className="space-y-1">
+              <Label htmlFor="auto-advance">Auto-advance after answer</Label>
+              <p className="text-muted-foreground text-xs">
+                When off, the next word waits for you to press Space / Enter or
+                click <em>Next</em>, so you can read the meaning.
+              </p>
+            </div>
+            <Button
+              id="auto-advance"
+              type="button"
+              variant={autoAdvance ? "default" : "outline"}
+              size="sm"
+              onClick={() => setAutoAdvance((v) => !v)}
+            >
+              {autoAdvance ? "On" : "Off"}
+            </Button>
+          </div>
         </div>
         <DialogFooter className="gap-2 sm:justify-between">
           <Button
             type="button"
             variant="outline"
             onClick={() => {
-              saveSettings({ timerSecondsOverride: null });
+              saveSettings({ timerSecondsOverride: null, autoAdvance: true });
               setUseOverride(false);
               setSeconds(def);
+              setAutoAdvance(true);
             }}
           >
             Reset to level defaults

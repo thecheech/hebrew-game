@@ -437,21 +437,208 @@ const rows = `
 לָרֶדֶת|laredet|to descend|2|20
 שָׁוֶה|shaveh|equal,worth|2|20
 בָּם|bam|in them (m)|3|20
+וַיְהִי|vayhi|and it was,and it came to pass|2|miketz-1b
+מִקֵּץ|miketz|at the end of|2|miketz-1b
+שְׁנָתַיִם|shnatayim|two years|2|miketz-1b
+יָמִים|yamim|days|1|miketz-1a
+וּפַרְעֹה|ufaroh|and Pharaoh|2|miketz-1b
+חֹלֵם|cholem|dreaming|2|miketz-1b
+וְהִנֵּה|vehineh|and behold|2|miketz-1b
+עֹמֵד|omed|standing|2|miketz-1b
+עַל|al|on,upon|1|miketz-1a
+הַיְאֹר|hayeor|the Nile,the river|2|miketz-1b
+מִן|min|from|1|miketz-1a
+עֹלוֹת|olot|coming up (f pl)|2|miketz-1b
+שֶׁבַע|sheva|seven|1|miketz-1a
+פָּרוֹת|parot|cows|2|miketz-1b
+יְפוֹת|yefot|beautiful (f pl)|2|miketz-1b
+מַרְאֶה|mareh|appearance|2|miketz-1b
+וּבְרִיאֹת|uveriot|and fat (f pl)|3|miketz-1c
+בָּשָׂר|basar|flesh|2|miketz-1b
+וַתִּרְעֶינָה|vatirenah|and they grazed|3|miketz-1c
+בָּאָחוּ|baachu|in the marsh|3|miketz-1c
+אֲחֵרוֹת|acherot|other (f pl)|2|miketz-1b
+אַחֲרֵיהֶן|achareihen|after them (f pl)|3|miketz-1c
+רָעוֹת|raot|bad (f pl)|2|miketz-1b
+וְדַקּוֹת|vedakot|and thin (f pl)|2|miketz-1b
+וַתַּעֲמֹדְנָה|vataamodnah|and they stood|3|miketz-1c
+אֵצֶל|etzel|beside,near|2|miketz-1b
+הַפָּרוֹת|haparot|the cows|2|miketz-1b
+שְׂפַת|sefat|edge of,bank of|2|miketz-1b
+וַתֹּאכַלְנָה|vatochalnah|and they ate|3|miketz-1c
+הַמַּרְאֶה|hamareh|the appearance|2|miketz-1b
+הַבָּשָׂר|habasar|the flesh|2|miketz-1b
+אֵת|et|(direct object marker)|1|miketz-1a
+וְהַבְּרִיאֹת|vehaberiot|and the fat (f pl)|3|miketz-1c
+וַיִּיקַץ|vayikatz|and he awoke|3|miketz-1c
+פַּרְעֹה|paroh|Pharaoh|2|miketz-1b
+וַיִּישָׁן|vayishan|and he slept|3|miketz-1c
+וַיַּחֲלֹם|vayachalom|and he dreamed|3|miketz-1c
+שֵׁנִית|shenit|a second time|2|miketz-1b
+שִׁבֳּלִים|shibolim|ears of grain|3|miketz-1c
+בְּקָנֶה|bekaneh|on a stalk|2|miketz-1b
+אֶחָד|echad|one|1|miketz-1a
+בְּרִיאוֹת|beriot|fat (f pl)|2|miketz-1b
+וְטֹבוֹת|vetovot|and good (f pl)|2|miketz-1b
+דַּקּוֹת|dakot|thin (f pl)|2|miketz-1b
+וּשְׁדוּפֹת|ushdufot|and scorched (f pl)|3|miketz-1c
+קָדִים|kadim|east wind|2|miketz-1b
+צֹמְחוֹת|tzomchot|growing,sprouting (f pl)|3|miketz-1c
+וַתִּבְלַעְנָה|vativlanah|and they swallowed|3|miketz-1c
+הַשִּׁבֳּלִים|hashibolim|the ears of grain|3|miketz-1c
+הַדַּקּוֹת|hadakot|the thin (f pl)|2|miketz-1b
+הַבְּרִיאוֹת|haberiot|the fat (f pl)|3|miketz-1c
+וְהַמְּלֵאוֹת|vehameleot|and the full (f pl)|3|miketz-1c
+חֲלוֹם|chalom|dream|2|miketz-1b
+בַבֹּקֶר|baboker|in the morning|2|miketz-1b
+וַתִּפָּעֶם|vatipaem|and was troubled|3|miketz-1c
+רוּחוֹ|rucho|his spirit|2|miketz-1b
+וַיִּשְׁלַח|vayishlach|and he sent|2|miketz-1b
+וַיִּקְרָא|vayikra|and he called|2|miketz-1b
+כָּל|kol|all,every|1|miketz-1a
+חַרְטֻמֵּי|chartumei|magicians of|3|miketz-1c
+מִצְרַיִם|mitzrayim|Egypt|2|miketz-1b
+וְאֵת|veet|and (direct object marker)|2|miketz-1b
+חֲכָמֶיהָ|chachameha|her wise men|3|miketz-1c
+וַיְסַפֵּר|vayesaper|and he told,recounted|2|miketz-1b
+לָהֶם|lahem|to them|2|miketz-1b
+חֲלֹמוֹ|chalomo|his dream|2|miketz-1b
+וְאֵין|veein|and there is no|2|miketz-1b
+פּוֹתֵר|poter|interpreter|2|miketz-1b
+אוֹתָם|otam|them (m)|2|miketz-1b
+לְפַרְעֹה|lefaroh|to Pharaoh|2|miketz-1b
+וַיְדַבֵּר|vayedaber|and he spoke|2|miketz-1b
+שַׂר|sar|chief,officer|2|miketz-1b
+הַמַּשְׁקִים|hamashkim|the cupbearers|2|miketz-1b
+לֵאמֹר|lemor|saying|2|miketz-1b
+חֲטָאַי|chataai|my sins,my faults|3|miketz-1c
+מַזְכִּיר|mazkir|recall,mention|2|miketz-1b
+קָצַף|katzaf|was angry|2|miketz-1b
+עֲבָדָיו|avadav|his servants|2|miketz-1b
+וַיִּתֵּן|vayiten|and he placed,gave|2|miketz-1b
+אֹתִי|oti|me|2|miketz-1b
+בְּמִשְׁמַר|bemishmar|in custody,in confinement|3|miketz-1c
+בֵּית|beit|house of|2|miketz-1b
+הַטַּבָּחִים|hatabachim|the guards,the executioners|3|miketz-1c
+הָאֹפִים|haofim|the bakers|2|miketz-1b
+וַנַּחַלְמָה|vanachalmah|and we dreamed|3|miketz-1c
+בְּלַיְלָה|belaylah|in a night|2|miketz-1b
+וָהוּא|vahu|and he|2|miketz-1b
+אִישׁ|ish|man,each|1|miketz-1a
+כְּפִתְרוֹן|kefitron|according to interpretation of|3|miketz-1c
+חָלָמְנוּ|chalamnu|we dreamed|2|miketz-1b
+וְשָׁם|vesham|and there|2|miketz-1b
+אִתָּנוּ|itanu|with us|2|miketz-1b
+נַעַר|naar|youth,lad|2|miketz-1b
+עִבְרִי|ivri|Hebrew|2|miketz-1b
+עֶבֶד|eved|servant,slave|2|miketz-1b
+לְשַׂר|lesar|to the chief of|2|miketz-1b
+וַנְּסַפֶּר|vanesaper|and we told|3|miketz-1c
+לוֹ|lo|to him|1|miketz-1a
+וַיִּפְתָּר|vayiftar|and he interpreted|3|miketz-1c
+לָנוּ|lanu|to us|2|miketz-1b
+חֲלֹמֹתֵינוּ|chalomoteinu|our dreams|3|miketz-1c
+כַּחֲלֹמוֹ|kachalomo|according to his dream|3|miketz-1c
+פָּתַר|patar|interpreted|2|miketz-1b
+כַּאֲשֶׁר|kaasher|just as,when|2|miketz-1b
+הָיָה|hayah|it was,happened|2|miketz-1b
+הֵשִׁיב|heshiv|restored,returned|2|miketz-1b
+כַּנִּי|kani|my post,my position|3|miketz-1c
+וְאֹתוֹ|veoto|and him|2|miketz-1b
+תָלָה|talah|hanged|2|miketz-1b
+יוֹסֵף|yosef|Joseph|2|miketz-1b
+וַיְרִיצֻהוּ|vayritzuhu|and they rushed him|3|miketz-1c
+הַבּוֹר|habor|the pit,the dungeon|2|miketz-1b
+וַיְגַלַּח|vayegalach|and he shaved|3|miketz-1c
+וַיְחַלֵּף|vayechalef|and he changed|3|miketz-1c
+שִׂמְלֹתָיו|simlotav|his clothes,his garments|3|miketz-1c
+וַיָּבֹא|vayavo|and he came|2|miketz-1b
+אֶל|el|to,toward|1|miketz-1a
 `.trim().split("\n").filter(Boolean);
 
 function parseRow(line) {
   const [hebrew, translit, englishPart, difficulty, level] = line.split("|");
+  const trimmedLevel = level.trim();
+  const numericLevel = Number(trimmedLevel);
   return {
     hebrew: hebrew.trim(),
     translit: translit.trim(),
     english: englishPart.split(",").map((s) => s.trim()),
     difficulty: Number(difficulty),
-    level: Number(level),
+    level: Number.isFinite(numericLevel) && /^\d+$/.test(trimmedLevel)
+      ? numericLevel
+      : trimmedLevel,
   };
 }
 
-const words = rows.map(parseRow);
+const MAX_PER_LEVEL = 25;
+
+/**
+ * Auto-split level groups that have more than MAX_PER_LEVEL words.
+ *
+ * - A level with N <= MAX words keeps its original id.
+ * - A level with N > MAX is divided into ceil(N / MAX) chunks of nearly-equal
+ *   size, and each chunk gets a stable letter suffix (`a`, `b`, `c`, ...).
+ *   `10` (30 words) → `10a` (15) + `10b` (15)
+ *   `miketz-1b` (73 words) → `miketz-1b-a`, `miketz-1b-b`, `miketz-1b-c`
+ *
+ * Word order within a level is preserved so suffix mapping is deterministic.
+ */
+function splitOversizedLevels(entries) {
+  const groups = new Map();
+  for (const e of entries) {
+    const key = String(e.level);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(e);
+  }
+
+  const out = [];
+  for (const [originalLevel, list] of groups) {
+    if (list.length <= MAX_PER_LEVEL) {
+      out.push(...list);
+      continue;
+    }
+    const parts = Math.ceil(list.length / MAX_PER_LEVEL);
+    const baseSize = Math.floor(list.length / parts);
+    const remainder = list.length % parts;
+    let cursor = 0;
+    const isNumeric = /^\d+$/.test(originalLevel);
+    for (let i = 0; i < parts; i++) {
+      const size = baseSize + (i < remainder ? 1 : 0);
+      const slice = list.slice(cursor, cursor + size);
+      cursor += size;
+      const suffix = String.fromCharCode("a".charCodeAt(0) + i);
+      const newLevel = isNumeric
+        ? `${originalLevel}${suffix}`
+        : `${originalLevel}-${suffix}`;
+      for (const w of slice) {
+        out.push({ ...w, level: newLevel });
+      }
+    }
+  }
+  return out;
+}
+
+const rawWords = rows.map(parseRow);
+const words = splitOversizedLevels(rawWords);
+
+const counts = words.reduce((acc, w) => {
+  const k = String(w.level);
+  acc[k] = (acc[k] ?? 0) + 1;
+  return acc;
+}, {});
+const tooBig = Object.entries(counts).filter(([, n]) => n > MAX_PER_LEVEL);
+if (tooBig.length > 0) {
+  throw new Error(
+    `Levels still exceed MAX_PER_LEVEL=${MAX_PER_LEVEL}: ${tooBig
+      .map(([k, n]) => `${k}=${n}`)
+      .join(", ")}`,
+  );
+}
+
 const outPath = join(root, "data", "words.json");
 mkdirSync(dirname(outPath), { recursive: true });
 writeFileSync(outPath, JSON.stringify(words, null, 2), "utf8");
-console.log(`Wrote ${words.length} words to ${outPath}`);
+console.log(
+  `Wrote ${words.length} words across ${Object.keys(counts).length} level groups to ${outPath}`,
+);

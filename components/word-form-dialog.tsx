@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { LEVEL_COUNT } from "@/lib/levels";
+import { getMaxCoreLevel } from "@/lib/levels";
 import type { WordDraft } from "@/lib/word-overrides";
 import type { WordEntry, WordDifficulty } from "@/lib/words";
 import { cn } from "@/lib/utils";
@@ -48,12 +48,16 @@ function modeToInitial(mode: WordFormMode): FormState {
       level: mode.defaultLevel,
     };
   }
+  const lv =
+    typeof mode.entry.level === "number"
+      ? mode.entry.level
+      : Number(mode.entry.level) || 1;
   return {
     hebrew: mode.entry.hebrew,
     translit: mode.entry.translit,
     englishCsv: mode.entry.english.join(", "),
     difficulty: mode.entry.difficulty,
-    level: mode.entry.level,
+    level: lv,
   };
 }
 
@@ -113,8 +117,9 @@ function WordFormBody({ mode, onCancel, onSubmit }: WordFormBodyProps) {
     if (!form.translit.trim()) return setError("Transliteration is required.");
     if (englishList.length === 0)
       return setError("At least one English meaning is required.");
-    if (form.level < 1 || form.level > LEVEL_COUNT)
-      return setError(`Level must be between 1 and ${LEVEL_COUNT}.`);
+    const maxLevel = getMaxCoreLevel();
+    if (form.level < 1 || form.level > maxLevel)
+      return setError(`Level must be between 1 and ${maxLevel}.`);
     onSubmit({
       hebrew: form.hebrew,
       translit: form.translit,
@@ -172,7 +177,7 @@ function WordFormBody({ mode, onCancel, onSubmit }: WordFormBodyProps) {
                 id="level"
                 type="number"
                 min={1}
-                max={LEVEL_COUNT}
+                max={getMaxCoreLevel()}
                 value={form.level}
                 onChange={(e) =>
                   setForm({

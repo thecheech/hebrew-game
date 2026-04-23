@@ -1,3 +1,5 @@
+import { levelKey, type LevelId } from "@/lib/levels";
+
 const BEST_KEY = "hebrew-game-best";
 
 export function loadBestScores(): Record<string, number> {
@@ -11,10 +13,10 @@ export function loadBestScores(): Record<string, number> {
   }
 }
 
-export function saveBestScore(level: number, score: number): void {
+export function saveBestScore(level: LevelId, score: number): void {
   if (typeof window === "undefined") return;
   const all = loadBestScores();
-  const key = String(level);
+  const key = levelKey(level);
   if (score > (all[key] ?? 0)) {
     all[key] = score;
     localStorage.setItem(BEST_KEY, JSON.stringify(all));
@@ -22,8 +24,8 @@ export function saveBestScore(level: number, score: number): void {
   }
 }
 
-export function getBestScore(level: number): number {
-  return loadBestScores()[String(level)] ?? 0;
+export function getBestScore(level: LevelId): number {
+  return loadBestScores()[levelKey(level)] ?? 0;
 }
 
 /**

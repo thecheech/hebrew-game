@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 
 import { AnswerOptions } from "@/components/answer-options";
 import { CheatsheetFab } from "@/components/cheatsheet";
+import { ConfettiBurst } from "@/components/confetti-burst";
 import { SettingsDialog } from "@/components/settings-dialog";
 import { TimerBar } from "@/components/timer-bar";
 import { WordCard } from "@/components/word-card";
@@ -20,18 +21,32 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getBestScore, subscribeBestScoresChanged } from "@/lib/best-score";
-import { LEVEL_COUNT, ROUNDS_PER_LEVEL } from "@/lib/levels";
+import {
+  getAllLevelIds,
+  getLevelTitle,
+  getMaxCoreLevel,
+  getRoundsForLevel,
+  levelKey,
+  type LevelId,
+} from "@/lib/levels";
 import { useGameStore } from "@/lib/game-store";
+import { loadSettings, subscribeSettings } from "@/lib/settings";
 import { cn } from "@/lib/utils";
 
-function parseLevel(raw: string | null): number {
+const ALL_LEVEL_KEYS = new Set(getAllLevelIds().map((l) => levelKey(l)));
+
+function parseLevel(raw: string | null): LevelId {
+  if (raw && ALL_LEVEL_KEYS.has(raw)) {
+    return /^\d+$/.test(raw) ? Number(raw) : raw;
+  }
   const n = Number(raw);
   if (!Number.isFinite(n)) return 1;
-  return Math.min(LEVEL_COUNT, Math.max(1, Math.floor(n)));
+  const max = getMaxCoreLevel();
+  return Math.min(max, Math.max(1, Math.floor(n)));
 }
 
 interface PlayGameSessionProps {
-  level: number;
+  level: LevelId;
 }
 
 function PlayGameSession({ level }: PlayGameSessionProps) {
@@ -47,7 +62,17 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
 
   const [userTimerPaused, setUserTimerPaused] = useState(false);
   const [cheatsheetOpen, setCheatsheetOpen] = useState(false);
+  const [completionCount, setCompletionCount] = useState(0);
+  const autoAdvance = useSyncExternalStore(
+    subscribeSettings,
+    () => loadSettings().autoAdvance,
+    () => true,
+  );
   const timerPaused = userTimerPaused || cheatsheetOpen;
+
+  useEffect(() => {
+    if (phase === "summary") setCompletionCount((c) => c + 1);
+  }, [phase]);
 
   useEffect(() => {
     useGameStore.getState().startSession(level);
@@ -65,25 +90,34 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
   }, [phase, roundIndex, currentWord?.hebrew, timerPaused]);
 
   useEffect(() => {
-    if (phase !== "feedback") return;
+    if (phase !== "feedback" || !autoAdvance) return;
     const id = window.setTimeout(() => {
       useGameStore.getState().clearFeedbackAndAdvance();
     }, 1000);
     return () => window.clearTimeout(id);
-  }, [phase, roundIndex]);
+  }, [phase, roundIndex, autoAdvance]);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (phase !== "playing" || timerPaused) return;
-      const n = Number(e.key);
-      if (n >= 1 && n <= 4) {
-        e.preventDefault();
-        useGameStore.getState().submitAnswer(n - 1);
+      if (timerPaused) return;
+      if (phase === "playing") {
+        const n = Number(e.key);
+        if (n >= 1 && n <= 4) {
+          e.preventDefault();
+          useGameStore.getState().submitAnswer(n - 1);
+        }
+        return;
+      }
+      if (phase === "feedback" && !autoAdvance) {
+        if (e.key === " " || e.key === "Enter" || e.key === "ArrowRight") {
+          e.preventDefault();
+          useGameStore.getState().clearFeedbackAndAdvance();
+        }
       }
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [phase, timerPaused]);
+  }, [phase, timerPaused, autoAdvance]);
 
   const best = useSyncExternalStore(
     subscribeBestScoresChanged,
@@ -102,11 +136,14 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
         />
 
         {phase === "summary" ? (
+          <>
+          <ConfettiBurst fireKey={`${levelKey(level)}:${completionCount}`} />
           <Card>
             <CardHeader>
               <CardTitle>Level complete</CardTitle>
               <CardDescription>
-                You finished {ROUNDS_PER_LEVEL} rounds on level {level}.
+                You finished {getRoundsForLevel(level)} rounds on{" "}
+                {getLevelTitle(level)}.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-2 text-sm">
@@ -115,7 +152,7 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
                 <strong className="text-lg tabular-nums">{score}</strong>
               </p>
               <p className="text-muted-foreground">
-                Correct answers: {correctCount}/{ROUNDS_PER_LEVEL}
+                Correct answers: {correctCount}/{getRoundsForLevel(level)}
               </p>
               <p className="text-muted-foreground">
                 Best for this level:{" "}
@@ -143,6 +180,7 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
               </Link>
             </CardFooter>
           </Card>
+          </>
         ) : (
           <>
             <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3">
@@ -175,18 +213,31 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
               onSelect={(i) => useGameStore.getState().submitAnswer(i)}
             />
             {phase === "feedback" && feedback ? (
-              <p
-                className="text-center text-sm"
-                aria-live="polite"
-              >
-                {feedback.correct ? (
-                  <span className="text-emerald-700 dark:text-emerald-400">
-                    +{feedback.pointsAwarded} points
-                  </span>
-                ) : (
-                  <span className="text-muted-foreground">No points</span>
-                )}
-              </p>
+              <div className="flex flex-col items-center gap-3">
+                <p className="text-center text-sm" aria-live="polite">
+                  {feedback.correct ? (
+                    <span className="text-emerald-700 dark:text-emerald-400">
+                      +{feedback.pointsAwarded} points
+                    </span>
+                  ) : (
+                    <span className="text-muted-foreground">No points</span>
+                  )}
+                </p>
+                {!autoAdvance ? (
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      useGameStore.getState().clearFeedbackAndAdvance()
+                    }
+                    autoFocus
+                  >
+                    Next word →
+                    <span className="text-muted-foreground ml-2 text-xs">
+                      (Space)
+                    </span>
+                  </Button>
+                ) : null}
+              </div>
             ) : null}
           </>
         )}

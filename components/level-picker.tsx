@@ -13,7 +13,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { loadBestScores } from "@/lib/best-score";
-import { getLevelLabel, LEVEL_COUNT } from "@/lib/levels";
+import {
+  getAllLevelIds,
+  getLevelLabel,
+  getLevelTitle,
+  getRoundsForLevel,
+  levelKey,
+} from "@/lib/levels";
 import { cn } from "@/lib/utils";
 
 /** Stable empty snapshot — required for `getServerSnapshot` (same reference every call). */
@@ -89,21 +95,23 @@ export function LevelPicker() {
         </CardHeader>
         <CardContent>
           <ol className="grid grid-cols-2 gap-2 sm:grid-cols-4 md:grid-cols-5">
-            {Array.from({ length: LEVEL_COUNT }, (_, i) => {
-              const lv = i + 1;
-              const b = best[String(lv)] ?? 0;
+            {getAllLevelIds().map((lv) => {
+              const b = best[levelKey(lv)] ?? 0;
+              const rounds = getRoundsForLevel(lv);
               return (
-                <li key={lv}>
+                <li key={levelKey(lv)}>
                   <Link
-                    href={`/play?level=${lv}`}
+                    href={`/play?level=${levelKey(lv)}`}
                     className={cn(
                       buttonVariants({ variant: "outline" }),
                       "h-auto w-full flex-col gap-0.5 py-3 no-underline",
                     )}
                   >
-                    <span className="text-base font-semibold">Level {lv}</span>
+                    <span className="text-base font-semibold">
+                      {getLevelTitle(lv)}
+                    </span>
                     <span className="text-muted-foreground text-[0.65rem] leading-tight">
-                      {getLevelLabel(lv)}
+                      {getLevelLabel(lv)} · {rounds}q
                     </span>
                     {b > 0 ? (
                       <span className="text-muted-foreground text-[0.65rem] tabular-nums">

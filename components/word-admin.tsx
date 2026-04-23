@@ -119,9 +119,9 @@ export function WordAdmin() {
       entry: w,
     }));
     return [...bundleRows, ...customRows].sort((a, b) => {
-      if (a.entry.level !== b.entry.level) {
-        return a.entry.level - b.entry.level;
-      }
+      const al = String(a.entry.level);
+      const bl = String(b.entry.level);
+      if (al !== bl) return al.localeCompare(bl, "en", { numeric: true });
       return a.entry.hebrew.localeCompare(b.entry.hebrew, "he");
     });
   }, [overrides, hiddenSet]);
