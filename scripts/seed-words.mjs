@@ -640,43 +640,111 @@ function removeVersePrefix(line) {
 }
 
 function cleanHebrewToken(token) {
-  return token.replace(/[^\u0590-\u05FF]/g, "");
+  return token
+    .normalize("NFD")
+    .replace(/[\u0591-\u05AF]/g, "")
+    .replace(/[^\u05B0-\u05BC\u05C1-\u05C2\u05C7\u05D0-\u05EA]/g, "")
+    .normalize("NFC");
 }
 
 function transliterateHebrew(hebrew) {
-  const plain = hebrew.normalize("NFD").replace(/[\u0591-\u05C7]/g, "");
-  const map = {
-    א: "a",
-    ב: "b",
-    ג: "g",
-    ד: "d",
-    ה: "h",
-    ו: "v",
-    ז: "z",
-    ח: "ch",
-    ט: "t",
-    י: "y",
-    כ: "k",
-    ך: "k",
-    ל: "l",
-    מ: "m",
-    ם: "m",
-    נ: "n",
-    ן: "n",
-    ס: "s",
-    ע: "a",
-    פ: "p",
-    ף: "f",
-    צ: "tz",
-    ץ: "tz",
-    ק: "k",
-    ר: "r",
-    ש: "sh",
-    ת: "t",
-  };
+  const plain = hebrew.normalize("NFD").replace(/[\u0591-\u05AF]/g, "");
+  const letters = /[\u05D0-\u05EA]/;
+  const DAGESH = "\u05BC";
+  const SHIN_DOT = "\u05C1";
+  const SIN_DOT = "\u05C2";
+
+  function baseConsonant(base, marks) {
+    const hasDagesh = marks.includes(DAGESH);
+    const hasHolam = marks.includes("\u05B9");
+    const hasSinDot = marks.includes(SIN_DOT);
+    const hasShinDot = marks.includes(SHIN_DOT);
+    const hasOtherVowel = marks.some((m) =>
+      ["\u05B0", "\u05B4", "\u05B5", "\u05B6", "\u05B7", "\u05B8", "\u05BB"].includes(m),
+    );
+
+    if (base === "ו") {
+      if (hasDagesh && !hasOtherVowel && !hasHolam) return ""; // shuruk handled as vowel
+      if (hasHolam && !hasOtherVowel) return ""; // holam male carrier
+      return "v";
+    }
+    if (base === "ש") {
+      if (hasSinDot) return "s";
+      if (hasShinDot || !hasSinDot) return "sh";
+    }
+    if (base === "ב") return hasDagesh ? "b" : "v";
+    if (base === "כ" || base === "ך") return hasDagesh ? "k" : "ch";
+    if (base === "פ") return hasDagesh ? "p" : "f";
+    if (base === "ף") return "f";
+
+    const map = {
+      א: "",
+      ג: "g",
+      ד: "d",
+      ה: "h",
+      ז: "z",
+      ח: "ch",
+      ט: "t",
+      י: "y",
+      ל: "l",
+      מ: "m",
+      ם: "m",
+      נ: "n",
+      ן: "n",
+      ס: "s",
+      ע: "",
+      צ: "tz",
+      ץ: "tz",
+      ק: "k",
+      ר: "r",
+      ת: "t",
+    };
+    return map[base] ?? "";
+  }
+
+  function vowelPart(base, marks) {
+    const hasDagesh = marks.includes(DAGESH);
+    if (base === "ו" && hasDagesh) return "u"; // shuruk
+    if (marks.includes("\u05B9")) return "o"; // holam
+    if (marks.includes("\u05BB")) return "u"; // qubuts
+    if (marks.includes("\u05B4")) return "i"; // hiriq
+    if (marks.includes("\u05B5") || marks.includes("\u05B6") || marks.includes("\u05B0"))
+      return "e"; // tsere/segol/sheva (approx)
+    if (marks.includes("\u05B7") || marks.includes("\u05B8")) return "a"; // patah/qamats
+    return "";
+  }
+
   let out = "";
-  for (const ch of plain) out += map[ch] ?? "";
-  return out || "he";
+  let i = 0;
+  while (i < plain.length) {
+    const ch = plain[i];
+    if (!letters.test(ch)) {
+      i += 1;
+      continue;
+    }
+    const marks = [];
+    let j = i + 1;
+    while (j < plain.length && !letters.test(plain[j])) {
+      marks.push(plain[j]);
+      j += 1;
+    }
+    const c = baseConsonant(ch, marks);
+    const v = vowelPart(ch, marks);
+    const isFinal = j >= plain.length;
+    if (isFinal && v === "a" && (ch === "ח" || ch === "ע" || ch === "ה")) {
+      out += `${v}${c}`;
+    } else {
+      out += `${c}${v}`;
+    }
+    i = j;
+  }
+
+  const normalized = out
+    .replace(/aa+/g, "a")
+    .replace(/ii+/g, "i")
+    .replace(/uu+/g, "u")
+    .replace(/oo+/g, "o");
+  return normalized || "he";
 }
 
 function inferDifficulty(hebrew) {
