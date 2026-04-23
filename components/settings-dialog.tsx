@@ -37,6 +37,7 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
   const [open, setOpen] = useState(false);
   const [useOverride, setUseOverride] = useState(false);
   const [seconds, setSeconds] = useState(15);
+  const [noTimer, setNoTimer] = useState(false);
   const [autoAdvance, setAutoAdvance] = useState(true);
 
   function syncFromStorage(nextOpen: boolean) {
@@ -47,6 +48,7 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
     setOpen(true);
     const s = loadSettings();
     const def = getDefaultTimerSeconds(level);
+    setNoTimer(Boolean(s.noTimer));
     const o = s.timerSecondsOverride;
     if (
       o != null &&
@@ -71,6 +73,7 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
 
   function handleSave() {
     saveSettings({
+      noTimer,
       timerSecondsOverride: useOverride ? seconds : null,
       autoAdvance,
     });
@@ -94,11 +97,29 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
         <DialogHeader>
           <DialogTitle>Settings</DialogTitle>
           <DialogDescription>
-            Set seconds per word (15–60) when custom timer is on; otherwise each
-            level uses its own default ({getLevelTitle(level)} default: {def}s).
+            Set seconds per word (15–60), or disable the timer entirely. If
+            custom timer is off and no-timer is off, each level uses its own
+            default ({getLevelTitle(level)} default: {def}s).
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-2">
+          <div className="flex items-start justify-between gap-4">
+            <div className="space-y-1">
+              <Label htmlFor="no-timer">No timer</Label>
+              <p className="text-muted-foreground text-xs">
+                Turn this on to remove the countdown and answer at your own pace.
+              </p>
+            </div>
+            <Button
+              id="no-timer"
+              type="button"
+              variant={noTimer ? "default" : "outline"}
+              size="sm"
+              onClick={() => setNoTimer((v) => !v)}
+            >
+              {noTimer ? "On" : "Off"}
+            </Button>
+          </div>
           <div className="flex items-center justify-between gap-4">
             <Label htmlFor="use-override">Use custom timer</Label>
             <Button
@@ -111,7 +132,9 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
               {useOverride ? "On" : "Off"}
             </Button>
           </div>
-          <div className={!useOverride ? "pointer-events-none opacity-50" : ""}>
+          <div
+            className={!useOverride || noTimer ? "pointer-events-none opacity-50" : ""}
+          >
             <div className="mb-2 flex justify-between text-sm">
               <Label>Seconds per word</Label>
               <span className="text-muted-foreground tabular-nums">{seconds}s</span>
@@ -153,7 +176,12 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
             type="button"
             variant="outline"
             onClick={() => {
-              saveSettings({ timerSecondsOverride: null, autoAdvance: true });
+              saveSettings({
+                noTimer: false,
+                timerSecondsOverride: null,
+                autoAdvance: true,
+              });
+              setNoTimer(false);
               setUseOverride(false);
               setSeconds(
                 Math.min(TIMER_OVERRIDE_MAX, Math.max(TIMER_OVERRIDE_MIN, def)),

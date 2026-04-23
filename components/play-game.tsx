@@ -68,6 +68,11 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
     () => loadSettings().autoAdvance,
     () => true,
   );
+  const noTimer = useSyncExternalStore(
+    subscribeSettings,
+    () => loadSettings().noTimer,
+    () => false,
+  );
   const timerPaused = userTimerPaused || cheatsheetOpen;
 
   useEffect(() => {
@@ -99,7 +104,6 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (timerPaused) return;
       if (phase === "playing") {
         const n = Number(e.key);
         if (n >= 1 && n <= 4) {
@@ -192,7 +196,7 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
                   paused={timerPaused}
                 />
               </div>
-              {phase === "playing" ? (
+              {phase === "playing" && !noTimer ? (
                 <Button
                   type="button"
                   variant="outline"
@@ -209,7 +213,7 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
               options={options}
               phase={phase}
               feedback={feedback}
-              choicesDisabled={timerPaused}
+              choicesDisabled={false}
               onSelect={(i) => useGameStore.getState().submitAnswer(i)}
             />
             {phase === "feedback" && feedback ? (

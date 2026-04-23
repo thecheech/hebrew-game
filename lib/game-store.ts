@@ -100,6 +100,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   tick: (deltaMs) => {
     const { phase, timerMsRemaining, currentWord } = get();
     if (phase !== "playing") return;
+    if (!Number.isFinite(timerMsRemaining)) return;
     const next = Math.max(0, timerMsRemaining - deltaMs);
     if (next <= 0 && currentWord) {
       set({

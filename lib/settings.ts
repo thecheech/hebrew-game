@@ -9,6 +9,8 @@ export const TIMER_OVERRIDE_MAX = 60;
 export interface GameSettings {
   /** If set, overrides per-level default timer (seconds). */
   timerSecondsOverride: number | null;
+  /** When true, round timer is disabled (no time limit). */
+  noTimer: boolean;
   /**
    * When true (default), the next round starts automatically ~1s after a
    * choice is made. When false, the user must press a key/click to advance,
@@ -19,12 +21,14 @@ export interface GameSettings {
 
 const defaultSettings: GameSettings = {
   timerSecondsOverride: null,
+  noTimer: false,
   autoAdvance: true,
 };
 
 /** Timer shown in UI and used when starting rounds. */
 export function getEffectiveTimerSeconds(level: LevelId): number {
   const s = loadSettings();
+  if (s.noTimer) return Number.POSITIVE_INFINITY;
   if (
     s.timerSecondsOverride != null &&
     Number.isFinite(s.timerSecondsOverride) &&
