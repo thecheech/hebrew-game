@@ -14,7 +14,6 @@ import { ScoreHud } from "@/components/score-hud";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -146,25 +145,9 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
             <CardHeader>
               <CardTitle>Level complete</CardTitle>
               <CardDescription>
-                You finished {getRoundsForLevel(level)} rounds on{" "}
-                {getLevelTitle(level)}.
+                {getLevelTitle(level)} · {correctCount}/{getRoundsForLevel(level)} correct
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-2 text-sm">
-              <p>
-                Final score:{" "}
-                <strong className="text-lg tabular-nums">{score}</strong>
-              </p>
-              <p className="text-muted-foreground">
-                Correct answers: {correctCount}/{getRoundsForLevel(level)}
-              </p>
-              <p className="text-muted-foreground">
-                Best for this level:{" "}
-                <span className="text-foreground font-medium tabular-nums">
-                  {Math.max(best, score)}
-                </span>
-              </p>
-            </CardContent>
             <CardFooter className="flex flex-wrap gap-2">
               <Button
                 type="button"
@@ -187,27 +170,29 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
           </>
         ) : (
           <>
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3">
-              <div className="min-w-0 flex-1">
-                <TimerBar
-                  remainingMs={timerMsRemaining}
-                  totalMs={timerTotalMs}
-                  active={phase === "playing"}
-                  paused={timerPaused}
-                />
+            {!noTimer && (
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3">
+                <div className="min-w-0 flex-1">
+                  <TimerBar
+                    remainingMs={timerMsRemaining}
+                    totalMs={timerTotalMs}
+                    active={phase === "playing"}
+                    paused={timerPaused}
+                  />
+                </div>
+                {phase === "playing" && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="shrink-0 self-start sm:mt-0.5"
+                    onClick={() => setUserTimerPaused((p) => !p)}
+                  >
+                    {userTimerPaused ? "Resume" : "Pause"}
+                  </Button>
+                )}
               </div>
-              {phase === "playing" && !noTimer ? (
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="shrink-0 self-start sm:mt-0.5"
-                  onClick={() => setUserTimerPaused((p) => !p)}
-                >
-                  {userTimerPaused ? "Resume" : "Pause"}
-                </Button>
-              ) : null}
-            </div>
+            )}
             <WordCard entry={currentWord} reveal={phase === "feedback"} />
             <AnswerOptions
               options={options}

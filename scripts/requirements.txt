@@ -1,0 +1,11 @@
+# Python dependencies for scripts/analyze_audio.py
+# Install into a project-local venv:
+#   python3 -m venv scripts/.venv
+#   scripts/.venv/bin/pip install -r scripts/requirements.txt
+#
+# The Next.js API route (app/api/parasha/analyze/route.ts) prefers
+# scripts/.venv/bin/python when present, and falls back to python3.
+
+numpy>=1.26,<3
+scipy>=1.11,<2
+librosa>=0.10,<0.11

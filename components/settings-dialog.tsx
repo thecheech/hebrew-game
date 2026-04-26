@@ -97,18 +97,14 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
         <DialogHeader>
           <DialogTitle>Settings</DialogTitle>
           <DialogDescription>
-            Set seconds per word (15–60), or disable the timer entirely. If
-            custom timer is off and no-timer is off, each level uses its own
-            default ({getLevelTitle(level)} default: {def}s).
+            Adjust timer and pacing. {getLevelTitle(level)} default: {def}s per word.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-2">
-          <div className="flex items-start justify-between gap-4">
-            <div className="space-y-1">
+          <div className="flex items-center justify-between gap-4">
+            <div className="space-y-0.5">
               <Label htmlFor="no-timer">No timer</Label>
-              <p className="text-muted-foreground text-xs">
-                Turn this on to remove the countdown and answer at your own pace.
-              </p>
+              <p className="text-muted-foreground text-xs">Answer at your own pace.</p>
             </div>
             <Button
               id="no-timer"
@@ -120,38 +116,42 @@ export function SettingsDialog({ level }: SettingsDialogProps) {
               {noTimer ? "On" : "Off"}
             </Button>
           </div>
-          <div className="flex items-center justify-between gap-4">
-            <Label htmlFor="use-override">Use custom timer</Label>
-            <Button
-              id="use-override"
-              type="button"
-              variant={useOverride ? "default" : "outline"}
-              size="sm"
-              onClick={() => setUseOverride((v) => !v)}
-            >
-              {useOverride ? "On" : "Off"}
-            </Button>
-          </div>
-          <div
-            className={!useOverride || noTimer ? "pointer-events-none opacity-50" : ""}
-          >
-            <div className="mb-2 flex justify-between text-sm">
-              <Label>Seconds per word</Label>
-              <span className="text-muted-foreground tabular-nums">{seconds}s</span>
-            </div>
-            <Slider
-              min={TIMER_OVERRIDE_MIN}
-              max={TIMER_OVERRIDE_MAX}
-              step={1}
-              value={[seconds]}
-              onValueChange={(v) => {
-                const next = Array.isArray(v) ? v[0] : v;
-                if (typeof next === "number" && !Number.isNaN(next)) {
-                  setSeconds(next);
-                }
-              }}
-            />
-          </div>
+          {!noTimer && (
+            <>
+              <div className="flex items-center justify-between gap-4">
+                <Label htmlFor="use-override">Custom timer</Label>
+                <Button
+                  id="use-override"
+                  type="button"
+                  variant={useOverride ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setUseOverride((v) => !v)}
+                >
+                  {useOverride ? "On" : "Off"}
+                </Button>
+              </div>
+              {useOverride && (
+                <div>
+                  <div className="mb-2 flex justify-between text-sm">
+                    <Label>Seconds per word</Label>
+                    <span className="text-muted-foreground tabular-nums">{seconds}s</span>
+                  </div>
+                  <Slider
+                    min={TIMER_OVERRIDE_MIN}
+                    max={TIMER_OVERRIDE_MAX}
+                    step={1}
+                    value={[seconds]}
+                    onValueChange={(v) => {
+                      const next = Array.isArray(v) ? v[0] : v;
+                      if (typeof next === "number" && !Number.isNaN(next)) {
+                        setSeconds(next);
+                      }
+                    }}
+                  />
+                </div>
+              )}
+            </>
+          )}
           <div className="flex items-start justify-between gap-4 border-t pt-4">
             <div className="space-y-1">
               <Label htmlFor="auto-advance">Auto-advance after answer</Label>

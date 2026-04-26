@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# raw source data — cloned PocketTorah (~470MB), used only at build time
+/external/
+
 # debug
 npm-debug.log*
 yarn-debug.log*
@@ -39,3 +42,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python venv and on-disk cache for scripts/analyze_audio.py
+/scripts/.venv/
+/scripts/.cache/

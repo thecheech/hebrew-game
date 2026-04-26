@@ -71,18 +71,34 @@ export function LevelPicker() {
           pronunciation (transliteration). Easy = 1 point, medium = 2, hard = 3.
           Twenty levels from beginner to advanced.
         </p>
-        <div className="flex justify-center">
+      </div>
+
+      <Card className="border-primary/40 bg-primary/[0.03]">
+        <CardHeader>
+          <CardTitle className="flex flex-wrap items-baseline gap-2">
+            Bar mitzvah practice
+            <span className="text-muted-foreground text-sm font-normal">
+              — Parashat Miketz
+            </span>
+          </CardTitle>
+          <CardDescription>
+            Aliya 1 (Gen 43:16–18) and Aliya 7 (Gen 44:11–17), triennial cycle
+            year 3. Listen to the chant, follow word-by-word, loop a phrase
+            until it&apos;s solid.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
           <Link
-            href="/admin"
+            href="/parasha/miketz"
             className={cn(
-              buttonVariants({ variant: "ghost", size: "sm" }),
-              "text-muted-foreground",
+              buttonVariants({ variant: "default" }),
+              "w-full sm:w-auto",
             )}
           >
-            Manage word list →
+            Open Miketz practice →
           </Link>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader>
@@ -125,6 +141,17 @@ export function LevelPicker() {
           </ol>
         </CardContent>
       </Card>
+      <div className="flex justify-center pt-2">
+        <Link
+          href="/admin"
+          className={cn(
+            buttonVariants({ variant: "ghost", size: "sm" }),
+            "text-muted-foreground/60 text-xs",
+          )}
+        >
+          Manage word list
+        </Link>
+      </div>
     </div>
     <CheatsheetFab />
     </>
