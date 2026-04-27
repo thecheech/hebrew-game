@@ -4,12 +4,9 @@ import Google from "next-auth/providers/google";
 import Resend from "next-auth/providers/resend";
 
 import { authConfig } from "@/auth.config";
+import { authAppDisplayName } from "@/lib/auth-app-name";
 import { signInEmailHtml, signInEmailText } from "@/lib/auth-sign-in-email";
 import { prisma } from "@/lib/prisma";
-
-function authAppDisplayName() {
-  return process.env.AUTH_APP_NAME ?? "Bar Mitzva App";
-}
 
 /**
  * Full Auth.js setup with Prisma adapter + providers.

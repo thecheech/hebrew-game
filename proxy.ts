@@ -12,7 +12,13 @@ import { authConfig } from "@/auth.config";
  */
 const { auth } = NextAuth(authConfig);
 
-const PUBLIC_PATHS = new Set(["/", "/login", "/theodore", "/play"]);
+const PUBLIC_PATHS = new Set([
+  "/",
+  "/login",
+  "/login/verify-request",
+  "/theodore",
+  "/play",
+]);
 
 function isPublicPath(pathname: string): boolean {
   if (PUBLIC_PATHS.has(pathname)) return true;
