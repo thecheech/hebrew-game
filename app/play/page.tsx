@@ -1,8 +1,33 @@
 import { Suspense } from "react";
 
-import { PlayGame } from "@/components/play-game";
+import { LevelPicker } from "@/components/level-picker";
+import { PlayGameActive } from "@/components/play-game";
 
-export default function PlayPage() {
+function normalizeLevelQuery(
+  raw: string | string[] | undefined,
+): string | null {
+  if (raw === undefined) return null;
+  const s = Array.isArray(raw) ? raw[0] : raw;
+  if (s == null || String(s).trim() === "") return null;
+  return String(s);
+}
+
+export default async function PlayPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ level?: string | string[] }>;
+}) {
+  const sp = await searchParams;
+  const levelParam = normalizeLevelQuery(sp.level);
+
+  if (!levelParam) {
+    return (
+      <div className="bg-background relative min-h-dvh">
+        <LevelPicker />
+      </div>
+    );
+  }
+
   return (
     <Suspense
       fallback={
@@ -11,7 +36,7 @@ export default function PlayPage() {
         </div>
       }
     >
-      <PlayGame />
+      <PlayGameActive levelParam={levelParam} />
     </Suspense>
   );
 }

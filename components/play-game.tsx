@@ -1,12 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 
 import { AnswerOptions } from "@/components/answer-options";
 import { CheatsheetFab } from "@/components/cheatsheet";
-import { LevelPicker } from "@/components/level-picker";
 import { ConfettiBurst } from "@/components/confetti-burst";
 import { SettingsDialog } from "@/components/settings-dialog";
 import { TimerBar } from "@/components/timer-bar";
@@ -238,21 +236,9 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
   );
 }
 
-export function PlayGame() {
-  const searchParams = useSearchParams();
-  const levelRaw = searchParams.get("level");
-  const hasLevel =
-    levelRaw !== null && String(levelRaw).trim().length > 0;
-
-  if (!hasLevel) {
-    return (
-      <div className="bg-background relative min-h-dvh">
-        <LevelPicker />
-      </div>
-    );
-  }
-
-  const level = parseLevel(levelRaw);
+/** Active level play UI — use when `?level=` is present (parent reads searchParams on the server). */
+export function PlayGameActive({ levelParam }: { levelParam: string }) {
+  const level = parseLevel(levelParam);
 
   return (
     <div className="bg-background relative min-h-dvh">
