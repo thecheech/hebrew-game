@@ -1,13 +1,8 @@
 import { Suspense } from "react";
-import { redirect } from "next/navigation";
 
-import { auth } from "@/auth";
 import { PlayGame } from "@/components/play-game";
 
-export default async function PlayPage() {
-  const session = await auth();
-  if (!session?.user) redirect("/login?callbackUrl=/play");
-
+export default function PlayPage() {
   return (
     <Suspense
       fallback={

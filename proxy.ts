@@ -1,14 +1,38 @@
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
-const PUBLIC_PATHS = ["/", "/login", "/theodore"];
+/** Exact path matches that skip auth. */
+const PUBLIC_PATHS = ["/", "/login", "/theodore", "/play"];
+
+function isPublicPath(pathname: string): boolean {
+  if (PUBLIC_PATHS.includes(pathname)) return true;
+  if (pathname.startsWith("/api/auth")) return true;
+  // Theodore landing: Miketz triennial player + its public assets.
+  if (
+    pathname === "/parasha/miketz/3" ||
+    pathname.startsWith("/parasha/miketz/3/")
+  ) {
+    return true;
+  }
+  if (
+    pathname.startsWith("/parasha/miketz/alt/") ||
+    pathname.startsWith("/parasha/miketz/audio/")
+  ) {
+    return true;
+  }
+  // Mic scoring for open parasha practice (small surface: POST only).
+  if (
+    pathname === "/api/parasha/analyze" ||
+    pathname === "/api/parasha/analyze-word"
+  ) {
+    return true;
+  }
+  return false;
+}
 
 export default auth((request) => {
   const pathname = request.nextUrl.pathname;
-  const isPublicPath = PUBLIC_PATHS.includes(pathname);
-  const isAuthRoute = pathname.startsWith("/api/auth");
-
-  if (isPublicPath || isAuthRoute) return NextResponse.next();
+  if (isPublicPath(pathname)) return NextResponse.next();
   if (request.auth) return NextResponse.next();
 
   const loginUrl = new URL("/login", request.url);
