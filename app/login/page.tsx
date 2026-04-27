@@ -13,7 +13,7 @@ async function signInWithGoogle(formData: FormData) {
     callbackUrlFromForm.length > 0 &&
     callbackUrlFromForm.startsWith("/");
   const callbackUrl =
-    isSafeRelativePath ? callbackUrlFromForm : "/play";
+    isSafeRelativePath ? callbackUrlFromForm : "/practice";
 
   await signIn("google", { redirectTo: callbackUrl });
 }
@@ -26,7 +26,7 @@ interface LoginPageProps {
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
   const session = await auth();
-  if (session?.user) redirect("/play");
+  if (session?.user) redirect("/practice");
 
   const { callbackUrl } = await searchParams;
 
@@ -38,7 +38,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         </CardHeader>
         <CardContent>
           <form action={signInWithGoogle}>
-            <input type="hidden" name="callbackUrl" value={callbackUrl ?? "/play"} />
+            <input type="hidden" name="callbackUrl" value={callbackUrl ?? "/practice"} />
             <Button type="submit" className="w-full" size="lg">
               Continue with Google
             </Button>

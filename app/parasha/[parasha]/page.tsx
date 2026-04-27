@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 
+import { auth } from "@/auth";
 import { ParashaPlayer } from "@/components/parasha-player";
 import { findBySlug } from "@/lib/parasha-list";
 
@@ -22,6 +23,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ParashaPage({ params }: Props) {
   const { parasha: slug } = await params;
+
+  const session = await auth();
+  if (!session?.user) redirect(`/login?callbackUrl=/parasha/${slug}`);
+
   const entry = findBySlug(slug);
   if (!entry) notFound();
 
