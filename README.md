@@ -14,7 +14,8 @@ cp .env.example .env.local
 
 Set real values in `.env.local` (see `.env.example`):
 
-- **`DATABASE_URL`** — Postgres connection string (e.g. [Neon](https://neon.tech) free tier).
+- **`DATABASE_URL`** — Neon's **pooled** connection string (hostname contains `-pooler`; used at runtime by Prisma's Neon adapter).
+- **`DIRECT_URL`** — Neon's **direct** connection string (same branch, without pooler; used by `prisma migrate`). On [Vercel’s Neon integration](https://neon.com/docs/guides/vercel-managed-integration) this is exposed as `DATABASE_URL_UNPOOLED`; locally you can paste it as `DIRECT_URL` or set `DATABASE_URL_UNPOOLED` to match.
 - **`AUTH_SECRET`** — run `openssl rand -base64 32` and paste the result.
 - **`AUTH_URL`** — e.g. `http://localhost:3000` locally, or your production URL on Vercel (`https://your-domain.com`).
 - **`AUTH_RESEND_KEY`** / **`AUTH_RESEND_FROM`** — from [Resend](https://resend.com); verify your domain or use their test sender for development.
@@ -39,19 +40,19 @@ npm run build
 npm start
 ```
 
-## Deploy (Vercel)
+## Deploy (Vercel + Neon)
 
 1. Push the repo to GitHub (or GitLab / Bitbucket).
 2. In [Vercel](https://vercel.com), **Import** the repository.
 3. Framework preset: **Next.js**. Root directory: this project folder.
-4. Add environment variables (see `.env.example`):
-   - `DATABASE_URL` (Postgres — Auth.js needs this for email magic links)
+4. Connect **[Neon](https://neon.com/docs/guides/vercel-managed-integration)** to the Vercel project (**Storage** in the project, or **Integrations → Neon**). This injects **`DATABASE_URL`** (pooled) and **`DATABASE_URL_UNPOOLED`** (direct). Prisma Migrate uses the unpooled URL via `prisma.config.ts`; the app uses the pooled URL with `@prisma/adapter-neon`.
+5. Add the remaining environment variables (not provisioned by Neon):
    - `AUTH_SECRET` (run `openssl rand -base64 32`)
    - `AUTH_URL` (production site URL, e.g. `https://your-project.vercel.app`)
    - `AUTH_RESEND_KEY`, `AUTH_RESEND_FROM`
    - `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET` if using Google sign-in
-5. Deploy. The default `npm run build` runs `prisma generate`, applies migrations with `prisma migrate deploy`, then builds Next.js — ensure `DATABASE_URL` is set on Vercel so migrations succeed.
+6. Deploy. `npm run build` runs `prisma generate`, `prisma migrate deploy` (needs `DATABASE_URL_UNPOOLED` or equivalent in the build environment), then `next build`.
 
 ## Stack
 
-Next.js 16 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui (Base UI), Zustand, Auth.js + Prisma (Postgres for magic links), `Frank Ruhl Libre` for Hebrew text.
+Next.js 16 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui (Base UI), Zustand, Auth.js + Prisma + Neon (`@prisma/adapter-neon`), `Frank Ruhl Libre` for Hebrew text.
