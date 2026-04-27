@@ -3,29 +3,25 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Resend from "next-auth/providers/resend";
 
+import { authConfig } from "@/auth.config";
 import { prisma } from "@/lib/prisma";
 
 /**
- * Lazy config ensures the Prisma adapter is attached on every Auth.js invocation.
- * With Turbopack, a static config object can lose or omit `adapter` in some server-action bundles,
- * which triggers MissingAdapter for email providers.
+ * Full Auth.js setup with Prisma adapter + providers.
+ * Used by the [...nextauth] route handler and any server code that needs
+ * the real `auth()` (server actions, server components, etc.).
+ *
+ * The proxy uses `auth.config.ts` directly so it doesn't pull Prisma into
+ * its serverless bundle.
  */
-export const { handlers, auth, signIn, signOut } = NextAuth(() => ({
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   adapter: PrismaAdapter(prisma),
   providers: [
     Google,
     Resend({
-      from: process.env.AUTH_RESEND_FROM ?? "Hebrew Game <onboarding@resend.dev>",
+      from:
+        process.env.AUTH_RESEND_FROM ?? "Hebrew Game <onboarding@resend.dev>",
     }),
   ],
-  pages: {
-    signIn: "/login",
-  },
-  session: {
-    strategy: "jwt",
-    maxAge: 60 * 24 * 60 * 60, // 60 days
-  },
-  jwt: {
-    maxAge: 60 * 24 * 60 * 60, // 60 days
-  },
-}));
+});
