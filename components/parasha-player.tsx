@@ -49,6 +49,8 @@ interface ParashaPlayerProps {
    * Set `false` to show vowels and cantillation initially.
    */
   defaultHideNikud?: boolean;
+  /** Force mic practice mode even when cantor says listen-only. */
+  forcePracticeMode?: boolean;
 }
 
 /**
@@ -62,6 +64,7 @@ export function ParashaPlayer({
   indexHref,
   defaultHideTranslit = true,
   defaultHideNikud = true,
+  forcePracticeMode = false,
 }: ParashaPlayerProps) {
   const [index, setIndex] = useState<ParashaIndex | null>(null);
   const [activeAliyaNum, setActiveAliyaNum] = useState<number | null>(null);
@@ -194,7 +197,7 @@ export function ParashaPlayer({
   // listen mode when a selected cantor doesn't support scoring.
   const supportsScoring = activeCantor?.supportsScoring !== false;
   const effectiveMode: "listen" | "practice" =
-    supportsScoring ? "practice" : "listen";
+    forcePracticeMode || supportsScoring ? "practice" : "listen";
 
   // Build the scoring reference passed to ParashaLeadMode (and nested flows).
   // Null when there's no cantor data at all (legacy parasha without a

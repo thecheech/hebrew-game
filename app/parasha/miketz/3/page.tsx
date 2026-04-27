@@ -16,6 +16,7 @@ export default function MiketzYear3Page() {
           indexHref="/parasha/miketz/3/index.json"
           defaultHideTranslit={false}
           defaultHideNikud={false}
+          forcePracticeMode
         />
       </div>
     </div>
