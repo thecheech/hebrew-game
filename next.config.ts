@@ -6,6 +6,7 @@ import type { NextConfig } from "next";
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ["@prisma/adapter-neon", "@prisma/client"],
   turbopack: {
     root: projectRoot,
   },

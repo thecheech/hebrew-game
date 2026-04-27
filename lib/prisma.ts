@@ -3,11 +3,19 @@ import { PrismaClient } from "@/lib/generated/prisma";
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 
+function databaseUrl() {
+  return (
+    process.env.DATABASE_URL ??
+    process.env.POSTGRES_PRISMA_URL ??
+    process.env.POSTGRES_URL
+  );
+}
+
 function createPrismaClient() {
-  const connectionString = process.env.DATABASE_URL;
+  const connectionString = databaseUrl();
   if (!connectionString) {
     throw new Error(
-      "DATABASE_URL is not set. On Vercel, connect the Neon integration (pooled URL). See README.",
+      "No database URL: set DATABASE_URL (or Neon POSTGRES_PRISMA_URL / POSTGRES_URL). See README.",
     );
   }
   const adapter = new PrismaNeon({ connectionString });

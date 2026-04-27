@@ -5,7 +5,12 @@ import Resend from "next-auth/providers/resend";
 
 import { prisma } from "@/lib/prisma";
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+/**
+ * Lazy config ensures the Prisma adapter is attached on every Auth.js invocation.
+ * With Turbopack, a static config object can lose or omit `adapter` in some server-action bundles,
+ * which triggers MissingAdapter for email providers.
+ */
+export const { handlers, auth, signIn, signOut } = NextAuth(() => ({
   adapter: PrismaAdapter(prisma),
   providers: [
     Google,
@@ -23,4 +28,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   jwt: {
     maxAge: 60 * 24 * 60 * 60, // 60 days
   },
-});
+}));
