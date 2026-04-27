@@ -73,33 +73,6 @@ export function LevelPicker() {
         </p>
       </div>
 
-      <Card className="border-primary/40 bg-primary/[0.03]">
-        <CardHeader>
-          <CardTitle className="flex flex-wrap items-baseline gap-2">
-            Bar mitzvah practice
-            <span className="text-muted-foreground text-sm font-normal">
-              — Parashat Miketz
-            </span>
-          </CardTitle>
-          <CardDescription>
-            Aliya 1 (Gen 43:16–18) and Aliya 7 (Gen 44:11–17), triennial cycle
-            year 3. Listen to the chant, follow word-by-word, loop a phrase
-            until it&apos;s solid.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Link
-            href="/parasha/miketz"
-            className={cn(
-              buttonVariants({ variant: "default" }),
-              "w-full sm:w-auto",
-            )}
-          >
-            Open Miketz practice →
-          </Link>
-        </CardContent>
-      </Card>
-
       <Card>
         <CardHeader>
           <CardTitle>Pick a level</CardTitle>
