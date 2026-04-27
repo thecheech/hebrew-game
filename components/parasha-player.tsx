@@ -39,6 +39,16 @@ function pickDefaultCantor(cantors: Cantor[] | undefined): Cantor | null {
 interface ParashaPlayerProps {
   /** URL to the index.json for this parasha. */
   indexHref: string;
+  /**
+   * Initial “Hide transliteration” setting (`true` = transliteration hidden).
+   * Default `true` (scroll-style listening). Set `false` to show translit initially.
+   */
+  defaultHideTranslit?: boolean;
+  /**
+   * Initial “Hide Nikud” setting (`true` = consonants only). Default `true`.
+   * Set `false` to show vowels and cantillation initially.
+   */
+  defaultHideNikud?: boolean;
 }
 
 /**
@@ -48,14 +58,18 @@ interface ParashaPlayerProps {
  */
 type LoadedAliya = { href: string; data: AliyaData };
 
-export function ParashaPlayer({ indexHref }: ParashaPlayerProps) {
+export function ParashaPlayer({
+  indexHref,
+  defaultHideTranslit = true,
+  defaultHideNikud = true,
+}: ParashaPlayerProps) {
   const [index, setIndex] = useState<ParashaIndex | null>(null);
   const [activeAliyaNum, setActiveAliyaNum] = useState<number | null>(null);
   const [loadedAliya, setLoadedAliya] = useState<LoadedAliya | null>(null);
-  /** When true, transliteration under each word is hidden. Default on. */
-  const [hideTranslit, setHideTranslit] = useState(true);
-  /** When true, vowels and cantillation are hidden (scroll-style consonants). Default on. */
-  const [hideNikud, setHideNikud] = useState(true);
+  /** When true, transliteration under each word is hidden. */
+  const [hideTranslit, setHideTranslit] = useState(defaultHideTranslit);
+  /** When true, vowels and cantillation are hidden (scroll-style consonants). */
+  const [hideNikud, setHideNikud] = useState(defaultHideNikud);
   const showTranslit = !hideTranslit;
   const scrollStyle = hideNikud;
   /** The cantor whose audio is currently used. Null until index.json

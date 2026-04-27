@@ -28,7 +28,7 @@
     {
       "id": "pockettorah",
       "label": "PocketTorah (Ashkenazi)",
-      "default": true,
+      "default": false,
       "supportsScoring": false,
       "tracks": {
         "1": {
@@ -43,8 +43,8 @@
     },
     {
       "id": "miketz3-alt",
-      "label": "Alternate cantor",
-      "default": false,
+      "label": "Alternate Cantor",
+      "default": true,
       "supportsScoring": true,
       "tracks": {
         "1": {
