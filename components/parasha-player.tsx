@@ -1,5 +1,6 @@
 "use client";
 
+import { Settings2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
@@ -51,8 +52,12 @@ export function ParashaPlayer({ indexHref }: ParashaPlayerProps) {
   const [index, setIndex] = useState<ParashaIndex | null>(null);
   const [activeAliyaNum, setActiveAliyaNum] = useState<number | null>(null);
   const [loadedAliya, setLoadedAliya] = useState<LoadedAliya | null>(null);
-  const [scrollStyle, setScrollStyle] = useState(false);
-  const [showTranslit, setShowTranslit] = useState(false);
+  /** When true, transliteration under each word is hidden. Default on. */
+  const [hideTranslit, setHideTranslit] = useState(true);
+  /** When true, vowels and cantillation are hidden (scroll-style consonants). Default on. */
+  const [hideNikud, setHideNikud] = useState(true);
+  const showTranslit = !hideTranslit;
+  const scrollStyle = hideNikud;
   /** The cantor whose audio is currently used. Null until index.json
    *  loads (or when the parasha lists no cantors at all — in which case the
    *  selector is hidden and the legacy aliya.audio path is used). */
@@ -215,9 +220,13 @@ export function ParashaPlayer({ indexHref }: ParashaPlayerProps) {
           </span>
         </h1>
         <p className="text-muted-foreground mx-auto max-w-xl text-sm">
-          {index.dateHebrew} · {formatDate(index.date)} ·{" "}
+          {index.dateHebrew && index.date
+            ? `${index.dateHebrew} · ${formatDate(index.date)} · `
+            : null}
           {index.cycle === "triennial-y3"
             ? "Triennial cycle, year 3"
+            : index.cycle === "annual"
+            ? "Annual cycle"
             : index.cycle}
         </p>
         <div className="flex justify-center">
@@ -236,110 +245,94 @@ export function ParashaPlayer({ indexHref }: ParashaPlayerProps) {
       <Card>
         <CardHeader className="space-y-3">
           <div className="flex w-full justify-stretch">
-            {cantors && cantors.length > 0 ? (
-              <div className="bg-muted/30 flex w-full flex-col gap-2 rounded-lg border px-2.5 py-2 sm:flex-row sm:items-center sm:gap-3 sm:py-1.5">
-                <div className="flex min-w-0 flex-1 items-center gap-2">
-                  <span className="text-muted-foreground shrink-0 text-xs">Cantor</span>
-                  <span
-                    className="min-w-0 truncate text-sm font-medium"
-                    title={activeCantor?.label ?? cantors[0].label}
-                  >
-                    {activeCantor?.label ?? cantors[0].label}
-                  </span>
-                  {supportsScoring ? null : (
-                    <span className="text-muted-foreground shrink-0 text-[0.65rem]">
-                      · listen only
+            <div className="bg-muted/30 flex w-full flex-col gap-2 rounded-lg border px-2.5 py-2 sm:flex-row sm:items-center sm:gap-3 sm:py-1.5">
+              {cantors && cantors.length > 0 ? (
+                <>
+                  <div className="flex min-w-0 flex-1 items-center gap-2">
+                    <span className="text-muted-foreground shrink-0 text-xs">
+                      Cantor
                     </span>
-                  )}
-                  {cantors.length > 1 ? (
-                    <Dialog>
-                      <DialogTrigger render={<Button size="xs" variant="outline" />}>
-                        Change
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Choose cantor</DialogTitle>
-                          <DialogDescription>
-                            Pick which cantor to use for listening and practice.
-                          </DialogDescription>
-                        </DialogHeader>
-                        <div className="space-y-2">
-                          {cantors.map((c) => {
-                            const isActive = (activeCantor?.id ?? "") === c.id;
-                            return (
-                              <Button
-                                key={c.id}
-                                variant={isActive ? "default" : "outline"}
-                                className="h-auto w-full justify-start py-2 text-left"
-                                onClick={() => setCantorId(c.id)}
-                                aria-pressed={isActive}
-                                title={
-                                  c.supportsScoring === false
-                                    ? `${c.label} — listen only (this cantor isn't enabled for mic scoring)`
-                                    : c.label
-                                }
-                              >
-                                <span>{c.label}</span>
-                                {c.default ? (
-                                  <span className="text-muted-foreground ml-1.5 text-[0.65rem] uppercase tracking-wide">
-                                    default
-                                  </span>
-                                ) : null}
-                              </Button>
-                            );
-                          })}
-                        </div>
-                        <DialogFooter showCloseButton />
-                      </DialogContent>
-                    </Dialog>
-                  ) : null}
-                </div>
-
-                <div
-                  className="bg-border hidden shrink-0 sm:block sm:h-6 sm:w-px"
-                  aria-hidden
-                />
-
-                <div
-                  className="flex flex-wrap items-center gap-1.5 sm:justify-end"
-                  role="group"
-                  aria-label="Hebrew display"
-                >
-                  <div className="bg-background/60 inline-flex rounded-md border p-0.5">
-                    <Button
-                      size="xs"
-                      variant={scrollStyle ? "ghost" : "secondary"}
-                      onClick={() => setScrollStyle(false)}
-                      aria-pressed={!scrollStyle}
-                      className="h-7 px-2"
-                      title="With vowels and cantillation marks"
+                    <span
+                      className="min-w-0 truncate text-sm font-medium"
+                      title={activeCantor?.label ?? cantors[0].label}
                     >
-                      Marks
-                    </Button>
-                    <Button
-                      size="xs"
-                      variant={scrollStyle ? "secondary" : "ghost"}
-                      onClick={() => setScrollStyle(true)}
-                      aria-pressed={scrollStyle}
-                      className="h-7 px-2"
-                      title="Torah scroll style (consonants only)"
-                    >
-                      Scroll
-                    </Button>
+                      {activeCantor?.label ?? cantors[0].label}
+                    </span>
+                    {supportsScoring ? null : (
+                      <span className="text-muted-foreground shrink-0 text-[0.65rem]">
+                        · listen only
+                      </span>
+                    )}
+                    {cantors.length > 1 ? (
+                      <Dialog>
+                        <DialogTrigger
+                          render={<Button size="xs" variant="outline" />}
+                        >
+                          Change
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Choose cantor</DialogTitle>
+                            <DialogDescription>
+                              Pick which cantor to use for listening and practice.
+                            </DialogDescription>
+                          </DialogHeader>
+                          <div className="space-y-2">
+                            {cantors.map((c) => {
+                              const isActive =
+                                (activeCantor?.id ?? "") === c.id;
+                              return (
+                                <Button
+                                  key={c.id}
+                                  variant={isActive ? "default" : "outline"}
+                                  className="h-auto w-full justify-start py-2 text-left"
+                                  onClick={() => setCantorId(c.id)}
+                                  aria-pressed={isActive}
+                                  title={
+                                    c.supportsScoring === false
+                                      ? `${c.label} — listen only (this cantor isn't enabled for mic scoring)`
+                                      : c.label
+                                  }
+                                >
+                                  <span>{c.label}</span>
+                                  {c.default ? (
+                                    <span className="text-muted-foreground ml-1.5 text-[0.65rem] uppercase tracking-wide">
+                                      default
+                                    </span>
+                                  ) : null}
+                                </Button>
+                              );
+                            })}
+                          </div>
+                          <DialogFooter showCloseButton />
+                        </DialogContent>
+                      </Dialog>
+                    ) : null}
                   </div>
-                  <label className="flex cursor-pointer items-center gap-1 text-xs text-muted-foreground select-none">
-                    <input
-                      type="checkbox"
-                      className="size-3.5 accent-primary cursor-pointer"
-                      checked={showTranslit}
-                      onChange={(e) => setShowTranslit(e.target.checked)}
-                      aria-label="Transliteration"
-                    />
-                    Translit
-                  </label>
-                </div>
+
+                  <div
+                    className="bg-border hidden shrink-0 sm:block sm:h-6 sm:w-px"
+                    aria-hidden
+                  />
+                </>
+              ) : null}
+
+              <div
+                className={cn(
+                  "flex flex-wrap items-center gap-1.5",
+                  cantors && cantors.length > 0
+                    ? "sm:justify-end"
+                    : "ml-auto justify-end",
+                )}
+              >
+                <ParashaDisplaySettingsDialog
+                  hideNikud={hideNikud}
+                  hideTranslit={hideTranslit}
+                  onHideNikudChange={setHideNikud}
+                  onHideTranslitChange={setHideTranslit}
+                />
               </div>
-            ) : null}
+            </div>
           </div>
 
           {/* Aliya tabs */}
@@ -391,6 +384,69 @@ export function ParashaPlayer({ indexHref }: ParashaPlayerProps) {
         )}
       </div>
     </div>
+  );
+}
+
+interface ParashaDisplaySettingsDialogProps {
+  hideTranslit: boolean;
+  hideNikud: boolean;
+  onHideTranslitChange: (value: boolean) => void;
+  onHideNikudChange: (value: boolean) => void;
+}
+
+function ParashaDisplaySettingsDialog({
+  hideTranslit,
+  hideNikud,
+  onHideTranslitChange,
+  onHideNikudChange,
+}: ParashaDisplaySettingsDialogProps) {
+  return (
+    <Dialog>
+      <DialogTrigger
+        render={
+          <Button
+            size="xs"
+            variant="outline"
+            className="h-7 gap-1 px-2"
+            aria-label="Display settings"
+          />
+        }
+      >
+        <Settings2 className="size-3.5" />
+        Settings
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-sm">
+        <DialogHeader>
+          <DialogTitle>Display</DialogTitle>
+          <DialogDescription>
+            Control transliteration and vowel marks for the text.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="space-y-3">
+          <label className="flex cursor-pointer items-center justify-between gap-4 text-sm">
+            <span>Hide transliteration</span>
+            <input
+              type="checkbox"
+              className="size-4 accent-primary cursor-pointer"
+              checked={hideTranslit}
+              onChange={(e) => onHideTranslitChange(e.target.checked)}
+              aria-label="Hide transliteration"
+            />
+          </label>
+          <label className="flex cursor-pointer items-center justify-between gap-4 text-sm">
+            <span>Hide Nikud</span>
+            <input
+              type="checkbox"
+              className="size-4 accent-primary cursor-pointer"
+              checked={hideNikud}
+              onChange={(e) => onHideNikudChange(e.target.checked)}
+              aria-label="Hide Nikud"
+            />
+          </label>
+        </div>
+        <DialogFooter showCloseButton />
+      </DialogContent>
+    </Dialog>
   );
 }
 

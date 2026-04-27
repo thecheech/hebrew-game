@@ -52,8 +52,8 @@ export type ParashaIndex = {
   parasha: string;
   parashaHebrew: string;
   cycle: string;
-  date: string;
-  dateHebrew: string;
+  date?: string;
+  dateHebrew?: string;
   aliyot: Array<{
     num: number;
     label: string;

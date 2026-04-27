@@ -1,57 +1,72 @@
 {
   "parasha": "Miketz",
-  "parashaHebrew": "מִקֵּץ",
-  "cycle": "triennial-y3",
-  "date": "2026-12-12",
-  "dateHebrew": "2 Tevet 5787",
+  "parashaHebrew": "מִקֵּץ",
+  "cycle": "annual",
+  "date": "",
+  "dateHebrew": "",
   "aliyot": [
     {
       "num": 1,
-      "label": "Aliya 1 — Genesis 43:16–18",
+      "label": "Aliya 1 — Gen 41:1–14",
       "href": "/parasha/miketz/aliya1.json",
       "audio": "/parasha/miketz/audio/aliya1.mp3",
-      "duration": 73.202,
-      "verseCount": 3,
-      "wordCount": 56
+      "duration": 226.795,
+      "verseCount": 14,
+      "wordCount": 184
+    },
+    {
+      "num": 2,
+      "label": "Aliya 2 — Gen 41:15–38",
+      "href": "/parasha/miketz/aliya2.json",
+      "audio": "/parasha/miketz/audio/aliya2.mp3",
+      "duration": 357.015,
+      "verseCount": 24,
+      "wordCount": 305
+    },
+    {
+      "num": 3,
+      "label": "Aliya 3 — Gen 41:39–52",
+      "href": "/parasha/miketz/aliya3.json",
+      "audio": "/parasha/miketz/audio/aliya3.mp3",
+      "duration": 203.024,
+      "verseCount": 14,
+      "wordCount": 212
+    },
+    {
+      "num": 4,
+      "label": "Aliya 4 — Gen 41:53–42:18",
+      "href": "/parasha/miketz/aliya4.json",
+      "audio": "/parasha/miketz/audio/aliya4.mp3",
+      "duration": 331.389,
+      "verseCount": 23,
+      "wordCount": 297
+    },
+    {
+      "num": 5,
+      "label": "Aliya 5 — Gen 42:19–43:15",
+      "href": "/parasha/miketz/aliya5.json",
+      "audio": "/parasha/miketz/audio/aliya5.mp3",
+      "duration": 624.51,
+      "verseCount": 35,
+      "wordCount": 523
+    },
+    {
+      "num": 6,
+      "label": "Aliya 6 — Gen 43:16–29",
+      "href": "/parasha/miketz/aliya6.json",
+      "audio": "/parasha/miketz/audio/aliya6.mp3",
+      "duration": 249.47,
+      "verseCount": 14,
+      "wordCount": 201
     },
     {
       "num": 7,
-      "label": "Aliya 7 — Genesis 44:11–17",
+      "label": "Aliya 7 — Gen 43:30–44:17",
       "href": "/parasha/miketz/aliya7.json",
       "audio": "/parasha/miketz/audio/aliya7.mp3",
-      "duration": 111.616,
-      "verseCount": 7,
-      "wordCount": 96
-    }
-  ],
-  "cantors": [
-    {
-      "id": "pockettorah",
-      "label": "PocketTorah (Ashkenazi)",
-      "default": true,
-      "supportsScoring": true,
-      "tracks": {
-        "1": { "audio": "/parasha/miketz/audio/aliya1.mp3", "duration": 73.202 },
-        "7": { "audio": "/parasha/miketz/audio/aliya7.mp3", "duration": 111.616 }
-      }
-    },
-    {
-      "id": "miketz3-alt",
-      "label": "Alternate cantor",
-      "default": false,
-      "supportsScoring": true,
-      "tracks": {
-        "1": {
-          "audio": "/parasha/miketz/audio/alt/aliya1.mp3",
-          "duration": 92.865,
-          "href": "/parasha/miketz/alt/aliya1.json"
-        },
-        "7": {
-          "audio": "/parasha/miketz/audio/alt/aliya7.mp3",
-          "duration": 129.541,
-          "href": "/parasha/miketz/alt/aliya7.json"
-        }
-      }
+      "duration": 344.712,
+      "verseCount": 22,
+      "wordCount": 300
     }
   ]
 }

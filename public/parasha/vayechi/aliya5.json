@@ -1,0 +1,850 @@
+{
+  "parasha": "Vayechi",
+  "cycle": "annual",
+  "aliyaNum": 5,
+  "label": "Aliya 5 — Gen 49:19–26",
+  "audio": "/parasha/vayechi/audio/aliya5.mp3",
+  "duration": 88.398,
+  "verses": [
+    {
+      "ref": "49:19",
+      "words": [
+        {
+          "text": "גָּ֖ד",
+          "noTeamim": "גָּד",
+          "plain": "גד",
+          "morph": "גָּ֖ד",
+          "translit": "gad",
+          "start": 0.0,
+          "end": 3.111,
+          "phraseBreak": null
+        },
+        {
+          "text": "גְּד֣וּד",
+          "noTeamim": "גְּדוּד",
+          "plain": "גדוד",
+          "morph": "גְּד֣וּד",
+          "translit": "gedud",
+          "start": 3.111,
+          "end": 4.087,
+          "phraseBreak": null
+        },
+        {
+          "text": "יְגוּדֶ֑נּוּ",
+          "noTeamim": "יְגוּדֶנּוּ",
+          "plain": "יגודנו",
+          "morph": "יְגוּדֶ֑/נּוּ",
+          "translit": "yegudenu",
+          "start": 4.087,
+          "end": 5.341,
+          "phraseBreak": "etnahta"
+        },
+        {
+          "text": "וְה֖וּא",
+          "noTeamim": "וְהוּא",
+          "plain": "והוא",
+          "morph": "וְ/ה֖וּא",
+          "translit": "vehu",
+          "start": 5.341,
+          "end": 6.362,
+          "phraseBreak": null
+        },
+        {
+          "text": "יָגֻ֥ד",
+          "noTeamim": "יָגֻד",
+          "plain": "יגד",
+          "morph": "יָגֻ֥ד",
+          "translit": "yagud",
+          "start": 6.362,
+          "end": 7.036,
+          "phraseBreak": null
+        },
+        {
+          "text": "עָקֵֽב׃",
+          "noTeamim": "עָקֵב׃",
+          "plain": "עקב",
+          "morph": "עָקֵֽב׃",
+          "translit": "akev",
+          "start": 7.036,
+          "end": 8.173,
+          "phraseBreak": "sof-pasuq"
+        }
+      ]
+    },
+    {
+      "ref": "49:20",
+      "words": [
+        {
+          "text": "מֵאָשֵׁ֖ר",
+          "noTeamim": "מֵאָשֵׁר",
+          "plain": "מאשר",
+          "morph": "מֵ/אָשֵׁ֖ר",
+          "translit": "measher",
+          "start": 8.173,
+          "end": 9.427,
+          "phraseBreak": null
+        },
+        {
+          "text": "שְׁמֵנָ֣ה",
+          "noTeamim": "שְׁמֵנָה",
+          "plain": "שמנה",
+          "morph": "שְׁמֵנָ֣ה",
+          "translit": "shemena",
+          "start": 9.427,
+          "end": 10.472,
+          "phraseBreak": null
+        },
+        {
+          "text": "לַחְמ֑וֹ",
+          "noTeamim": "לַחְמוֹ",
+          "plain": "לחמו",
+          "morph": "לַחְמ֑/וֹ",
+          "translit": "lachmo",
+          "start": 10.472,
+          "end": 11.494,
+          "phraseBreak": "etnahta"
+        },
+        {
+          "text": "וְה֥וּא",
+          "noTeamim": "וְהוּא",
+          "plain": "והוא",
+          "morph": "וְ/ה֥וּא",
+          "translit": "vehu",
+          "start": 11.494,
+          "end": 12.307,
+          "phraseBreak": null
+        },
+        {
+          "text": "יִתֵּ֖ן",
+          "noTeamim": "יִתֵּן",
+          "plain": "יתן",
+          "morph": "יִתֵּ֖ן",
+          "translit": "yiten",
+          "start": 12.307,
+          "end": 13.026,
+          "phraseBreak": null
+        },
+        {
+          "text": "מַֽעֲדַנֵּי־",
+          "noTeamim": "מַעֲדַנֵּי־",
+          "plain": "מעדני",
+          "morph": "מַֽעֲדַנֵּי־",
+          "translit": "maadaneiy",
+          "start": 13.026,
+          "end": 13.769,
+          "phraseBreak": null
+        },
+        {
+          "text": "מֶֽלֶךְ׃",
+          "noTeamim": "מֶלֶךְ׃",
+          "plain": "מלך",
+          "morph": "מֶֽלֶךְ׃",
+          "translit": "melech",
+          "start": 13.769,
+          "end": 14.93,
+          "phraseBreak": "sof-pasuq"
+        }
+      ]
+    },
+    {
+      "ref": "49:21",
+      "words": [
+        {
+          "text": "נַפְתָּלִ֖י",
+          "noTeamim": "נַפְתָּלִי",
+          "plain": "נפתלי",
+          "morph": "נַפְתָּלִ֖י",
+          "translit": "naftaliy",
+          "start": 14.93,
+          "end": 16.3,
+          "phraseBreak": null
+        },
+        {
+          "text": "אַיָּלָ֣ה",
+          "noTeamim": "אַיָּלָה",
+          "plain": "אילה",
+          "morph": "אַיָּלָ֣ה",
+          "translit": "ayala",
+          "start": 16.3,
+          "end": 17.067,
+          "phraseBreak": null
+        },
+        {
+          "text": "שְׁלֻחָ֑ה",
+          "noTeamim": "שְׁלֻחָה",
+          "plain": "שלחה",
+          "morph": "שְׁלֻחָ֑ה",
+          "translit": "shelucha",
+          "start": 17.067,
+          "end": 18.274,
+          "phraseBreak": "etnahta"
+        },
+        {
+          "text": "הַנֹּתֵ֖ן",
+          "noTeamim": "הַנֹּתֵן",
+          "plain": "הנתן",
+          "morph": "הַ/נֹּתֵ֖ן",
+          "translit": "hanoten",
+          "start": 18.274,
+          "end": 19.435,
+          "phraseBreak": null
+        },
+        {
+          "text": "אִמְרֵי־",
+          "noTeamim": "אִמְרֵי־",
+          "plain": "אמרי",
+          "morph": "אִמְרֵי־",
+          "translit": "imreiy",
+          "start": 19.435,
+          "end": 19.923,
+          "phraseBreak": null
+        },
+        {
+          "text": "שָֽׁפֶר׃",
+          "noTeamim": "שָׁפֶר׃",
+          "plain": "שפר",
+          "morph": "שָֽׁפֶר׃",
+          "translit": "shafer",
+          "start": 19.923,
+          "end": 20.898,
+          "phraseBreak": "sof-pasuq"
+        }
+      ]
+    },
+    {
+      "ref": "49:22",
+      "words": [
+        {
+          "text": "בֵּ֤ן",
+          "noTeamim": "בֵּן",
+          "plain": "בן",
+          "morph": "בֵּ֤ן",
+          "translit": "ben",
+          "start": 20.898,
+          "end": 21.873,
+          "phraseBreak": null
+        },
+        {
+          "text": "פֹּרָת֙",
+          "noTeamim": "פֹּרָת",
+          "plain": "פרת",
+          "morph": "פֹּרָת֙",
+          "translit": "porat",
+          "start": 21.873,
+          "end": 22.709,
+          "phraseBreak": null
+        },
+        {
+          "text": "יוֹסֵ֔ף",
+          "noTeamim": "יוֹסֵף",
+          "plain": "יוסף",
+          "morph": "יוֹסֵ֔ף",
+          "translit": "yosef",
+          "start": 22.709,
+          "end": 23.661,
+          "phraseBreak": "zaqef"
+        },
+        {
+          "text": "בֵּ֥ן",
+          "noTeamim": "בֵּן",
+          "plain": "בן",
+          "morph": "בֵּ֥ן",
+          "translit": "ben",
+          "start": 23.661,
+          "end": 24.404,
+          "phraseBreak": null
+        },
+        {
+          "text": "פֹּרָ֖ת",
+          "noTeamim": "פֹּרָת",
+          "plain": "פרת",
+          "morph": "פֹּרָ֖ת",
+          "translit": "porat",
+          "start": 24.404,
+          "end": 25.008,
+          "phraseBreak": null
+        },
+        {
+          "text": "עֲלֵי־",
+          "noTeamim": "עֲלֵי־",
+          "plain": "עלי",
+          "morph": "עֲלֵי־",
+          "translit": "aleiy",
+          "start": 25.008,
+          "end": 25.565,
+          "phraseBreak": null
+        },
+        {
+          "text": "עָ֑יִן",
+          "noTeamim": "עָיִן",
+          "plain": "עין",
+          "morph": "עָ֑יִן",
+          "translit": "ayin",
+          "start": 25.565,
+          "end": 26.285,
+          "phraseBreak": "etnahta"
+        },
+        {
+          "text": "בָּנ֕וֹת",
+          "noTeamim": "בָּנוֹת",
+          "plain": "בנות",
+          "morph": "בָּנ֕וֹת",
+          "translit": "banot",
+          "start": 26.285,
+          "end": 28.633,
+          "phraseBreak": "zaqef"
+        },
+        {
+          "text": "צָעֲדָ֖ה",
+          "noTeamim": "צָעֲדָה",
+          "plain": "צעדה",
+          "morph": "צָעֲדָ֖ה",
+          "translit": "tzaada",
+          "start": 28.633,
+          "end": 29.644,
+          "phraseBreak": null
+        },
+        {
+          "text": "עֲלֵי־",
+          "noTeamim": "עֲלֵי־",
+          "plain": "עלי",
+          "morph": "עֲלֵי־",
+          "translit": "aleiy",
+          "start": 29.644,
+          "end": 29.898,
+          "phraseBreak": null
+        },
+        {
+          "text": "שֽׁוּר׃",
+          "noTeamim": "שׁוּר׃",
+          "plain": "שור",
+          "morph": "שֽׁוּר׃",
+          "translit": "shur",
+          "start": 29.898,
+          "end": 31.036,
+          "phraseBreak": "sof-pasuq"
+        }
+      ]
+    },
+    {
+      "ref": "49:23",
+      "words": [
+        {
+          "text": "וַֽיְמָרֲרֻ֖הוּ",
+          "noTeamim": "וַיְמָרֲרֻהוּ",
+          "plain": "וימררהו",
+          "morph": "וַֽ/יְמָרֲרֻ֖/הוּ",
+          "translit": "vaymararuhu",
+          "start": 31.036,
+          "end": 32.684,
+          "phraseBreak": null
+        },
+        {
+          "text": "וָרֹ֑בּוּ",
+          "noTeamim": "וָרֹבּוּ",
+          "plain": "ורבו",
+          "morph": "וָ/רֹ֑בּוּ",
+          "translit": "varobu",
+          "start": 32.684,
+          "end": 33.938,
+          "phraseBreak": "etnahta"
+        },
+        {
+          "text": "וַֽיִּשְׂטְמֻ֖הוּ",
+          "noTeamim": "וַיִּשְׂטְמֻהוּ",
+          "plain": "וישטמהו",
+          "morph": "וַֽ/יִּשְׂטְמֻ֖/הוּ",
+          "translit": "vayistmuhu",
+          "start": 33.938,
+          "end": 35.401,
+          "phraseBreak": null
+        },
+        {
+          "text": "בַּעֲלֵ֥י",
+          "noTeamim": "בַּעֲלֵי",
+          "plain": "בעלי",
+          "morph": "בַּעֲלֵ֥י",
+          "translit": "baaleiy",
+          "start": 35.401,
+          "end": 36.284,
+          "phraseBreak": null
+        },
+        {
+          "text": "חִצִּֽים׃",
+          "noTeamim": "חִצִּים׃",
+          "plain": "חצים",
+          "morph": "חִצִּֽים׃",
+          "translit": "chitziym",
+          "start": 36.284,
+          "end": 37.63,
+          "phraseBreak": "sof-pasuq"
+        }
+      ]
+    },
+    {
+      "ref": "49:24",
+      "words": [
+        {
+          "text": "וַתֵּ֤שֶׁב",
+          "noTeamim": "וַתֵּשֶׁב",
+          "plain": "ותשב",
+          "morph": "וַ/תֵּ֤שֶׁב",
+          "translit": "vateshev",
+          "start": 37.63,
+          "end": 38.745,
+          "phraseBreak": null
+        },
+        {
+          "text": "בְּאֵיתָן֙",
+          "noTeamim": "בְּאֵיתָן",
+          "plain": "באיתן",
+          "morph": "בְּ/אֵיתָן֙",
+          "translit": "beeiytan",
+          "start": 38.745,
+          "end": 39.581,
+          "phraseBreak": null
+        },
+        {
+          "text": "קַשְׁתּ֔וֹ",
+          "noTeamim": "קַשְׁתּוֹ",
+          "plain": "קשתו",
+          "morph": "קַשְׁתּ֔/וֹ",
+          "translit": "kashto",
+          "start": 39.581,
+          "end": 40.533,
+          "phraseBreak": "zaqef"
+        },
+        {
+          "text": "וַיָּפֹ֖זּוּ",
+          "noTeamim": "וַיָּפֹזּוּ",
+          "plain": "ויפזו",
+          "morph": "וַ/יָּפֹ֖זּוּ",
+          "translit": "vayafozu",
+          "start": 40.533,
+          "end": 42.089,
+          "phraseBreak": null
+        },
+        {
+          "text": "זְרֹעֵ֣י",
+          "noTeamim": "זְרֹעֵי",
+          "plain": "זרעי",
+          "morph": "זְרֹעֵ֣י",
+          "translit": "zeroeiy",
+          "start": 42.089,
+          "end": 43.036,
+          "phraseBreak": null
+        },
+        {
+          "text": "יָדָ֑יו",
+          "noTeamim": "יָדָיו",
+          "plain": "ידיו",
+          "morph": "יָדָ֑י/ו",
+          "translit": "yadayv",
+          "start": 43.036,
+          "end": 44.104,
+          "phraseBreak": "etnahta"
+        },
+        {
+          "text": "מִידֵי֙",
+          "noTeamim": "מִידֵי",
+          "plain": "מידי",
+          "morph": "מִ/ידֵי֙",
+          "translit": "miydeiy",
+          "start": 44.104,
+          "end": 45.335,
+          "phraseBreak": null
+        },
+        {
+          "text": "אֲבִ֣יר",
+          "noTeamim": "אֲבִיר",
+          "plain": "אביר",
+          "morph": "אֲבִ֣יר",
+          "translit": "aviyr",
+          "start": 45.335,
+          "end": 46.287,
+          "phraseBreak": null
+        },
+        {
+          "text": "יַעֲקֹ֔ב",
+          "noTeamim": "יַעֲקֹב",
+          "plain": "יעקב",
+          "morph": "יַעֲקֹ֔ב",
+          "translit": "yaakov",
+          "start": 46.287,
+          "end": 47.401,
+          "phraseBreak": "zaqef"
+        },
+        {
+          "text": "מִשָּׁ֥ם",
+          "noTeamim": "מִשָּׁם",
+          "plain": "משם",
+          "morph": "מִ/שָּׁ֥ם",
+          "translit": "misham",
+          "start": 47.401,
+          "end": 48.26,
+          "phraseBreak": null
+        },
+        {
+          "text": "רֹעֶ֖ה",
+          "noTeamim": "רֹעֶה",
+          "plain": "רעה",
+          "morph": "רֹעֶ֖ה",
+          "translit": "roe",
+          "start": 48.26,
+          "end": 49.05,
+          "phraseBreak": null
+        },
+        {
+          "text": "אֶ֥בֶן",
+          "noTeamim": "אֶבֶן",
+          "plain": "אבן",
+          "morph": "אֶ֥בֶן",
+          "translit": "even",
+          "start": 49.05,
+          "end": 49.816,
+          "phraseBreak": null
+        },
+        {
+          "text": "יִשְׂרָאֵֽל׃",
+          "noTeamim": "יִשְׂרָאֵל׃",
+          "plain": "ישראל",
+          "morph": "יִשְׂרָאֵֽל׃",
+          "translit": "yisrael",
+          "start": 49.816,
+          "end": 51.279,
+          "phraseBreak": "sof-pasuq"
+        }
+      ]
+    },
+    {
+      "ref": "49:25",
+      "words": [
+        {
+          "text": "מֵאֵ֨ל",
+          "noTeamim": "מֵאֵל",
+          "plain": "מאל",
+          "morph": "מֵ/אֵ֨ל",
+          "translit": "meel",
+          "start": 51.279,
+          "end": 52.185,
+          "phraseBreak": null
+        },
+        {
+          "text": "אָבִ֜יךָ",
+          "noTeamim": "אָבִיךָ",
+          "plain": "אביך",
+          "morph": "אָבִ֜י/ךָ",
+          "translit": "aviycha",
+          "start": 52.185,
+          "end": 53.717,
+          "phraseBreak": null
+        },
+        {
+          "text": "וְיַעְזְרֶ֗ךָּ",
+          "noTeamim": "וְיַעְזְרֶךָּ",
+          "plain": "ויעזרך",
+          "morph": "וְ/יַעְזְרֶ֗/ךָּ",
+          "translit": "veyazreka",
+          "start": 53.717,
+          "end": 55.877,
+          "phraseBreak": null
+        },
+        {
+          "text": "וְאֵ֤ת",
+          "noTeamim": "וְאֵת",
+          "plain": "ואת",
+          "morph": "וְ/אֵ֤ת",
+          "translit": "veet",
+          "start": 55.877,
+          "end": 56.991,
+          "phraseBreak": null
+        },
+        {
+          "text": "שַׁדַּי֙",
+          "noTeamim": "שַׁדַּי",
+          "plain": "שדי",
+          "morph": "שַׁדַּי֙",
+          "translit": "shaday",
+          "start": 56.991,
+          "end": 57.804,
+          "phraseBreak": null
+        },
+        {
+          "text": "וִיבָ֣רְכֶ֔ךָּ",
+          "noTeamim": "וִיבָרְכֶךָּ",
+          "plain": "ויברכך",
+          "morph": "וִ/יבָ֣רְכֶ֔/ךָּ",
+          "translit": "viyvarcheka",
+          "start": 57.804,
+          "end": 59.778,
+          "phraseBreak": "zaqef"
+        },
+        {
+          "text": "בִּרְכֹ֤ת",
+          "noTeamim": "בִּרְכֹת",
+          "plain": "ברכת",
+          "morph": "בִּרְכֹ֤ת",
+          "translit": "birchot",
+          "start": 59.778,
+          "end": 60.799,
+          "phraseBreak": null
+        },
+        {
+          "text": "שָׁמַ֙יִם֙",
+          "noTeamim": "שָׁמַיִם",
+          "plain": "שמים",
+          "morph": "שָׁמַ֙יִם֙",
+          "translit": "shamayim",
+          "start": 60.799,
+          "end": 61.589,
+          "phraseBreak": null
+        },
+        {
+          "text": "מֵעָ֔ל",
+          "noTeamim": "מֵעָל",
+          "plain": "מעל",
+          "morph": "מֵ/עָ֔ל",
+          "translit": "meal",
+          "start": 61.589,
+          "end": 62.378,
+          "phraseBreak": "zaqef"
+        },
+        {
+          "text": "בִּרְכֹ֥ת",
+          "noTeamim": "בִּרְכֹת",
+          "plain": "ברכת",
+          "morph": "בִּרְכֹ֥ת",
+          "translit": "birchot",
+          "start": 62.378,
+          "end": 63.237,
+          "phraseBreak": null
+        },
+        {
+          "text": "תְּה֖וֹם",
+          "noTeamim": "תְּהוֹם",
+          "plain": "תהום",
+          "morph": "תְּה֖וֹם",
+          "translit": "tehom",
+          "start": 63.237,
+          "end": 64.027,
+          "phraseBreak": null
+        },
+        {
+          "text": "רֹבֶ֣צֶת",
+          "noTeamim": "רֹבֶצֶת",
+          "plain": "רבצת",
+          "morph": "רֹבֶ֣צֶת",
+          "translit": "rovetzet",
+          "start": 64.027,
+          "end": 65.257,
+          "phraseBreak": null
+        },
+        {
+          "text": "תָּ֑חַת",
+          "noTeamim": "תָּחַת",
+          "plain": "תחת",
+          "morph": "תָּ֑חַת",
+          "translit": "tachat",
+          "start": 65.257,
+          "end": 66.209,
+          "phraseBreak": "etnahta"
+        },
+        {
+          "text": "בִּרְכֹ֥ת",
+          "noTeamim": "בִּרְכֹת",
+          "plain": "ברכת",
+          "morph": "בִּרְכֹ֥ת",
+          "translit": "birchot",
+          "start": 66.209,
+          "end": 67.022,
+          "phraseBreak": null
+        },
+        {
+          "text": "שָׁדַ֖יִם",
+          "noTeamim": "שָׁדַיִם",
+          "plain": "שדים",
+          "morph": "שָׁדַ֖יִם",
+          "translit": "shadayim",
+          "start": 67.022,
+          "end": 67.719,
+          "phraseBreak": null
+        },
+        {
+          "text": "וָרָֽחַם׃",
+          "noTeamim": "וָרָחַם׃",
+          "plain": "ורחם",
+          "morph": "וָ/רָֽחַם׃",
+          "translit": "varacham",
+          "start": 67.719,
+          "end": 69.158,
+          "phraseBreak": "sof-pasuq"
+        }
+      ]
+    },
+    {
+      "ref": "49:26",
+      "words": [
+        {
+          "text": "בִּרְכֹ֣ת",
+          "noTeamim": "בִּרְכֹת",
+          "plain": "ברכת",
+          "morph": "בִּרְכֹ֣ת",
+          "translit": "birchot",
+          "start": 69.158,
+          "end": 70.97,
+          "phraseBreak": null
+        },
+        {
+          "text": "אָבִ֗יךָ",
+          "noTeamim": "אָבִיךָ",
+          "plain": "אביך",
+          "morph": "אָבִ֗י/ךָ",
+          "translit": "aviycha",
+          "start": 70.97,
+          "end": 72.432,
+          "phraseBreak": null
+        },
+        {
+          "text": "גָּֽבְרוּ֙",
+          "noTeamim": "גָּבְרוּ",
+          "plain": "גברו",
+          "morph": "גָּֽבְרוּ֙",
+          "translit": "gavru",
+          "start": 72.432,
+          "end": 73.477,
+          "phraseBreak": null
+        },
+        {
+          "text": "עַל־",
+          "noTeamim": "עַל־",
+          "plain": "על",
+          "morph": "עַל־",
+          "translit": "al",
+          "start": 73.477,
+          "end": 73.963,
+          "phraseBreak": null
+        },
+        {
+          "text": "בִּרְכֹ֣ת",
+          "noTeamim": "בִּרְכֹת",
+          "plain": "ברכת",
+          "morph": "בִּרְכֹ֣ת",
+          "translit": "birchot",
+          "start": 73.963,
+          "end": 74.939,
+          "phraseBreak": null
+        },
+        {
+          "text": "הוֹרַ֔י",
+          "noTeamim": "הוֹרַי",
+          "plain": "הורי",
+          "morph": "הוֹרַ֔/י",
+          "translit": "horay",
+          "start": 74.939,
+          "end": 75.891,
+          "phraseBreak": "zaqef"
+        },
+        {
+          "text": "עַֽד־",
+          "noTeamim": "עַד־",
+          "plain": "עד",
+          "morph": "עַֽד־",
+          "translit": "ad",
+          "start": 75.891,
+          "end": 76.448,
+          "phraseBreak": null
+        },
+        {
+          "text": "תַּאֲוַ֖ת",
+          "noTeamim": "תַּאֲוַת",
+          "plain": "תאות",
+          "morph": "תַּאֲוַ֖ת",
+          "translit": "taavat",
+          "start": 76.448,
+          "end": 77.562,
+          "phraseBreak": null
+        },
+        {
+          "text": "גִּבְעֹ֣ת",
+          "noTeamim": "גִּבְעֹת",
+          "plain": "גבעת",
+          "morph": "גִּבְעֹ֣ת",
+          "translit": "givot",
+          "start": 77.562,
+          "end": 78.561,
+          "phraseBreak": null
+        },
+        {
+          "text": "עוֹלָ֑ם",
+          "noTeamim": "עוֹלָם",
+          "plain": "עולם",
+          "morph": "עוֹלָ֑ם",
+          "translit": "olam",
+          "start": 78.561,
+          "end": 79.583,
+          "phraseBreak": "etnahta"
+        },
+        {
+          "text": "תִּֽהְיֶ֙ין֙",
+          "noTeamim": "תִּהְיֶין",
+          "plain": "תהיין",
+          "morph": "תִּֽהְיֶ֙ין֙",
+          "translit": "tihyeyn",
+          "start": 79.583,
+          "end": 80.785,
+          "phraseBreak": null
+        },
+        {
+          "text": "לְרֹ֣אשׁ",
+          "noTeamim": "לְרֹאשׁ",
+          "plain": "לראש",
+          "morph": "לְ/רֹ֣אשׁ",
+          "translit": "lerosh",
+          "start": 80.785,
+          "end": 81.691,
+          "phraseBreak": null
+        },
+        {
+          "text": "יוֹסֵ֔ף",
+          "noTeamim": "יוֹסֵף",
+          "plain": "יוסף",
+          "morph": "יוֹסֵ֔ף",
+          "translit": "yosef",
+          "start": 81.691,
+          "end": 82.782,
+          "phraseBreak": "zaqef"
+        },
+        {
+          "text": "וּלְקָדְקֹ֖ד",
+          "noTeamim": "וּלְקָדְקֹד",
+          "plain": "ולקדקד",
+          "morph": "וּ/לְ/קָדְקֹ֖ד",
+          "translit": "ulkadkod",
+          "start": 82.782,
+          "end": 84.663,
+          "phraseBreak": null
+        },
+        {
+          "text": "נְזִ֥יר",
+          "noTeamim": "נְזִיר",
+          "plain": "נזיר",
+          "morph": "נְזִ֥יר",
+          "translit": "neziyr",
+          "start": 84.663,
+          "end": 85.94,
+          "phraseBreak": null
+        },
+        {
+          "text": "אֶחָֽיו׃",
+          "noTeamim": "אֶחָיו׃",
+          "plain": "אחיו",
+          "morph": "אֶחָֽי/ו׃",
+          "translit": "echayv",
+          "start": 85.94,
+          "end": 88.398,
+          "phraseBreak": "sof-pasuq"
+        }
+      ]
+    }
+  ]
+}
