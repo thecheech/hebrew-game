@@ -18,7 +18,7 @@ Set real values in `.env.local` (see `.env.example`):
 - **`DIRECT_URL`** — Neon's **direct** connection string (same branch, without pooler; used by `prisma migrate`). On [Vercel’s Neon integration](https://neon.com/docs/guides/vercel-managed-integration) this is exposed as `DATABASE_URL_UNPOOLED`; locally you can paste it as `DIRECT_URL` or set `DATABASE_URL_UNPOOLED` to match.
 - **`AUTH_SECRET`** — run `openssl rand -base64 32` and paste the result.
 - **`AUTH_URL`** — e.g. `http://localhost:3000` locally, or your production URL on Vercel (`https://your-domain.com`).
-- **`AUTH_RESEND_KEY`** / **`AUTH_RESEND_FROM`** — from [Resend](https://resend.com); verify your domain or use their test sender for development.
+- **`AUTH_RESEND_KEY`** (or **`RESEND_API_KEY`**) / **`AUTH_RESEND_FROM`** — [Resend](https://resend.com). The `from` address must use a **verified domain** (e.g. `noreply@topupcredits.com`); unverified senders only work for the account’s test inbox.
 - **`AUTH_GOOGLE_ID`** / **`AUTH_GOOGLE_SECRET`** — if you use Google sign-in.
 
 Apply the database schema (required for email magic links):

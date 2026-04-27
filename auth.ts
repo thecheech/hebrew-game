@@ -20,8 +20,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     Google,
     Resend({
+      // Auth.js docs use AUTH_RESEND_KEY; TopUp Credits uses RESEND_API_KEY — accept both.
+      apiKey: process.env.AUTH_RESEND_KEY ?? process.env.RESEND_API_KEY,
       from:
-        process.env.AUTH_RESEND_FROM ?? "Hebrew Game <onboarding@resend.dev>",
+        process.env.AUTH_RESEND_FROM ??
+        "Hebrew Game <noreply@topupcredits.com>",
     }),
   ],
 });
