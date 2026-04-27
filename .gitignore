@@ -47,3 +47,5 @@ next-env.d.ts
 # python venv and on-disk cache for scripts/analyze_audio.py
 /scripts/.venv/
 /scripts/.cache/
+
+/lib/generated/prisma

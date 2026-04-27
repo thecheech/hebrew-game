@@ -10,6 +10,23 @@ A small Next.js game: read a Hebrew word **with nikud** (vowel marks), then choo
 ```bash
 npm install
 cp .env.example .env.local
+```
+
+Set real values in `.env.local` (see `.env.example`):
+
+- **`DATABASE_URL`** — Postgres connection string (e.g. [Neon](https://neon.tech) free tier).
+- **`AUTH_SECRET`** — run `openssl rand -base64 32` and paste the result.
+- **`AUTH_URL`** — e.g. `http://localhost:3000` locally, or your production URL on Vercel (`https://your-domain.com`).
+- **`AUTH_RESEND_KEY`** / **`AUTH_RESEND_FROM`** — from [Resend](https://resend.com); verify your domain or use their test sender for development.
+- **`AUTH_GOOGLE_ID`** / **`AUTH_GOOGLE_SECRET`** — if you use Google sign-in.
+
+Apply the database schema (required for email magic links):
+
+```bash
+npx prisma migrate deploy
+```
+
+```bash
 npm run dev
 ```
 
@@ -27,11 +44,14 @@ npm start
 1. Push the repo to GitHub (or GitLab / Bitbucket).
 2. In [Vercel](https://vercel.com), **Import** the repository.
 3. Framework preset: **Next.js**. Root directory: this project folder.
-4. Add environment variables:
-   - `AUTH_RESEND_KEY` (Resend API key)
-   - `AUTH_RESEND_FROM` (email sender, e.g. `Hebrew Game <onboarding@resend.dev>`)
-5. Deploy.
+4. Add environment variables (see `.env.example`):
+   - `DATABASE_URL` (Postgres — Auth.js needs this for email magic links)
+   - `AUTH_SECRET` (run `openssl rand -base64 32`)
+   - `AUTH_URL` (production site URL, e.g. `https://your-project.vercel.app`)
+   - `AUTH_RESEND_KEY`, `AUTH_RESEND_FROM`
+   - `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET` if using Google sign-in
+5. Deploy. The default `npm run build` runs `prisma generate`, applies migrations with `prisma migrate deploy`, then builds Next.js — ensure `DATABASE_URL` is set on Vercel so migrations succeed.
 
 ## Stack
 
-Next.js 16 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui (Base UI), Zustand, `Frank Ruhl Libre` for Hebrew text.
+Next.js 16 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui (Base UI), Zustand, Auth.js + Prisma (Postgres for magic links), `Frank Ruhl Libre` for Hebrew text.
