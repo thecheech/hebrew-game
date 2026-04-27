@@ -16,7 +16,7 @@ interface AnalysisResultsCardProps {
   aliya: AliyaData;
   scrollStyle: boolean;
   onReset: () => void;
-  /** When the recording was scoped to a single phrase, restrict the
+  /** When the practice was scoped to a single phrase, restrict the
    *  word-by-word grid to those words and label the card accordingly.
    *  Word indices are inclusive into the flat-words array. */
   segmentInfo?: {
@@ -24,7 +24,7 @@ interface AnalysisResultsCardProps {
     endWord: number;
     label: string;
   } | null;
-  /** Object URL for the student's recording. When provided alongside a
+  /** Object URL for the student's practice take. When provided alongside a
    *  phrase segment, the card renders Play cantor / Play student buttons
    *  so the student can A/B their take against the cantor's reading of
    *  the same words. */
@@ -56,7 +56,7 @@ export function AnalysisResultsCard({
 
   // ── A/B playback for phrase analysis ────────────────────────────────────
   // Two parallel audio elements — one for the cantor (clipped to the
-  // recorded phrase) and one for the student's take. Only one plays at a
+  // practice phrase) and one for the student's take. Only one plays at a
   // time so the user can flip between them and hear the difference.
   const cantorAudioRef = useRef<HTMLAudioElement | null>(null);
   const studentAudioRef = useRef<HTMLAudioElement | null>(null);
@@ -174,7 +174,7 @@ export function AnalysisResultsCard({
           <p className="text-sm text-muted-foreground">
             {segmentInfo
               ? `Performance breakdown for ${segmentInfo.label}`
-              : "Performance breakdown for this recording"}
+              : "Performance breakdown for this practice"}
           </p>
         </div>
       </CardHeader>
@@ -201,7 +201,7 @@ export function AnalysisResultsCard({
           />
         )}
 
-        {/* Phrase A/B playback buttons — only shown when recording was
+        {/* Phrase A/B playback buttons — only shown when practice was
             scoped to a single phrase, since the buttons compare the
             student's take to the cantor's reading of those words. Hidden
             in full-aliya mode to avoid duplicating the listen-mode
@@ -240,13 +240,13 @@ export function AnalysisResultsCard({
                   disabled={!studentAudioUrl}
                   aria-label={
                     playing === "student"
-                      ? "Pause your recording"
-                      : "Play your recording"
+                      ? "Pause your practice"
+                      : "Play your practice"
                   }
                   title={
                     studentAudioUrl
                       ? undefined
-                      : "Your recording isn't available for this take"
+                      : "Your practice audio isn't available for this take"
                   }
                 >
                   {playing === "student" ? (
@@ -269,7 +269,7 @@ export function AnalysisResultsCard({
           </>
         )}
 
-        {/* Two recording-level hero scores: pitch (left) and pronunciation
+        {/* Two session-level hero scores: pitch (left) and pronunciation
             (right). They're scored from different signals (F0 vs MFCC) so
             they can disagree — e.g. right notes wrong words, or vice versa. */}
         {(typeof results.overall_score === "number" ||
@@ -417,7 +417,7 @@ export function AnalysisResultsCard({
             Both arrays are pre-resampled to the same length on the server so
             we just render index → x. Wider viewBox than the word-drill modal
             since this contour can be hundreds of points across a multi-minute
-            recording. */}
+            take. */}
         {results.reference_contour && results.student_contour && (
           <div className="space-y-1">
             <p className="text-xs font-semibold text-muted-foreground">
@@ -454,7 +454,7 @@ export function AnalysisResultsCard({
             Duration
           </p>
           <div className="flex items-center justify-between text-sm">
-            <span>Your recording</span>
+            <span>Your practice</span>
             <span className="font-mono">
               {results.student_duration?.toFixed(1)}s
             </span>
@@ -535,7 +535,7 @@ export function AnalysisResultsCard({
                 );
               });
 
-              // When the recording was scoped to a single phrase, hide
+              // When practice was scoped to a single phrase, hide
               // verses that don't intersect the segment so the breakdown
               // only shows what was actually scored.
               if (segmentInfo) {
@@ -562,7 +562,7 @@ export function AnalysisResultsCard({
                   >
                     {verse.words.map((word, wi) => {
                       const score = verseScores[wi];
-                      // Hide words outside the recorded segment. We render
+                      // Hide words outside the practice segment. We render
                       // partial verses so the user sees exactly the slice
                       // that was scored, not the surrounding context greyed
                       // out (which we'd otherwise have to colour as "not
@@ -604,7 +604,7 @@ export function AnalysisResultsCard({
                           ? "pronunciation: —"
                           : `pronunciation: ${pronDist.toFixed(2)}`;
                       const tooltip = notAttempted
-                        ? "Not recorded — tap to practice"
+                        ? "Not attempted — tap to practice"
                         : score
                           ? `${pitchPart} · ${pronPart} — tap to practice`
                           : "Tap to practice";
@@ -676,7 +676,7 @@ export function AnalysisResultsCard({
             {notAttemptedCount > 0 && (
               <div className="flex items-center gap-1.5">
                 <div className="h-3 w-3 rounded border border-muted-foreground/30" />
-                <span>Not recorded</span>
+                <span>Not attempted</span>
               </div>
             )}
           </div>
@@ -685,7 +685,7 @@ export function AnalysisResultsCard({
         {/* Action buttons */}
         <div className="flex flex-wrap gap-2 border-t pt-4">
           <Button onClick={onReset} variant="default" size="sm">
-            Record Again
+            Practice again
           </Button>
           <Button variant="outline" size="sm" disabled>
             Download Report (coming soon)

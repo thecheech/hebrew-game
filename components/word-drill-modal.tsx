@@ -43,7 +43,7 @@ interface WordDrillModalProps {
   /** Whether to show the trope-stripped consonants only. */
   scrollStyle?: boolean;
   /** Cantor scoring reference. Forwarded to /api/parasha/analyze-word so
-   *  per-word drills score against the same cantor as the aliya recording.
+   *  per-word drills score against the same cantor as the aliya track.
    *  Null means "use the API's default cantor reference." */
   cantor?: CantorScoringRef | null;
 }
@@ -51,20 +51,20 @@ interface WordDrillModalProps {
 type DrillState =
   | "idle"
   | "listening"
-  | "recording"
+  | "practicing"
   | "analyzing"
   | "scored"
   | "error";
 
 type Verdict = "green" | "yellow" | "red";
 
-const MAX_RECORD_SECONDS = 5;
+const MAX_PRACTICE_SECONDS = 5;
 const HISTORY_LEN = 3;
 
 /**
  * Word-level practice modal. Opens on a single word; the user can:
  *   • Listen — plays the cantor's slice for that word
- *   • Record — captures their attempt at the same word, then scores it
+ *   • Practice — captures their attempt at the same word, then scores it
  *   • Try again, navigate prev/next, see last-3 attempt history
  *
  * Auto-advances to the next word ~1.2s after a green verdict.
@@ -84,16 +84,16 @@ export function WordDrillModal({
   const [state, setState] = useState<DrillState>("idle");
   const [result, setResult] = useState<WordDrillResult | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [recordedDuration, setRecordedDuration] = useState(0);
+  const [practiceDuration, setPracticeDuration] = useState(0);
   // History of verdicts per word index, capped at HISTORY_LEN entries each.
   const [history, setHistory] = useState<Record<number, Verdict[]>>({});
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const micRef = useRef<MicPitchEngine | null>(null);
   const listenStopTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const recordingStartRef = useRef<number>(0);
-  const recordingTickRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const recordingMaxTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
+  const practiceStartRef = useRef<number>(0);
+  const practiceTickRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const practiceMaxTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
     null
   );
   const advanceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -115,10 +115,10 @@ export function WordDrillModal({
     setState("idle");
     setResult(null);
     setError(null);
-    setRecordedDuration(0);
+    setPracticeDuration(0);
     cancelAdvance();
     stopListenPlayback();
-    stopRecordingTickers();
+    stopPracticeTickers();
   }, [wordIdx]);
 
   // Lazy-init the mic engine the first time the modal opens
@@ -133,7 +133,7 @@ export function WordDrillModal({
   useEffect(() => {
     if (open) return;
     stopListenPlayback();
-    stopRecordingTickers();
+    stopPracticeTickers();
     cancelAdvance();
     if (micRef.current) {
       micRef.current.stop();
@@ -144,7 +144,7 @@ export function WordDrillModal({
   useEffect(() => {
     return () => {
       stopListenPlayback();
-      stopRecordingTickers();
+      stopPracticeTickers();
       cancelAdvance();
       if (micRef.current) {
         micRef.current.stop();
@@ -171,14 +171,14 @@ export function WordDrillModal({
     }
   }
 
-  function stopRecordingTickers() {
-    if (recordingTickRef.current) {
-      clearInterval(recordingTickRef.current);
-      recordingTickRef.current = null;
+  function stopPracticeTickers() {
+    if (practiceTickRef.current) {
+      clearInterval(practiceTickRef.current);
+      practiceTickRef.current = null;
     }
-    if (recordingMaxTimerRef.current) {
-      clearTimeout(recordingMaxTimerRef.current);
-      recordingMaxTimerRef.current = null;
+    if (practiceMaxTimerRef.current) {
+      clearTimeout(practiceMaxTimerRef.current);
+      practiceMaxTimerRef.current = null;
     }
   }
 
@@ -206,50 +206,49 @@ export function WordDrillModal({
     }, durationMs);
   }, [word]);
 
-  const handleStartRecording = useCallback(async () => {
+  const handleStartPractice = useCallback(async () => {
     if (!micRef.current) return;
     setError(null);
     setResult(null);
-    setRecordedDuration(0);
+    setPracticeDuration(0);
 
     try {
       stopListenPlayback();
       if (!micRef.current.isRunning) await micRef.current.start();
-      recordingStartRef.current = Date.now() / 1000;
-      setState("recording");
+      practiceStartRef.current = Date.now() / 1000;
+      setState("practicing");
 
       // UI ticker
-      recordingTickRef.current = setInterval(() => {
-        const elapsed = Date.now() / 1000 - recordingStartRef.current;
-        setRecordedDuration(elapsed);
+      practiceTickRef.current = setInterval(() => {
+        const elapsed = Date.now() / 1000 - practiceStartRef.current;
+        setPracticeDuration(elapsed);
       }, 100);
 
-      // Hard cap so the user can't accidentally record a 5-minute take.
-      recordingMaxTimerRef.current = setTimeout(() => {
-        void handleStopRecording();
-      }, MAX_RECORD_SECONDS * 1000);
+      // Hard cap so the user can't accidentally run a 5-minute take.
+      practiceMaxTimerRef.current = setTimeout(() => {
+        void handleStopPractice();
+      }, MAX_PRACTICE_SECONDS * 1000);
     } catch (e) {
       setError(
         e instanceof Error ? e.message : "Could not access microphone."
       );
       setState("error");
     }
-    // handleStopRecording is defined below; we intentionally read it via the
-    // ref to handleStopRecording at call time. Define-once-and-use pattern
-    // to avoid a circular dep.
+    // handleStopPractice is defined below; we intentionally read it at call
+    // time. Define-once-and-use pattern to avoid a circular dep.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleStopRecording = useCallback(async () => {
+  const handleStopPractice = useCallback(async () => {
     const mic = micRef.current;
     if (!mic) return;
-    stopRecordingTickers();
+    stopPracticeTickers();
     mic.stop();
     setState("analyzing");
 
     let blob: Blob | null = null;
     try {
-      blob = await mic.getRecordingBlob?.();
+      blob = await mic.getPracticeBlob?.();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Failed to capture audio");
       setState("error");
@@ -257,7 +256,7 @@ export function WordDrillModal({
     }
 
     if (!blob) {
-      setError("No audio captured. Try recording again.");
+      setError("No audio captured. Try again.");
       setState("error");
       return;
     }
@@ -311,7 +310,7 @@ export function WordDrillModal({
     setState("idle");
     setResult(null);
     setError(null);
-    setRecordedDuration(0);
+    setPracticeDuration(0);
   }, []);
 
   const goPrev = useCallback(() => {
@@ -329,7 +328,7 @@ export function WordDrillModal({
   const pronunciationVerdict = pronunciation?.verdict ?? null;
   const pronunciationDistance = pronunciation?.distance ?? null;
   const wordHistory = history[wordIdx] ?? [];
-  const isBusy = state === "recording" || state === "analyzing";
+  const isBusy = state === "practicing" || state === "analyzing";
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -342,8 +341,8 @@ export function WordDrillModal({
             </span>
           </DialogTitle>
           <DialogDescription>
-            Listen to the cantor, then record yourself singing this single
-            word. We'll score the pitch shape.
+            Listen to the cantor, then practice this single word. We&apos;ll
+            score the pitch shape.
           </DialogDescription>
         </DialogHeader>
 
@@ -374,15 +373,15 @@ export function WordDrillModal({
             <span className="ml-1.5">Listen</span>
           </Button>
 
-          {state === "recording" ? (
+          {state === "practicing" ? (
             <Button
               variant="destructive"
               size="lg"
-              onClick={() => void handleStopRecording()}
+              onClick={() => void handleStopPractice()}
             >
               <MicOff className="size-4" />
               <span className="ml-1.5">
-                Stop ({recordedDuration.toFixed(1)}s)
+                Stop ({practiceDuration.toFixed(1)}s)
               </span>
             </Button>
           ) : state === "analyzing" ? (
@@ -394,10 +393,10 @@ export function WordDrillModal({
             <Button
               variant="default"
               size="lg"
-              onClick={() => void handleStartRecording()}
+              onClick={() => void handleStartPractice()}
             >
               <Mic className="size-4" />
-              <span className="ml-1.5">Record</span>
+              <span className="ml-1.5">Practice</span>
             </Button>
           )}
 

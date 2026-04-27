@@ -64,7 +64,7 @@ export type ParashaIndex = {
     wordCount: number;
   }>;
   /**
-   * Optional list of cantors with their own audio recordings. The default
+   * Optional list of cantors with their own audio tracks. The default
    * cantor (`default: true`) has full word-timing alignment baked into the
    * per-aliya JSON files. Alternate cantors can either:
    *   • point at their own pre-aligned per-aliya JSON via `tracks[N].href`
@@ -75,12 +75,12 @@ export type ParashaIndex = {
    *     (cheap but drifts on cantors who don't pace proportionally).
    *
    * Mic-based scoring is only meaningful against the cantor whose
-   * recording the per-aliya pitch reference was built from
+   * per-aliya pitch reference was built from
    * (`supportsScoring`).
    *
    * Indexed by aliya number (as string keys, since JSON object keys are
    * strings) so cantors can supply audio for a subset of aliyot if they
-   * only recorded some.
+   * only provided some.
    */
   cantors?: Array<{
     id: string;
@@ -193,7 +193,7 @@ export function flattenWords(aliya: AliyaData): ParashaWord[] {
 
 /**
  * Re-target an aliya's audio + word timings at a different cantor's
- * recording. Word start/end times are scaled linearly by
+ * track. Word start/end times are scaled linearly by
  * `newDuration / aliya.duration`, which is a coarse approximation —
  * different cantors don't sing at strictly proportional speeds, so
  * mid-aliya highlighting will drift a bit. Good enough for the listen
@@ -331,26 +331,26 @@ export type AnalysisResult = {
   /** Aliya-level student pitch contour, in semitones from the student's
    *  tonic. */
   student_contour?: Array<number | null>;
-  /** Recording-level mean absolute error in semitones, weighted by each
+  /** Session-level mean absolute error in semitones, weighted by each
    *  word's reference duration. Null if no attempted words produced a
    *  finite per-word MAE. */
   overall_mae?: number | null;
-  /** Recording-level score 0–100 derived from overall_mae on the same scale
+  /** Session-level score 0–100 derived from overall_mae on the same scale
    *  as the per-word verdicts (0 ST → 100, ≥6 ST → 0). Stable across aliyot
    *  of different lengths. */
   overall_score?: number;
-  /** Recording-level verdict using the same MAE thresholds as per-word
+  /** Session-level verdict using the same MAE thresholds as per-word
    *  scoring (green ≤2, yellow ≤4, red >4). */
   overall_verdict?: "green" | "yellow" | "red";
-  /** Recording-level mean cepstral distance, weighted by each word's
+  /** Session-level mean cepstral distance, weighted by each word's
    *  reference duration. Null if no attempted words produced a finite
    *  per-word pronunciation distance. */
   overall_pronunciation_distance?: number | null;
-  /** Recording-level pronunciation score 0–100, derived from
+  /** Session-level pronunciation score 0–100, derived from
    *  overall_pronunciation_distance on the pronunciation thresholds.
    *  Independent scale from overall_score (which is pitch). */
   overall_pronunciation_score?: number;
-  /** Recording-level pronunciation verdict, separate from the pitch
+  /** Session-level pronunciation verdict, separate from the pitch
    *  verdict. Same color scale, different thresholds. */
   overall_pronunciation_verdict?: "green" | "yellow" | "red";
   /** How many words the student actually sang far enough to attempt. */
@@ -360,12 +360,12 @@ export type AnalysisResult = {
   /** attempted_words / total_words as an integer percent. */
   coverage_pct?: number;
   /** True when the analyzer was invoked with --seg-start / --seg-end and
-   *  scored only the recorded phrase. word_scores, total_words, and the
+   *  scored only the practice phrase. word_scores, total_words, and the
    *  roll-up fields all reflect the segment, not the full aliya. */
   segment_mode?: boolean;
-  /** Cantor-time start of the recorded segment (seconds), or null when
-   *  the recording covered the full aliya. */
+  /** Cantor-time start of the practice segment (seconds), or null when
+   *  the practice covered the full aliya. */
   segment_start?: number | null;
-  /** Cantor-time end of the recorded segment (seconds). */
+  /** Cantor-time end of the practice segment (seconds). */
   segment_end?: number | null;
 };

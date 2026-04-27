@@ -7,7 +7,7 @@ import { Play, Pause } from "lucide-react";
  * SVG overlay of two pitch contours — typically the cantor reference and the
  * student attempt — on a shared y-axis (semitones from each speaker's own
  * tonic). Used by both the word-drill modal (short, one word) and the
- * full-aliya results card (wide, the whole recording). The two callers pass
+ * full-aliya results card (wide, the whole practice). The two callers pass
  * different dimensions; everything else is identical.
  *
  * Both contour arrays must be the same length and contain semitone values
@@ -42,7 +42,7 @@ export interface PitchContourOverlayProps {
   cantorSegmentStart?: number;
   /** Duration (seconds) of the cantor segment. */
   cantorDuration?: number;
-  /** Duration (seconds) of the student recording. */
+  /** Duration (seconds) of the student practice take. */
   studentDuration?: number;
 }
 
@@ -351,8 +351,8 @@ export function PitchContourOverlay({
                   className="flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] text-emerald-600 transition-colors hover:bg-emerald-500/10 dark:text-emerald-400"
                   title={
                     studentTimeLabel
-                      ? `Play your recording from ${studentTimeLabel}`
-                      : "Play your recording"
+                      ? `Play your practice from ${studentTimeLabel}`
+                      : "Play your practice"
                   }
                 >
                   {playingStudent ? (

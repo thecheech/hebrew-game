@@ -12,7 +12,7 @@
  *   tops out around 400 Hz, so 16 kHz Nyquist (8 kHz) is overkill and safe.
  * - First pass: estimate the cantor's tonic as the median of all voiced
  *   semitone samples across the aliya. This is the "0" reference for that
- *   recording. Stored in the result so the UI can also use it.
+ *   take. Stored in the result so the UI can also use it.
  * - Second pass: for each word, run YIN at N evenly-spaced positions inside
  *   [word.start, word.end]. Subtract tonic. Smooth with a 3-tap median filter
  *   to dampen YIN's occasional octave errors.
@@ -25,7 +25,7 @@ import type { AliyaData, ParashaWord } from "@/lib/parasha-types";
 
 /** Reference data for one aliya. */
 export type ReferenceContours = {
-  /** Global tonic of this recording, in semitones above A1 (55 Hz). */
+  /** Global tonic of this take, in semitones above A1 (55 Hz). */
   tonic: number;
   /** Per-word contour, semitones above/below tonic. NaN where unvoiced. */
   contours: Map<number, number[]>;

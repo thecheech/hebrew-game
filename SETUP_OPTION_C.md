@@ -75,9 +75,9 @@ ls public/parasha/miketz/aliya7.json
 npm run dev
 
 # Navigate to http://localhost:3000/parasha/miketz
-# Click "Practice with mic" → "Start recording"
+# Click "Practice with mic" → "Practice"
 # Read the aliya out loud
-# Click "Stop recording" when done
+# Click "Stop" when done
 # Wait 2-5 seconds for analysis
 # View detailed results with word-by-word scores
 ```

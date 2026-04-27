@@ -354,8 +354,8 @@ export class MicPitchEngine {
     this.buffer = null;
   }
 
-  /** Get the recorded audio as a Blob. Returns promise that resolves when recording is ready. */
-  async getRecordingBlob(): Promise<Blob | null> {
+  /** Get the captured practice audio as a Blob. Resolves when the take is ready. */
+  async getPracticeBlob(): Promise<Blob | null> {
     if (!this.mediaRecorder) {
       console.warn("⚠️ No MediaRecorder available");
       return null;

@@ -34,7 +34,7 @@ function sanitizeCantorId(raw: FormDataEntryValue | null): string | null {
  * POST /api/parasha/analyze-word
  *
  * Multipart form fields:
- *   student   - audio Blob (single-word recording, typically <5s)
+ *   student   - audio Blob (single-word practice take, typically <5s)
  *   parasha   - parasha name (e.g. "Miketz")
  *   aliyaNum  - aliya number (1-7)
  *   wordIdx   - word index in the aliya's flat-words array

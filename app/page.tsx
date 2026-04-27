@@ -1,9 +1,14 @@
-import { LevelPicker } from "@/components/level-picker";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-dvh flex-1">
-      <LevelPicker />
-    </div>
+    <main className="flex min-h-dvh items-center justify-center px-4">
+      <Link
+        href="/login"
+        className="bg-primary text-primary-foreground rounded-lg px-5 py-3 text-sm font-medium hover:opacity-90"
+      >
+        Go to log in
+      </Link>
+    </main>
   );
 }

@@ -4,7 +4,6 @@ import {
   Loader2,
   Mic,
   MicOff,
-  Music,
   Pause,
   Play,
   Repeat,
@@ -21,10 +20,9 @@ import {
   buildPhrases,
   flattenWords,
 } from "@/lib/parasha-types";
+import { WordDrillModal } from "@/components/word-drill-modal";
 import { MicPitchEngine } from "@/lib/pitch";
 import { cn } from "@/lib/utils";
-import { WordDrillModal } from "@/components/word-drill-modal";
-
 /** Identifies the cantor being scored against. When omitted (or matching
  *  the default cantor), the API falls back to the default reference. */
 export type CantorScoringRef = {
@@ -47,7 +45,7 @@ interface ParashaLeadModeProps {
   cantor?: CantorScoringRef | null;
 }
 
-type RecordingState = "idle" | "recording" | "analyzing" | "done" | "error";
+type PracticeState = "idle" | "practicing" | "analyzing" | "done" | "error";
 
 const SPEED_OPTIONS = [
   { value: 0.5, label: "0.5×" },
@@ -60,10 +58,10 @@ const MIN_HIGHLIGHT_DURATION = 0.05;
 
 /**
  * Practice-with-mic mode. Combines Listen-mode controls (play the cantor,
- * scrub to a word, loop a phrase) with mic recording. The user can record
+ * scrub to a word, loop a phrase) with the mic. The user can practice
  * the whole aliya, OR pick a phrase (single tap = select; double-tap or
- * loop icon = loop while listening) and record just that segment — the
- * resulting analysis only covers the recorded phrase.
+ * loop icon = loop while listening) and practice just that segment — the
+ * resulting analysis only covers that phrase.
  */
 export function ParashaLeadMode({
   aliya,
@@ -71,18 +69,18 @@ export function ParashaLeadMode({
   showTranslit,
   cantor = null,
 }: ParashaLeadModeProps) {
-  // ── Recording state ─────────────────────────────────────────────────────
-  const [recordingState, setRecordingState] = useState<RecordingState>("idle");
+  // ── Practice session state ───────────────────────────────────────────────
+  const [practiceState, setPracticeState] = useState<PracticeState>("idle");
   const [error, setError] = useState<string | null>(null);
   const [analysisResults, setAnalysisResults] =
     useState<AnalysisResult | null>(null);
-  const [recordedDuration, setRecordedDuration] = useState(0);
-  /** When we recorded a single segment, remember which phrase it was so the
+  const [practiceDuration, setPracticeDuration] = useState(0);
+  /** When we practiced a single segment, remember which phrase it was so the
    *  results card can scope its display to those words. */
-  const [recordedPhraseIdx, setRecordedPhraseIdx] = useState<number | null>(
+  const [practicePhraseIdx, setPracticePhraseIdx] = useState<number | null>(
     null,
   );
-  /** Object URL pointing at the most recent student recording, so the
+  /** Object URL for the most recent student practice take, so the
    *  analysis card can replay it back-to-back with the cantor segment.
    *  Created on stop, revoked on reset / unmount so we don't leak blobs. */
   const [studentAudioUrl, setStudentAudioUrl] = useState<string | null>(null);
@@ -95,16 +93,17 @@ export function ParashaLeadMode({
   const [speed, setSpeed] = useState(1);
   /** Phrase being looped during cantor playback (Listen-style behaviour). */
   const [loopPhraseIdx, setLoopPhraseIdx] = useState<number | null>(null);
-  /** Phrase the user has *selected* for recording. May or may not equal
+  /** Phrase the user has *selected* to practice. May or may not equal
    *  loopPhraseIdx — selection persists across play/pause and loop toggling
-   *  so "Start recording" knows which segment to capture. */
+   *  so "Practice" knows which segment to capture. */
   const [selectedPhraseIdx, setSelectedPhraseIdx] = useState<number | null>(
     null,
   );
 
-  // ── Word drill modal — same hook as before ──────────────────────────────
   const [drillOpen, setDrillOpen] = useState(false);
   const [drillWordIdx, setDrillWordIdx] = useState(0);
+  /** Word index of the last tap; second tap on the same word opens the drill. */
+  const lastWordTapIdxRef = useRef<number | null>(null);
 
   const phrases = useMemo(() => buildPhrases(aliya), [aliya]);
   const flatWords = useMemo(() => flattenWords(aliya), [aliya]);
@@ -120,14 +119,14 @@ export function ParashaLeadMode({
 
   // Mic engine
   const micRef = useRef<MicPitchEngine | null>(null);
-  const recordingStartTimeRef = useRef<number>(0);
+  const practiceStartTimeRef = useRef<number>(0);
   /** Where the read-along cursor is (flat-word index). Driven by the
-   *  recording-progress timer; stays put when not recording. State (not
+   *  practice timer; stays put when not practicing. State (not
    *  a ref) because it's read during render to highlight the current
    *  word, and React's lint rules (rightly) flag refs read in render. */
   const [cursorWordProgress, setCursorWordProgress] = useState(0);
   /** Pre-computed segment span (cantor reference time, seconds) when the
-   *  user starts a segment recording. Saved off so the auto-stop timer and
+   *  user starts a segment practice. Saved off so the auto-stop timer and
    *  the API submission both see the same window. */
   const segmentSpanRef = useRef<{
     startTime: number;
@@ -216,13 +215,13 @@ export function ParashaLeadMode({
   // into one effect (which trips react-hooks/set-state-in-effect and
   // would cascade renders besides).
 
-  // ── Recording: cursor progress while recording ──────────────────────────
+  // ── Practicing: cursor progress while the mic is on ───────────────────────
   useEffect(() => {
-    if (recordingState !== "recording") return;
+    if (practiceState !== "practicing") return;
 
     const interval = setInterval(() => {
-      const elapsed = Date.now() / 1000 - recordingStartTimeRef.current;
-      setRecordedDuration(elapsed);
+      const elapsed = Date.now() / 1000 - practiceStartTimeRef.current;
+      setPracticeDuration(elapsed);
 
       // Map elapsed time to a word cursor inside the relevant span (whole
       // aliya, or just the segment if one is selected).
@@ -242,7 +241,7 @@ export function ParashaLeadMode({
     }, 100);
 
     return () => clearInterval(interval);
-  }, [recordingState, aliya.duration, flatWords.length]);
+  }, [practiceState, aliya.duration, flatWords.length]);
 
   // ── Audio control handlers (Listen-mode parity) ─────────────────────────
   const handlePlayPause = useCallback(() => {
@@ -255,26 +254,13 @@ export function ParashaLeadMode({
     }
   }, []);
 
-  const handleRestart = useCallback(() => {
-    const a = audioRef.current;
-    if (!a) return;
-    if (loopPhraseIdx != null) {
-      a.currentTime = phrases[loopPhraseIdx].startTime;
-    } else if (selectedPhraseIdx != null) {
-      a.currentTime = phrases[selectedPhraseIdx].startTime;
-    } else {
-      a.currentTime = 0;
-    }
-    setCurrentTime(a.currentTime);
-  }, [loopPhraseIdx, selectedPhraseIdx, phrases]);
-
   const handleSeekToWord = useCallback(
     (wordIdx: number) => {
       const a = audioRef.current;
       const w = flatWords[wordIdx];
       if (!w) return;
       // Selecting a word also selects its containing phrase as the "active
-      // segment" candidate so a subsequent Start-recording records that
+      // segment" candidate so a subsequent Practice run captures that
       // segment without further input. Seek the audio if available.
       const phraseIdx = wordIdxToPhrase[wordIdx];
       if (phraseIdx >= 0) setSelectedPhraseIdx(phraseIdx);
@@ -297,7 +283,7 @@ export function ParashaLeadMode({
         }
         return next;
       });
-      // Looping a phrase also selects it for recording.
+      // Looping a phrase also selects it for practice.
       setSelectedPhraseIdx(phraseIdx);
     },
     [phrases],
@@ -308,7 +294,29 @@ export function ParashaLeadMode({
     setLoopPhraseIdx(null);
   }, []);
 
-  // ── Recording handlers ──────────────────────────────────────────────────
+  const openWordDrill = useCallback(
+    (wordIdx: number) => {
+      lastWordTapIdxRef.current = null;
+      handleSeekToWord(wordIdx);
+      setDrillWordIdx(wordIdx);
+      setDrillOpen(true);
+    },
+    [handleSeekToWord],
+  );
+
+  const onWordButtonClick = useCallback(
+    (flatIdx: number) => {
+      if (lastWordTapIdxRef.current === flatIdx) {
+        openWordDrill(flatIdx);
+        return;
+      }
+      lastWordTapIdxRef.current = flatIdx;
+      handleSeekToWord(flatIdx);
+    },
+    [handleSeekToWord, openWordDrill],
+  );
+
+  // ── Practice (mic) handlers ─────────────────────────────────────────────
   const handleStop = useCallback(async () => {
     const mic = micRef.current;
     if (!mic) {
@@ -322,23 +330,23 @@ export function ParashaLeadMode({
       segmentStopTimerRef.current = null;
     }
 
-    console.log("✓ Stopping recording...");
+    console.log("✓ Stopping practice take...");
     mic.stop();
-    setRecordingState("analyzing");
+    setPracticeState("analyzing");
 
     let audioBlob: Blob | null = null;
     try {
-      audioBlob = await mic.getRecordingBlob?.();
+      audioBlob = await mic.getPracticeBlob?.();
     } catch (e) {
-      const msg = e instanceof Error ? e.message : "Failed to get recording";
+      const msg = e instanceof Error ? e.message : "Failed to get audio";
       setError(msg);
-      setRecordingState("error");
+      setPracticeState("error");
       return;
     }
 
     if (!audioBlob) {
-      setError("Failed to capture audio - no recording data");
-      setRecordingState("error");
+      setError("Failed to capture audio - no data captured");
+      setPracticeState("error");
       return;
     }
 
@@ -363,7 +371,7 @@ export function ParashaLeadMode({
       // Cantor-time window the student is meant to be re-singing. The
       // analyzer shifts student frame times by +segStart so its word
       // boundaries (which are in cantor time) line up with the student's
-      // recording (which starts at t=0).
+      // practice take (which starts at t=0).
       formData.append("segStart", String(span.startTime));
       formData.append("segEnd", String(span.endTime));
       formData.append("wordStart", String(span.startWord));
@@ -382,29 +390,29 @@ export function ParashaLeadMode({
       }
 
       const results = (await res.json()) as AnalysisResult;
-      // Hold onto the recorded blob as an object URL so the results card can
+      // Hold onto the practice take blob as an object URL so the results card can
       // play it back. Revoke any prior URL first to avoid leaks across takes.
       setStudentAudioUrl((prev) => {
         if (prev) URL.revokeObjectURL(prev);
         return URL.createObjectURL(audioBlob);
       });
       setAnalysisResults(results);
-      setRecordedPhraseIdx(span ? span.phraseIdx : null);
-      setRecordingState("done");
+      setPracticePhraseIdx(span ? span.phraseIdx : null);
+      setPracticeState("done");
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Analysis failed";
       setError(msg);
-      setRecordingState("error");
+      setPracticeState("error");
     }
   }, [aliya, cantor]);
 
   const handleStart = useCallback(async () => {
     setError(null);
     setAnalysisResults(null);
-    setRecordedPhraseIdx(null);
+    setPracticePhraseIdx(null);
 
     // Stop any cantor playback before opening the mic — we don't want the
-    // cantor leaking into the student's recording.
+    // cantor leaking into the student's mic.
     const a = audioRef.current;
     if (a && !a.paused) a.pause();
 
@@ -435,24 +443,24 @@ export function ParashaLeadMode({
 
     try {
       if (!mic.isRunning) await mic.start();
-      recordingStartTimeRef.current = Date.now() / 1000;
+      practiceStartTimeRef.current = Date.now() / 1000;
       setCursorWordProgress(segmentSpanRef.current?.startWord ?? 0);
-      setRecordingState("recording");
+      setPracticeState("practicing");
       console.log(
-        "✓ Recording started",
+        "✓ Practice started",
         segmentSpanRef.current
           ? `(segment ${segmentSpanRef.current.startTime.toFixed(2)}–${segmentSpanRef.current.endTime.toFixed(2)}s)`
           : "(full aliya)",
       );
 
-      // Auto-stop a segment recording one second past the segment's natural
+      // Auto-stop a segment take one second past the segment's natural
       // duration. The +1s gives a comfortable tail for the student's last
-      // syllable; longer than that and we're just recording silence.
+      // syllable; longer than that and we're just capturing silence.
       const span = segmentSpanRef.current;
       if (span) {
         const ms = Math.max(500, (span.endTime - span.startTime) * 1000 + 1000);
         segmentStopTimerRef.current = setTimeout(() => {
-          // Only auto-stop if we're still recording (user didn't already stop).
+          // Only auto-stop if we're still practicing (user didn't already stop).
           void handleStop();
         }, ms);
       }
@@ -460,16 +468,16 @@ export function ParashaLeadMode({
       const msg =
         e instanceof Error ? e.message : "Could not access microphone.";
       setError(msg);
-      setRecordingState("error");
+      setPracticeState("error");
     }
   }, [phrases, selectedPhraseIdx, handleStop]);
 
   const handleReset = useCallback(() => {
-    setRecordingState("idle");
+    setPracticeState("idle");
     setError(null);
     setAnalysisResults(null);
-    setRecordedDuration(0);
-    setRecordedPhraseIdx(null);
+    setPracticeDuration(0);
+    setPracticePhraseIdx(null);
     setCursorWordProgress(0);
     setStudentAudioUrl((prev) => {
       if (prev) URL.revokeObjectURL(prev);
@@ -504,21 +512,21 @@ export function ParashaLeadMode({
     selectedPhraseIdx != null
       ? phrases[selectedPhraseIdx].endTime - phrases[selectedPhraseIdx].startTime
       : aliya.duration;
-  const recordingProgressPercent =
-    recordingState === "recording"
-      ? Math.min(100, (recordedDuration / Math.max(0.001, segmentDuration)) * 100)
+  const practiceProgressPercent =
+    practiceState === "practicing"
+      ? Math.min(100, (practiceDuration / Math.max(0.001, segmentDuration)) * 100)
       : 0;
 
   // ── Show results card on success ────────────────────────────────────────
-  if (recordingState === "done" && analysisResults) {
+  if (practiceState === "done" && analysisResults) {
     const segmentInfo =
-      recordedPhraseIdx != null
+      practicePhraseIdx != null
         ? {
-            startWord: phrases[recordedPhraseIdx].startWord,
-            endWord: phrases[recordedPhraseIdx].endWord,
+            startWord: phrases[practicePhraseIdx].startWord,
+            endWord: phrases[practicePhraseIdx].endWord,
             label:
-              `Verse ${phrases[recordedPhraseIdx].verseRef}, ` +
-              `${phrases[recordedPhraseIdx].endsWith} phrase`,
+              `Verse ${phrases[practicePhraseIdx].verseRef}, ` +
+              `${phrases[practicePhraseIdx].endsWith} phrase`,
           }
         : null;
     return (
@@ -533,9 +541,9 @@ export function ParashaLeadMode({
     );
   }
 
-  const isRecording = recordingState === "recording";
-  const isAnalyzing = recordingState === "analyzing";
-  const isBusy = isRecording || isAnalyzing;
+  const isPracticing = practiceState === "practicing";
+  const isAnalyzing = practiceState === "analyzing";
+  const isBusy = isPracticing || isAnalyzing;
 
   return (
     <Card className="border-primary/20 bg-card/80 shadow-md">
@@ -553,105 +561,91 @@ export function ParashaLeadMode({
           }}
         />
 
-        {/* Top row: status text + record / stop / reset */}
+        {/* Top row: status + play cantor + practice (or stop / analyzing / try again) */}
         <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-3">
           <div>
             <p className="text-sm font-medium">
-              {recordingState === "idle" &&
+              {practiceState === "idle" &&
                 (selectedPhraseIdx != null
-                  ? `Ready to record selected phrase (${segmentDuration.toFixed(1)}s)`
-                  : "Ready to record full aliya")}
-              {isRecording && "Recording..."}
+                  ? `Ready: selected phrase (${segmentDuration.toFixed(1)}s)`
+                  : "Ready: full aliya")}
+              {isPracticing && "Practicing…"}
               {isAnalyzing && "Analyzing your performance..."}
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            {recordingState === "idle" ? (
+            {practiceState === "idle" ? (
               <>
                 <Button
+                  type="button"
                   size="sm"
                   variant="outline"
-                  onClick={() => {
-                    setDrillWordIdx(0);
-                    setDrillOpen(true);
-                  }}
-                  title="Practice individual words one at a time"
+                  onClick={handlePlayPause}
+                  aria-label={isPlaying ? "Pause" : "Play cantor"}
                 >
-                  <Music className="size-4" />
-                  <span className="ml-1.5">Practice words</span>
+                  {isPlaying ? (
+                    <Pause className="size-4" />
+                  ) : (
+                    <Play className="size-4" />
+                  )}
+                  <span className="ml-1.5">
+                    {isPlaying ? "Pause" : "Play cantor"}
+                  </span>
                 </Button>
                 <Button size="sm" variant="default" onClick={handleStart}>
                   <Mic className="size-4" />
-                  <span className="ml-1.5">
-                    {selectedPhraseIdx != null
-                      ? "Record phrase"
-                      : "Start recording"}
-                  </span>
+                  <span className="ml-1.5">Practice</span>
                 </Button>
               </>
-            ) : isRecording ? (
+            ) : isPracticing ? (
               <Button size="sm" variant="destructive" onClick={handleStop}>
                 <MicOff className="size-4" />
-                <span className="ml-1.5">Stop recording</span>
+                <span className="ml-1.5">Stop</span>
               </Button>
             ) : isAnalyzing ? (
               <Button size="sm" variant="outline" disabled>
                 <Loader2 className="size-4 animate-spin" />
                 <span className="ml-1.5">Analyzing...</span>
               </Button>
+            ) : practiceState === "error" ? (
+              <>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  onClick={handlePlayPause}
+                  aria-label={isPlaying ? "Pause" : "Play cantor"}
+                >
+                  {isPlaying ? (
+                    <Pause className="size-4" />
+                  ) : (
+                    <Play className="size-4" />
+                  )}
+                  <span className="ml-1.5">
+                    {isPlaying ? "Pause" : "Play cantor"}
+                  </span>
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={handleReset}
+                  title="Reset and try again"
+                >
+                  <RotateCcw className="size-4" />
+                  <span className="ml-1.5">Try again</span>
+                </Button>
+              </>
             ) : null}
-
-            {recordingState === "error" && (
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={handleReset}
-                title="Reset and record again"
-              >
-                <RotateCcw className="size-4" />
-                <span className="ml-1.5">Try again</span>
-              </Button>
-            )}
           </div>
         </div>
 
         {/* Listen-mode transport row (cantor playback). Hidden while
-            recording / analyzing so we don't leak audio into the mic and
+            practicing / analyzing so we don't leak audio into the mic and
             so the controls aren't a distraction mid-take. */}
         {!isBusy && (
           <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-3">
             <div className="flex items-center gap-2">
-              <Button
-                type="button"
-                size="sm"
-                variant="default"
-                onClick={handlePlayPause}
-                aria-label={isPlaying ? "Pause" : "Play cantor"}
-              >
-                {isPlaying ? (
-                  <Pause className="size-4" />
-                ) : (
-                  <Play className="size-4" />
-                )}
-                <span className="ml-1.5">
-                  {isPlaying ? "Pause" : "Play cantor"}
-                </span>
-              </Button>
-              <Button
-                type="button"
-                size="sm"
-                variant="outline"
-                onClick={handleRestart}
-                aria-label="Restart"
-              >
-                <RotateCcw className="size-4" />
-                <span className="ml-1.5">
-                  {loopPhraseIdx != null || selectedPhraseIdx != null
-                    ? "Restart phrase"
-                    : "Restart"}
-                </span>
-              </Button>
               {(selectedPhraseIdx != null || loopPhraseIdx != null) && (
                 <Button
                   type="button"
@@ -659,7 +653,7 @@ export function ParashaLeadMode({
                   variant="ghost"
                   onClick={handleClearSelection}
                   aria-label="Clear selection"
-                  title="Clear phrase selection (record full aliya)"
+                  title="Clear phrase selection (practice full aliya)"
                 >
                   Clear selection
                 </Button>
@@ -685,7 +679,7 @@ export function ParashaLeadMode({
         )}
 
         {/* Cantor playback progress (Listen-mode style). Hidden during
-            recording — we show the recording-progress bar instead. */}
+            practice take — we show the progress bar instead. */}
         {!isBusy && (
           <div className="space-y-1">
             <div className="bg-muted relative h-1.5 w-full overflow-hidden rounded-full">
@@ -714,8 +708,8 @@ export function ParashaLeadMode({
 
         {error ? <p className="text-destructive text-sm">{error}</p> : null}
 
-        {/* Recording progress (only during recording) */}
-        {isRecording && (
+        {/* Practice progress (only while the mic is on) */}
+        {isPracticing && (
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
               <span className="text-muted-foreground">
@@ -725,13 +719,13 @@ export function ParashaLeadMode({
                 </span>
               </span>
               <span className="tabular-nums font-mono text-xs">
-                {recordedDuration.toFixed(1)}s / {segmentDuration.toFixed(1)}s
+                {practiceDuration.toFixed(1)}s / {segmentDuration.toFixed(1)}s
               </span>
             </div>
             <div className="bg-muted relative h-2 w-full overflow-hidden rounded-full">
               <div
                 className="bg-primary absolute inset-y-0 left-0 transition-[width] duration-200"
-                style={{ width: `${recordingProgressPercent}%` }}
+                style={{ width: `${practiceProgressPercent}%` }}
               />
             </div>
           </div>
@@ -740,7 +734,7 @@ export function ParashaLeadMode({
         {isAnalyzing && (
           <div className="space-y-2">
             <p className="text-xs text-muted-foreground text-center">
-              Processing your recording... This should take 2-5 seconds.
+              Processing your practice… This should take 2-5 seconds.
             </p>
             <div className="bg-muted relative h-2 w-full overflow-hidden rounded-full">
               <div className="bg-primary absolute inset-y-0 left-0 h-full w-full animate-pulse" />
@@ -749,11 +743,9 @@ export function ParashaLeadMode({
         )}
 
         {/* Verses + words display.
-            – Idle: phrase looping + word seek (Listen-style), tap word for
-              drill modal via long-press / explicit button is not currently
-              implemented; tapping a word selects its phrase and seeks the
-              cantor. Use "Practice words" for the per-word drill flow.
-            – Recording / analyzing: static read-along with a cursor. */}
+            – Idle: first tap = select phrase + seek; second tap on same word =
+              word drill. Phrase <Repeat> buttons toggle loop. Practicing / analyzing:
+              static read-along with a cursor. */}
         <div className="space-y-5" dir="rtl" lang="he">
           {aliya.verses.map((verse) => {
             const versePhrases = phrases.filter((p) => p.verseRef === verse.ref);
@@ -807,7 +799,7 @@ export function ParashaLeadMode({
                           const flatIdx = p.startWord + wi;
                           const isCurrent =
                             !isBusy && flatIdx === currentWordIdx;
-                          const isCursor = isRecording && flatIdx === cursorWordIdx;
+                          const isCursor = isPracticing && flatIdx === cursorWordIdx;
                           const display = scrollStyle ? word.plain : word.text;
                           const tappable = !isBusy;
 
@@ -848,12 +840,9 @@ export function ParashaLeadMode({
                             <button
                               key={`${verse.ref}-w${flatIdx}`}
                               type="button"
-                              onClick={() => handleSeekToWord(flatIdx)}
-                              onDoubleClick={() =>
-                                handleTogglePhraseLoop(phraseIdx)
-                              }
+                              onClick={() => onWordButtonClick(flatIdx)}
                               className={className}
-                              title={`Click: select phrase & seek here · Double-click: loop this phrase (${p.endsWith})`}
+                              title={`First click: select phrase & seek · Second click: word practice`}
                               aria-label={`Word ${flatIdx + 1} of ${flatWords.length}${
                                 word.translit ? `: ${word.translit}` : ""
                               }`}
@@ -870,7 +859,7 @@ export function ParashaLeadMode({
                           );
                         })}
                         {/* Phrase-end loop button (Listen-style). Hidden while
-                            recording so the read-along stays clean. */}
+                            practice so the read-along stays clean. */}
                         {!isBusy && (
                           <button
                             type="button"
@@ -904,11 +893,11 @@ export function ParashaLeadMode({
         </div>
 
         <p className="text-muted-foreground border-t pt-3 text-center text-xs">
-          Tap a word to select its phrase · Double-tap (or{" "}
-          <Repeat className="inline size-3" />) to loop · Hit{" "}
-          <Mic className="inline size-3" /> to record. With a phrase selected,
-          recording captures only that phrase and scores it against the
-          cantor&apos;s matching segment.
+          First tap a word to select its phrase; tap the same word again to open
+          word practice. Use <Repeat className="inline size-3" /> to loop a
+          phrase. Hit <Mic className="inline size-3" /> to practice the aliya.
+          With a phrase selected, only that phrase is captured and scored against
+          the cantor&apos;s matching segment.
         </p>
       </CardContent>
 

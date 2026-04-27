@@ -9,13 +9,16 @@ import {
   type CantorScoringRef,
 } from "@/components/parasha-lead-mode";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
   type AliyaData,
   type ParashaIndex,
@@ -50,8 +53,7 @@ export function ParashaPlayer({ indexHref }: ParashaPlayerProps) {
   const [loadedAliya, setLoadedAliya] = useState<LoadedAliya | null>(null);
   const [scrollStyle, setScrollStyle] = useState(false);
   const [showTranslit, setShowTranslit] = useState(false);
-  const [mode, setMode] = useState<"listen" | "practice">("listen");
-  /** The cantor whose recording is currently playing. Null until index.json
+  /** The cantor whose audio is currently used. Null until index.json
    *  loads (or when the parasha lists no cantors at all — in which case the
    *  selector is hidden and the legacy aliya.audio path is used). */
   const [cantorId, setCantorId] = useState<string | null>(null);
@@ -167,17 +169,15 @@ export function ParashaPlayer({ indexHref }: ParashaPlayerProps) {
     });
   }, [baseAliyaData, cantorTrack]);
 
-  // Mic-based scoring is only meaningful against the cantor whose
-  // recording the per-word JSON timings were aligned to. If the active
-  // cantor doesn't support scoring, the practice button is disabled and
-  // the effective mode is forced to "listen" without touching state —
-  // leaving `mode` alone means switching back to a scoring-capable
-  // cantor restores the user's prior choice.
+  // Mic-based scoring is only meaningful against the cantor the
+  // per-word JSON timings were aligned to. The UI now
+  // exposes only "Practice with mic", but we still fall back to
+  // listen mode when a selected cantor doesn't support scoring.
   const supportsScoring = activeCantor?.supportsScoring !== false;
   const effectiveMode: "listen" | "practice" =
-    supportsScoring ? mode : "listen";
+    supportsScoring ? "practice" : "listen";
 
-  // Build the scoring reference passed to ParashaLeadMode + WordDrillModal.
+  // Build the scoring reference passed to ParashaLeadMode (and nested flows).
   // Null when there's no cantor data at all (legacy parasha without a
   // `cantors` block in index.json) — the API then falls back to its
   // hardcoded default-cantor paths.
@@ -234,128 +234,123 @@ export function ParashaPlayer({ indexHref }: ParashaPlayerProps) {
       </div>
 
       <Card>
-        <CardHeader className="space-y-4">
-          <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-start">
-            <div className="space-y-1">
-              <CardTitle>Practice an aliya</CardTitle>
-              <CardDescription className="min-h-12 max-w-2xl leading-relaxed">
-                {effectiveMode === "listen"
-                  ? "Tap a word to jump there. Double-tap, or use the loop icon, to repeat a phrase."
-                  : "Lead mode: read aloud and get per-word trope scoring. The cursor advances as we detect each new word."}
-              </CardDescription>
-            </div>
-
-            <div className="flex flex-col gap-2 sm:items-end">
-              {cantors && cantors.length > 1 ? (
-                <div
-                  className="bg-muted/30 flex items-center gap-1 rounded-md border p-1"
-                  role="group"
-                  aria-label="Cantor"
-                >
-                  <span className="text-muted-foreground px-1.5 text-xs">
-                    Cantor:
+        <CardHeader className="space-y-3">
+          <div className="flex w-full justify-stretch">
+            {cantors && cantors.length > 0 ? (
+              <div className="bg-muted/30 flex w-full flex-col gap-2 rounded-lg border px-2.5 py-2 sm:flex-row sm:items-center sm:gap-3 sm:py-1.5">
+                <div className="flex min-w-0 flex-1 items-center gap-2">
+                  <span className="text-muted-foreground shrink-0 text-xs">Cantor</span>
+                  <span
+                    className="min-w-0 truncate text-sm font-medium"
+                    title={activeCantor?.label ?? cantors[0].label}
+                  >
+                    {activeCantor?.label ?? cantors[0].label}
                   </span>
-                  {cantors.map((c) => (
-                    <Button
-                      key={c.id}
-                      size="sm"
-                      variant={
-                        (activeCantor?.id ?? "") === c.id ? "default" : "ghost"
-                      }
-                      onClick={() => setCantorId(c.id)}
-                      aria-pressed={(activeCantor?.id ?? "") === c.id}
-                      title={
-                        c.supportsScoring === false
-                          ? `${c.label} — listen only (this cantor isn't enabled for mic scoring)`
-                          : c.label
-                      }
-                    >
-                      {c.label}
-                      {c.default ? (
-                        <span className="text-muted-foreground/80 ml-1 text-[0.65rem] uppercase tracking-wide">
-                          default
-                        </span>
-                      ) : null}
-                    </Button>
-                  ))}
+                  {supportsScoring ? null : (
+                    <span className="text-muted-foreground shrink-0 text-[0.65rem]">
+                      · listen only
+                    </span>
+                  )}
+                  {cantors.length > 1 ? (
+                    <Dialog>
+                      <DialogTrigger render={<Button size="xs" variant="outline" />}>
+                        Change
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Choose cantor</DialogTitle>
+                          <DialogDescription>
+                            Pick which cantor to use for listening and practice.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="space-y-2">
+                          {cantors.map((c) => {
+                            const isActive = (activeCantor?.id ?? "") === c.id;
+                            return (
+                              <Button
+                                key={c.id}
+                                variant={isActive ? "default" : "outline"}
+                                className="h-auto w-full justify-start py-2 text-left"
+                                onClick={() => setCantorId(c.id)}
+                                aria-pressed={isActive}
+                                title={
+                                  c.supportsScoring === false
+                                    ? `${c.label} — listen only (this cantor isn't enabled for mic scoring)`
+                                    : c.label
+                                }
+                              >
+                                <span>{c.label}</span>
+                                {c.default ? (
+                                  <span className="text-muted-foreground ml-1.5 text-[0.65rem] uppercase tracking-wide">
+                                    default
+                                  </span>
+                                ) : null}
+                              </Button>
+                            );
+                          })}
+                        </div>
+                        <DialogFooter showCloseButton />
+                      </DialogContent>
+                    </Dialog>
+                  ) : null}
                 </div>
-              ) : null}
 
-              <div
-                className="bg-muted/30 flex items-center gap-1 rounded-md border p-1"
-                role="group"
-                aria-label="Mode"
-              >
-                <Button
-                  size="sm"
-                  variant={effectiveMode === "listen" ? "default" : "ghost"}
-                  onClick={() => setMode("listen")}
-                  aria-pressed={effectiveMode === "listen"}
-                  title="Play the cantor's audio with word-by-word highlighting"
-                >
-                  Listen
-                </Button>
-                <Button
-                  size="sm"
-                  variant={effectiveMode === "practice" ? "default" : "ghost"}
-                  onClick={() => setMode("practice")}
-                  aria-pressed={effectiveMode === "practice"}
-                  disabled={!supportsScoring}
-                  title={
-                    supportsScoring
-                      ? "Sing along with the mic and get scored"
-                      : "Mic scoring is only available with the default cantor"
-                  }
-                >
-                  Practice with mic
-                </Button>
-              </div>
-
-              <div
-                className="bg-muted/30 flex items-center gap-1 rounded-md border p-1"
-                role="group"
-                aria-label="Hebrew display style"
-              >
-                <Button
-                  size="sm"
-                  variant={scrollStyle ? "ghost" : "default"}
-                  onClick={() => setScrollStyle(false)}
-                  aria-pressed={!scrollStyle}
-                >
-                  With marks
-                </Button>
-                <Button
-                  size="sm"
-                  variant={scrollStyle ? "default" : "ghost"}
-                  onClick={() => setScrollStyle(true)}
-                  aria-pressed={scrollStyle}
-                  title="Show consonants only - as the text appears in a Torah scroll"
-                >
-                  Scroll style
-                </Button>
-              </div>
-
-              <label className="text-muted-foreground flex items-center gap-1.5 px-1 text-xs cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  className="size-3.5 accent-primary cursor-pointer"
-                  checked={showTranslit}
-                  onChange={(e) => setShowTranslit(e.target.checked)}
+                <div
+                  className="bg-border hidden shrink-0 sm:block sm:h-6 sm:w-px"
+                  aria-hidden
                 />
-                <span>Show transliteration</span>
-              </label>
-            </div>
+
+                <div
+                  className="flex flex-wrap items-center gap-1.5 sm:justify-end"
+                  role="group"
+                  aria-label="Hebrew display"
+                >
+                  <div className="bg-background/60 inline-flex rounded-md border p-0.5">
+                    <Button
+                      size="xs"
+                      variant={scrollStyle ? "ghost" : "secondary"}
+                      onClick={() => setScrollStyle(false)}
+                      aria-pressed={!scrollStyle}
+                      className="h-7 px-2"
+                      title="With vowels and cantillation marks"
+                    >
+                      Marks
+                    </Button>
+                    <Button
+                      size="xs"
+                      variant={scrollStyle ? "secondary" : "ghost"}
+                      onClick={() => setScrollStyle(true)}
+                      aria-pressed={scrollStyle}
+                      className="h-7 px-2"
+                      title="Torah scroll style (consonants only)"
+                    >
+                      Scroll
+                    </Button>
+                  </div>
+                  <label className="flex cursor-pointer items-center gap-1 text-xs text-muted-foreground select-none">
+                    <input
+                      type="checkbox"
+                      className="size-3.5 accent-primary cursor-pointer"
+                      checked={showTranslit}
+                      onChange={(e) => setShowTranslit(e.target.checked)}
+                      aria-label="Transliteration"
+                    />
+                    Translit
+                  </label>
+                </div>
+              </div>
+            ) : null}
           </div>
 
           {/* Aliya tabs */}
-          <div className="bg-muted/20 flex flex-wrap gap-2 rounded-lg border p-2">
+          <div className="bg-muted/20 grid grid-cols-2 gap-2 rounded-lg border p-2 sm:grid-cols-3 lg:grid-cols-6">
             {index.aliyot.map((a) => (
               <Button
                 key={a.num}
                 size="sm"
                 variant={a.num === activeAliyaNum ? "default" : "outline"}
                 onClick={() => setActiveAliyaNum(a.num)}
-                className="h-auto flex-col gap-0 py-1.5"
+                className="h-auto min-h-12 flex-col gap-0 py-1"
               >
                 <span className="text-xs font-semibold">Aliya {a.num}</span>
                 <span className="text-[0.65rem] opacity-80">
@@ -377,7 +372,7 @@ export function ParashaPlayer({ indexHref }: ParashaPlayerProps) {
             />
           ) : (
             // Key on the audio path so switching aliyas remounts the
-            // practice component — that drops in-flight recording state,
+            // practice component — that drops in-flight session state,
             // selection, and analysis results without needing a reset
             // effect (which trips react-hooks/set-state-in-effect when
             // resetting many fields at once).

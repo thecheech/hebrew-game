@@ -15,9 +15,9 @@ npm run dev
 # 4. Test
 # Open: http://localhost:3000/parasha/miketz
 # Click: "Practice with mic"
-# Click: "Start recording"
+# Click: "Practice"
 # Speak 1-2 words
-# Click: "Stop recording"
+# Click: "Stop"
 # Wait 2-5 seconds
 # See results! 🎉
 ```
@@ -30,13 +30,13 @@ npm run dev
 ✓ components/parasha-lead-mode.tsx (modified)
 ✓ app/api/parasha/analyze/route.ts
 ✓ scripts/analyze_audio.py
-✓ lib/pitch.ts (modified - has getRecordingBlob)
+✓ lib/pitch.ts (modified - has getPracticeBlob)
 ✓ lib/parasha-types.ts (modified - has AnalysisResult type)
 ```
 
 ## How It Works
 
-1. **Record** → User clicks "Start recording", reads aloud, clicks "Stop"
+1. **Practice** → User clicks "Practice", reads aloud, clicks "Stop"
 2. **Upload** → Audio blob sent to backend API
 3. **Analyze** → Python script extracts F0, maps words, scores each
 4. **Display** → Results card shows green/yellow/red verdicts
@@ -85,7 +85,7 @@ git push origin main
 | "Analysis takes >30s" | Optimize Python or increase timeout |
 | "All red verdicts" | Lower thresholds in analyze_audio.py |
 | "API returns 404" | Check reference audio exists at `/public/parasha/miketz/audio/` |
-| "Recording doesn't work" | Check browser allows microphone access |
+| "Mic / practice doesn't work" | Check browser allows microphone access |
 
 ## Testing
 
@@ -102,7 +102,7 @@ python3 scripts/analyze_audio.py \
 
 - [ ] Install Python deps
 - [ ] Start dev server
-- [ ] Test recording on `/parasha/miketz`
+- [ ] Test practice on `/parasha/miketz`
 - [ ] Verify results display
 - [ ] Deploy to production
 - [ ] Monitor error logs
@@ -111,14 +111,14 @@ python3 scripts/analyze_audio.py \
 
 | File | Purpose |
 |------|---------|
-| `components/parasha-lead-mode.tsx` | Recording UI |
+| `components/parasha-lead-mode.tsx` | Practice UI |
 | `components/analysis-results-card.tsx` | Results display |
 | `app/api/parasha/analyze/route.ts` | Backend API |
 | `scripts/analyze_audio.py` | Analysis engine |
 
 ## Performance
 
-- Recording: <1ms overhead
+- Capture: <1ms overhead
 - Analysis: 2-5 seconds (mostly F0 extraction)
 - Results display: Instant
 

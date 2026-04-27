@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
     const studentBlob = formData.get("student") as Blob | null;
     const aliyaNum = formData.get("aliyaNum") as string;
     const parasha = formData.get("parasha") as string;
-    // Optional segment scoping. When present, the student recording
+    // Optional segment scoping. When present, the student practice
     // covers only the cantor's [segStart, segEnd] window and the python
     // script will (a) filter words to those boundaries, (b) shift student
     // frame times by +segStart so they line up with cantor-space word
@@ -239,7 +239,7 @@ export async function POST(req: NextRequest) {
         args,
         {
           // First call for a given (parasha, aliya) builds the reference
-          // F0 cache via librosa.pyin on the full cantor recording, which
+          // F0 cache via librosa.pyin on the full cantor track, which
           // can take 30-60s on a multi-minute aliya. Subsequent calls are
           // fast (just the student). Give it room.
           timeout: 90000,
