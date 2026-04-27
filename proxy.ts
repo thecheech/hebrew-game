@@ -30,7 +30,7 @@ function isPublicPath(pathname: string): boolean {
   return false;
 }
 
-export const proxy = auth((request) => {
+const authProxy = auth((request) => {
   const pathname = request.nextUrl.pathname;
   if (isPublicPath(pathname)) return NextResponse.next();
   if (request.auth) return NextResponse.next();
@@ -40,6 +40,10 @@ export const proxy = auth((request) => {
   loginUrl.searchParams.set("callbackUrl", callbackPath);
   return NextResponse.redirect(loginUrl);
 });
+
+export function proxy(...args: Parameters<typeof authProxy>) {
+  return authProxy(...args);
+}
 
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)"],
