@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
 import { AnswerOptions } from "@/components/answer-options";
 import { CheatsheetFab } from "@/components/cheatsheet";
+import { LevelPicker } from "@/components/level-picker";
 import { ConfettiBurst } from "@/components/confetti-burst";
 import { SettingsDialog } from "@/components/settings-dialog";
 import { TimerBar } from "@/components/timer-bar";
@@ -160,7 +161,7 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
                 Play again
               </Button>
               <Link
-                href="/"
+                href="/play"
                 className={cn(buttonVariants({ variant: "outline" }))}
               >
                 Choose level
@@ -239,17 +240,26 @@ function PlayGameSession({ level }: PlayGameSessionProps) {
 
 export function PlayGame() {
   const searchParams = useSearchParams();
-  const level = useMemo(
-    () => parseLevel(searchParams.get("level")),
-    [searchParams],
-  );
+  const levelRaw = searchParams.get("level");
+  const hasLevel =
+    levelRaw !== null && String(levelRaw).trim().length > 0;
+
+  if (!hasLevel) {
+    return (
+      <div className="bg-background relative min-h-dvh">
+        <LevelPicker />
+      </div>
+    );
+  }
+
+  const level = parseLevel(levelRaw);
 
   return (
     <div className="bg-background relative min-h-dvh">
       <header className="border-b bg-card/60 px-4 py-3 backdrop-blur-sm">
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-3">
           <Link
-            href="/"
+            href="/play"
             className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
           >
             ← Levels
