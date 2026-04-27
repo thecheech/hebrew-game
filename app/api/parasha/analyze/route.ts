@@ -5,6 +5,8 @@ import fs from "fs/promises";
 import path from "path";
 import os from "os";
 
+import { resolveParashaAnalyzePython } from "@/lib/parasha-analyze-python";
+
 const execFileAsync = promisify(execFile);
 
 // Vercel hobby limit is 60s; pro is higher. Locally we control the
@@ -173,17 +175,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Prefer the project-local venv python if it exists, otherwise fall back
-    // to the system python3. The venv is set up via:
-    //   python3 -m venv scripts/.venv
-    //   scripts/.venv/bin/pip install -r scripts/requirements.txt
-    const venvPython = path.join(process.cwd(), "scripts/.venv/bin/python");
-    const pythonBin = (await fs
-      .stat(venvPython)
-      .then(() => true)
-      .catch(() => false))
-      ? venvPython
-      : "python3";
+    const pythonBin = resolveParashaAnalyzePython();
 
     // Build the python invocation. Segment fields are optional; only
     // append them if all of segStart and segEnd are valid finite numbers

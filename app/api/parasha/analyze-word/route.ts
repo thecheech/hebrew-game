@@ -5,6 +5,8 @@ import fs from "fs/promises";
 import path from "path";
 import os from "os";
 
+import { resolveParashaAnalyzePython } from "@/lib/parasha-analyze-python";
+
 const execFileAsync = promisify(execFile);
 
 // Single-word scoring is much cheaper than full-aliya — the reference F0 is
@@ -145,14 +147,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Prefer project-local venv python; fall back to system python3.
-    const venvPython = path.join(process.cwd(), "scripts/.venv/bin/python");
-    const pythonBin = (await fs
-      .stat(venvPython)
-      .then(() => true)
-      .catch(() => false))
-      ? venvPython
-      : "python3";
+    const pythonBin = resolveParashaAnalyzePython();
 
     const childArgs: string[] = [
       scriptPath,
