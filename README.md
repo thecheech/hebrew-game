@@ -9,6 +9,7 @@ A small Next.js game: read a Hebrew word **with nikud** (vowel marks), then choo
 
 ```bash
 npm install
+cp .env.example .env.local
 npm run dev
 ```
 
@@ -26,7 +27,10 @@ npm start
 1. Push the repo to GitHub (or GitLab / Bitbucket).
 2. In [Vercel](https://vercel.com), **Import** the repository.
 3. Framework preset: **Next.js**. Root directory: this project folder.
-4. Deploy — no environment variables are required (static client-side game).
+4. Add environment variables:
+   - `AUTH_RESEND_KEY` (Resend API key)
+   - `AUTH_RESEND_FROM` (email sender, e.g. `Hebrew Game <onboarding@resend.dev>`)
+5. Deploy.
 
 ## Stack
 
