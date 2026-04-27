@@ -4,7 +4,12 @@ import Google from "next-auth/providers/google";
 import Resend from "next-auth/providers/resend";
 
 import { authConfig } from "@/auth.config";
+import { signInEmailHtml, signInEmailText } from "@/lib/auth-sign-in-email";
 import { prisma } from "@/lib/prisma";
+
+function authAppDisplayName() {
+  return process.env.AUTH_APP_NAME ?? "Bar Mitzva App";
+}
 
 /**
  * Full Auth.js setup with Prisma adapter + providers.
@@ -25,6 +30,28 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       from:
         process.env.AUTH_RESEND_FROM ??
         "Hebrew Game <noreply@topupcredits.com>",
+      /** Use product name in email copy instead of the raw deployment hostname. */
+      async sendVerificationRequest(params) {
+        const { identifier, url, provider, theme } = params;
+        const appName = authAppDisplayName();
+        const res = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${provider.apiKey}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: provider.from,
+            to: identifier,
+            subject: `Sign in to ${appName}`,
+            html: signInEmailHtml({ url, host: appName, theme: theme ?? {} }),
+            text: signInEmailText({ url, host: appName }),
+          }),
+        });
+        if (!res.ok) {
+          throw new Error("Resend error: " + JSON.stringify(await res.json()));
+        }
+      },
     }),
   ],
 });

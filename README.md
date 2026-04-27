@@ -19,6 +19,7 @@ Set real values in `.env.local` (see `.env.example`):
 - **`AUTH_SECRET`** — run `openssl rand -base64 32` and paste the result.
 - **`AUTH_URL`** — e.g. `http://localhost:3000` locally, or your production URL on Vercel (`https://your-domain.com`).
 - **`AUTH_RESEND_KEY`** (or **`RESEND_API_KEY`**) / **`AUTH_RESEND_FROM`** — [Resend](https://resend.com). The `from` address must use a **verified domain** (e.g. `noreply@topupcredits.com`); unverified senders only work for the account’s test inbox.
+- **`AUTH_APP_NAME`** — optional; used in the Resend sign-in email subject/body (default: **Bar Mitzva App**). Magic links still use your real deployment URL.
 - **`AUTH_GOOGLE_ID`** / **`AUTH_GOOGLE_SECRET`** — if you use Google sign-in.
 
 Apply the database schema (required for email magic links):
@@ -50,6 +51,7 @@ npm start
    - `AUTH_SECRET` (run `openssl rand -base64 32`)
    - `AUTH_URL` (production site URL, e.g. `https://your-project.vercel.app`)
    - `AUTH_RESEND_KEY`, `AUTH_RESEND_FROM`
+   - `AUTH_APP_NAME` (optional; defaults to **Bar Mitzva App** in magic-link emails)
    - `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET` if using Google sign-in
 6. Deploy. `npm run build` runs `prisma generate`, `prisma migrate deploy` (needs `DATABASE_URL_UNPOOLED` or equivalent in the build environment), then `next build`.
 
