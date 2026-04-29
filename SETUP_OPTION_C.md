@@ -194,6 +194,19 @@ chmod +x scripts/analyze_audio.py
 2. Deploy to a server with longer timeouts
 3. Use a dedicated audio processing service
 
+### "Audio analysis failed" (HTTP 500) on Vercel
+**Cause:** Vercel's Node.js serverless runtime doesn't ship `python3`
+or `librosa` / `scipy` / `numpy`, so the route's `execFile("python3", …)`
+call rejects.
+
+**Solution:** Deploy the external analyze service in [`service/`](service/)
+(FastAPI + Dockerfile, runs on Railway / Fly.io / Cloud Run / etc.) and
+set `PARASHA_ANALYZE_URL` + `PARASHA_ANALYZE_TOKEN` on the Vercel
+project. See [`service/README.md`](service/README.md) for step-by-step
+instructions. Once the env vars are present the Vercel routes forward
+all multipart traffic to that service instead of trying to run Python
+locally.
+
 ### Results show all red verdicts
 **Solution:** The thresholds may be too strict. Lower them in `analyze_audio.py`:
 ```python

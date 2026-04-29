@@ -55,6 +55,33 @@ npm start
    - `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET` if using Google sign-in
 6. Deploy. `npm run build` runs `prisma generate`, `prisma migrate deploy` (needs `DATABASE_URL_UNPOOLED` or equivalent in the build environment), then `next build`.
 
+## Practice scoring (Python audio analysis)
+
+The "Practice with mic" feature on `/parasha/<slug>` records the user, then
+posts the take to `/api/parasha/analyze` (or `/api/parasha/analyze-word`).
+That route runs `scripts/analyze_audio.py` (librosa + scipy + numpy) to
+compare the student's pitch contour against the cantor's.
+
+**Vercel's Node.js serverless runtime can't run Python**, so in production
+the route forwards the multipart request to an external Python service.
+See [`service/README.md`](service/README.md) for the FastAPI app +
+Dockerfile and step-by-step Railway / Fly.io / Cloud Run deploy
+instructions.
+
+Add these env vars to the Vercel project once the service is live:
+
+- `PARASHA_ANALYZE_URL` — public URL of the deployed service (e.g.
+  `https://parasha-analyze.up.railway.app`). Setting this flips the
+  routes from local-subprocess to remote-forward mode.
+- `PARASHA_ANALYZE_TOKEN` — shared bearer token; must match the value
+  set on the service. Generate with `openssl rand -base64 32`.
+
+When `PARASHA_ANALYZE_URL` is unset, the routes fall back to spawning
+`python3` locally — convenient for `npm run dev` against
+`scripts/.venv/bin/python`. If the binary is also missing (i.e.
+production with no service configured), the routes return `503` with a
+friendly message instead of an opaque 500.
+
 ## Stack
 
 Next.js 16 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui (Base UI), Zustand, Auth.js + Prisma + Neon (`@prisma/adapter-neon`), `Frank Ruhl Libre` for Hebrew text.

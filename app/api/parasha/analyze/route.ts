@@ -11,6 +11,10 @@ import {
   materializePublicAssetForExec,
   resolvePublicUrlToFsPath,
 } from "@/lib/parasha-exec-assets";
+import {
+  forwardAnalyzeToRemote,
+  isRemoteAnalyzeConfigured,
+} from "@/lib/parasha-analyze-remote";
 
 const execFileAsync = promisify(execFile);
 
@@ -45,7 +49,97 @@ function refAudioPublicPath(
   return defaultParashaRefAudioPublicPath(parasha, aliyaNum);
 }
 
-export async function POST(req: NextRequest) {
+/**
+ * Forward to the external Python service.
+ *
+ * On Vercel (and any Node-only host that can't run librosa), this is the
+ * production path: parse the multipart, hand it to the FastAPI service,
+ * pass through its JSON + status code unchanged.
+ */
+async function handleRemote(req: NextRequest): Promise<NextResponse> {
+  const formData = await req.formData();
+  const studentBlob = formData.get("student") as Blob | null;
+  const aliyaNum = formData.get("aliyaNum") as string;
+  const parasha = formData.get("parasha") as string;
+  const segStartRaw = formData.get("segStart");
+  const segEndRaw = formData.get("segEnd");
+  const wordStartRaw = formData.get("wordStart");
+  const wordEndRaw = formData.get("wordEnd");
+  const cantorAudioRaw = formData.get("cantorAudio");
+  const cantorWordsJsonRaw = formData.get("cantorWordsJson");
+  const cantorIdRaw = formData.get("cantorId");
+
+  if (!studentBlob) {
+    return NextResponse.json(
+      { status: "error", error: "Missing student audio" },
+      { status: 400 },
+    );
+  }
+  if (!aliyaNum || !parasha) {
+    return NextResponse.json(
+      { status: "error", error: "Missing aliyaNum or parasha" },
+      { status: 400 },
+    );
+  }
+
+  const segStart =
+    typeof segStartRaw === "string" ? Number(segStartRaw) : null;
+  const segEnd = typeof segEndRaw === "string" ? Number(segEndRaw) : null;
+  const wordStart =
+    typeof wordStartRaw === "string" ? Number.parseInt(wordStartRaw, 10) : null;
+  const wordEnd =
+    typeof wordEndRaw === "string" ? Number.parseInt(wordEndRaw, 10) : null;
+
+  try {
+    const upstream = await forwardAnalyzeToRemote({
+      mode: "aliya",
+      origin: req.nextUrl.origin,
+      studentBlob,
+      aliyaNum,
+      parasha,
+      cantorId:
+        typeof cantorIdRaw === "string" ? sanitizeCantorId(cantorIdRaw) : null,
+      cantorAudio:
+        typeof cantorAudioRaw === "string" ? cantorAudioRaw : null,
+      cantorWordsJson:
+        typeof cantorWordsJsonRaw === "string" ? cantorWordsJsonRaw : null,
+      segStart,
+      segEnd,
+      wordStart,
+      wordEnd,
+    });
+
+    // Pass through both the body and the status code; the service already
+    // shapes errors as `{status:"error", error:"..."}` so the frontend
+    // doesn't need to know we forwarded.
+    const text = await upstream.text();
+    return new NextResponse(text, {
+      status: upstream.status,
+      headers: {
+        "content-type":
+          upstream.headers.get("content-type") ?? "application/json",
+      },
+    });
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Analysis service unreachable";
+    console.error("analyze: remote forward failed:", message, error);
+    return NextResponse.json(
+      {
+        status: "error",
+        error: `Analysis service unreachable: ${message}`,
+      },
+      { status: 502 },
+    );
+  }
+}
+
+/**
+ * Local-subprocess execution path (dev). Kept untouched from the
+ * pre-remote-service implementation so `npm run dev` against a local
+ * Python venv keeps working as before.
+ */
+async function handleLocal(req: NextRequest): Promise<NextResponse> {
   const origin = req.nextUrl.origin;
   let studentPath: string | null = null;
   let disposeRef: (() => Promise<void>) | null = null;
@@ -199,10 +293,30 @@ export async function POST(req: NextRequest) {
       }
       stdout = result.stdout;
     } catch (execError) {
-      const error = execError as Error & { stderr?: string };
+      const error = execError as Error & { stderr?: string; code?: string };
       console.error("Python execution error:", error.message);
       if (error.stderr) {
         console.error("stderr:", error.stderr);
+      }
+
+      // ENOENT means `python3` (or the binary in PARASHA_ANALYZE_PYTHON)
+      // doesn't exist on this runtime. Surface the configuration miss
+      // explicitly instead of pretending it's an analysis failure — this
+      // is exactly the case where someone deployed without setting
+      // `PARASHA_ANALYZE_URL`.
+      if (error.code === "ENOENT") {
+        console.error(
+          "analyze: python binary missing AND PARASHA_ANALYZE_URL is unset.",
+          "Deploy the service in service/ and set PARASHA_ANALYZE_URL on this project.",
+        );
+        return NextResponse.json(
+          {
+            status: "error",
+            error:
+              "Practice scoring isn't available right now. Please try again later.",
+          },
+          { status: 503 },
+        );
       }
 
       let errorMsg = "Audio analysis failed";
@@ -254,4 +368,11 @@ export async function POST(req: NextRequest) {
       await disposeWords().catch(() => {});
     }
   }
+}
+
+export async function POST(req: NextRequest) {
+  if (isRemoteAnalyzeConfigured()) {
+    return handleRemote(req);
+  }
+  return handleLocal(req);
 }

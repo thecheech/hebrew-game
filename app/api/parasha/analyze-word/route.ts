@@ -11,6 +11,10 @@ import {
   materializePublicAssetForExec,
   resolvePublicUrlToFsPath,
 } from "@/lib/parasha-exec-assets";
+import {
+  forwardAnalyzeToRemote,
+  isRemoteAnalyzeConfigured,
+} from "@/lib/parasha-analyze-remote";
 
 const execFileAsync = promisify(execFile);
 
@@ -39,7 +43,74 @@ function refAudioPublicPath(
   return defaultParashaRefAudioPublicPath(parasha, aliyaNum);
 }
 
-export async function POST(req: NextRequest) {
+async function handleRemote(req: NextRequest): Promise<NextResponse> {
+  const formData = await req.formData();
+  const studentBlob = formData.get("student") as Blob | null;
+  const aliyaNum = formData.get("aliyaNum") as string;
+  const parasha = formData.get("parasha") as string;
+  const wordIdxRaw = formData.get("wordIdx") as string;
+  const cantorAudioRaw = formData.get("cantorAudio");
+  const cantorWordsJsonRaw = formData.get("cantorWordsJson");
+  const cantorIdRaw = formData.get("cantorId");
+
+  if (!studentBlob) {
+    return NextResponse.json(
+      { status: "error", error: "Missing student audio" },
+      { status: 400 },
+    );
+  }
+  if (!aliyaNum || !parasha) {
+    return NextResponse.json(
+      { status: "error", error: "Missing aliyaNum or parasha" },
+      { status: 400 },
+    );
+  }
+  const wordIdx = Number.parseInt(wordIdxRaw ?? "", 10);
+  if (!Number.isInteger(wordIdx) || wordIdx < 0) {
+    return NextResponse.json(
+      { status: "error", error: "Missing or invalid wordIdx" },
+      { status: 400 },
+    );
+  }
+
+  try {
+    const upstream = await forwardAnalyzeToRemote({
+      mode: "word",
+      origin: req.nextUrl.origin,
+      studentBlob,
+      aliyaNum,
+      parasha,
+      cantorId:
+        typeof cantorIdRaw === "string" ? sanitizeCantorId(cantorIdRaw) : null,
+      cantorAudio:
+        typeof cantorAudioRaw === "string" ? cantorAudioRaw : null,
+      cantorWordsJson:
+        typeof cantorWordsJsonRaw === "string" ? cantorWordsJsonRaw : null,
+      wordIdx,
+    });
+    const text = await upstream.text();
+    return new NextResponse(text, {
+      status: upstream.status,
+      headers: {
+        "content-type":
+          upstream.headers.get("content-type") ?? "application/json",
+      },
+    });
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Analysis service unreachable";
+    console.error("analyze-word: remote forward failed:", message, error);
+    return NextResponse.json(
+      {
+        status: "error",
+        error: `Analysis service unreachable: ${message}`,
+      },
+      { status: 502 },
+    );
+  }
+}
+
+async function handleLocal(req: NextRequest): Promise<NextResponse> {
   const origin = req.nextUrl.origin;
   let studentPath: string | null = null;
   let disposeRef: (() => Promise<void>) | null = null;
@@ -176,9 +247,24 @@ export async function POST(req: NextRequest) {
       }
       stdout = result.stdout;
     } catch (execError) {
-      const error = execError as Error & { stderr?: string };
+      const error = execError as Error & { stderr?: string; code?: string };
       console.error("Python execution error (word):", error.message);
       if (error.stderr) console.error("stderr:", error.stderr);
+
+      if (error.code === "ENOENT") {
+        console.error(
+          "analyze-word: python binary missing AND PARASHA_ANALYZE_URL is unset.",
+          "Deploy the service in service/ and set PARASHA_ANALYZE_URL on this project.",
+        );
+        return NextResponse.json(
+          {
+            status: "error",
+            error:
+              "Practice scoring isn't available right now. Please try again later.",
+          },
+          { status: 503 },
+        );
+      }
 
       let errorMsg = "Audio analysis failed";
       if (error.stderr && error.stderr.includes("{")) {
@@ -228,4 +314,11 @@ export async function POST(req: NextRequest) {
       await disposeWords().catch(() => {});
     }
   }
+}
+
+export async function POST(req: NextRequest) {
+  if (isRemoteAnalyzeConfigured()) {
+    return handleRemote(req);
+  }
+  return handleLocal(req);
 }

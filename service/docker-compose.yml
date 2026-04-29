@@ -1,0 +1,26 @@
+# Local dev orchestration for the parasha-analyze service.
+#
+# Run from the repo root:
+#   docker compose -f service/docker-compose.yml up --build
+#
+# Then in .env.local for the Next.js app:
+#   PARASHA_ANALYZE_URL=http://localhost:8080
+#   PARASHA_ANALYZE_TOKEN=devtoken
+
+services:
+  analyze:
+    build:
+      context: ..
+      dockerfile: service/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      PARASHA_ANALYZE_TOKEN: devtoken
+      # Empty allow-list = allow any host. Tighten in production.
+      PARASHA_ALLOWED_REF_HOSTS: ""
+      PARASHA_SUBPROCESS_TIMEOUT_S: "120"
+    volumes:
+      - parasha-cache:/var/cache/parasha
+
+volumes:
+  parasha-cache:

@@ -1,0 +1,17 @@
+# Runtime deps for the parasha analyze service.
+#
+# The FastAPI/uvicorn pair is the HTTP layer; everything below it is the
+# same set scripts/analyze_audio.py needs.
+
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+python-multipart==0.0.20
+httpx==0.28.1
+
+# Audio analysis (must match scripts/requirements.txt versions)
+numpy>=1.26,<3
+scipy>=1.11,<2
+librosa>=0.10,<0.11
+# librosa needs an mp3 backend; soundfile handles wav/flac/ogg, audioread
+# (with ffmpeg in the container) handles mp3.
+soundfile>=0.12,<0.14
